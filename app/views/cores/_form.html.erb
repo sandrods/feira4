@@ -1,0 +1,12 @@
+<%= simple_form_for(@cor) do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :nome, label: 'Nome' %>
+    </div>
+  </div>
+
+
+	<%= f.button :submit, 'Salvar Cor', :class => 'btn btn-primary' %>
+
+<% end %>

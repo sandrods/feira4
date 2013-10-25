@@ -1,0 +1,17 @@
+<%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+    <%- attributes.each do |attribute| -%>
+      <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>, label: '<%= attribute.human_name.capitalize %>' %>
+    <%- end -%>
+
+    <%- if attributes.empty? -%>
+      <%%= f.input :nome, label: 'Nome' %>
+    <%- end -%>
+    </div>
+  </div>
+
+  <%%= f.button :submit, 'Salvar <%= singular_table_name.capitalize %>', class: 'btn btn-primary' %>
+
+<%% end %>

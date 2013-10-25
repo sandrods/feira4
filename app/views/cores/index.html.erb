@@ -1,0 +1,44 @@
+<%= page_header "Cores" %>
+
+<div class="row">
+
+  <div class="col-md-8">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Nome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cores.each do |cor| %>
+          <tr>
+            <td><%= link_to cor.nome, edit_cor_path(cor) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <p class="index_count"><span><%= @cores.count %></span> cores encontradas.</p>
+
+    <%= link_to(icon(:plus, 'Nova Cor'), new_cor_path, class: 'btn btn-primary') %>
+  
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Filtros</h3>
+      </div>
+      <div id="filtro_pedidos" class="panel-body">
+        <%= simple_form_for @search, url: cores_path, method: 'GET' do |f| %>
+          <%= f.input :nome_cont,
+                      label: "Nome" %>
+
+          <%= f.submit 'Filtrar', class: 'btn btn-info' %>
+          <%= button_tag 'Limpar', class: 'btn btn-default clear' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

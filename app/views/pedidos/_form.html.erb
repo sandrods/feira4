@@ -1,0 +1,70 @@
+<%= simple_form_for(@pedido, html: {:multipart => true}) do |f| %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :descricao, label: 'Descrição', input_html: { maxlength: 255 } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-sm-8">
+      <%= f.association :setor,
+                        collection: Setor.order("nome"),
+                        label: 'Setor Solicitante',
+                        label_method: :nome_sigla,
+                        input_html: {:class => 'select2', 'data-placeholder' => 'Selecione'} %>
+    </div>
+    <div class="col-md-4">
+      <%= f.association :responsavel,
+                        collection: Usuario.all.order("usuarios.nome"),
+                        label: 'Solicitante Responsável',
+                        label_method: :nome,
+                        input_html: {:class => 'select2_with_clear', 'data-placeholder' => 'Selecione'} %>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-sm-4">
+      <%= f.input :motivo, label: 'Motivo', collection: Pedido::MOTIVOS, input_html: {:class => 'select2_with_clear', 'data-placeholder' => 'Selecione'} %>
+    </div>
+    <div class="col-md-4 col-sm-6">
+      <%= f.input :tipo_contratacao, label: 'Tipo de Contratação', collection: Pedido::TIPOS_CONTRATACAO, input_html: {:class => 'select2', 'data-placeholder' => 'Selecione'}  %>
+    </div>
+    <div class="col-md-2 col-sm-3 col-xs-6">
+      <%= f.input :data, label: 'Data do Pedido', input_html: { value: data_pt_BR(f.object.data) }%>
+    </div>
+    <div class="col-md-2 col-sm-3 col-xs-6">
+      <%= f.input :prazo, label: 'Prazo de Entrega (dias)' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <%= f.input :tag_list, label: 'Categorias', :collection => Tag.to_tag_list , input_html: { multiple: true, class: 'select2'} %>
+    </div>
+    <div class="col-md-4">
+      <%= f.association :operador,
+                        collection: Usuario.all.order("usuarios.nome"),
+                        label: 'Operador',
+                        label_method: :nome,
+                        input_html: {:class => 'select2_with_clear', 'data-placeholder' => 'Selecione'} %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-sm-6 col-xs-6">
+      <%= f.input :numero_pae, label: 'Processo PAE', placeholder: "Número/Ano" %>
+    </div>
+    <div class="col-md-2 col-sm-6 col-xs-6">
+      <%= f.input :numero_simba, label: 'Número do Simba' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.button :submit, :class => 'btn-primary' %> <%= link_to icon('chevron-left', :black, "Voltar"), pedido_path(@pedido), :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

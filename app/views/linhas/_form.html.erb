@@ -1,0 +1,12 @@
+<%= simple_form_for(@linha) do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :descricao, label: 'Descricao' %>
+
+    </div>
+  </div>
+
+  <%= f.button :submit, 'Salvar Linha', class: 'btn btn-primary' %>
+
+<% end %>

@@ -1,0 +1,5 @@
+<%%= page_header "Novo <%= singular_table_name.capitalize %>" do %>
+  <%%= link_to icon(:chevron_left, "Voltar"), <%= plural_table_name %>_path, class: 'btn' %>
+<%% end %>
+
+<%%= render 'form' %>

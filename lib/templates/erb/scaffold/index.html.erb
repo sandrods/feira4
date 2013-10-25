@@ -1,0 +1,43 @@
+<%%= page_header "<%= plural_table_name.capitalize %>" %><% att = (attributes_names.first || 'nome') %>
+
+<div class="row">
+
+  <div class="col-md-8">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th><%= att.capitalize %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+          <tr>
+            <td><%%= link_to <%= singular_table_name %>.<%= att %>, edit_<%= singular_table_name %>_path(<%= singular_table_name %>) %></td>
+          </tr>
+        <%% end %>
+      </tbody>
+    </table>
+    
+    <p class="index_count"><span><%%= @<%= plural_table_name %>.count %></span> <%= plural_table_name %> encontradas.</p>
+
+    <%%= link_to(icon(:plus, 'Novo <%= singular_table_name.capitalize %>'), new_<%= singular_table_name %>_path, class: 'btn btn-primary') %>
+  
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Filtros</h3>
+      </div>
+      <div id="filtro_pedidos" class="panel-body">
+        <%%= simple_form_for @search, url: <%= plural_table_name %>_path, method: 'GET' do |f| %>
+          <%%= f.input :<%= att %>_cont, label: "<%= att.capitalize %>" %>
+
+          <%%= f.submit 'Filtrar', class: 'btn btn-info' %>
+          <%%= button_tag 'Limpar', class: 'btn btn-default clear' %>
+        <%% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

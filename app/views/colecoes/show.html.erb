@@ -1,0 +1,29 @@
+<%= page_header "Exibir Coleção" do %>
+  <%= link_to icon(:chevron_left, "Voltar"), colecoes_path, class: 'btn' %>
+  <%= link_to icon(:edit, 'Editar Coleção'), edit_colecao_path(@colecao), class: 'btn btn-primary' %>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <h4 class="text-primary">
+      <%= @colecao.descricao %>
+    </h4>
+
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6">
+
+        <dl class="dl-horizontal form">
+
+          <dt>Descrição</dt>
+          <dd><%= @colecao.descricao %></dd>
+
+        </dl>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

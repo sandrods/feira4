@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  proposta_id: 
+  item_pedido_id: 
+  valor: 1.5
+
+two:
+  proposta_id: 
+  item_pedido_id: 
+  valor: 1.5

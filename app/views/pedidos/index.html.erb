@@ -1,0 +1,67 @@
+<%= page_header "Listar Pedidos" %>
+
+<div class="row">
+
+  <div class="col-md-8">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Número</th>
+          <th>Descrição</th>
+          <th><%= sort_link @search, :data, "Data" %></th>
+          <th><%= sort_link @search, :setor_nome, "Solicitante" %></th>
+          <th><%= sort_link @search, :operador_logon, "Operador" %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pedidos.each do |pedido| %>
+          <tr>
+            <td><%= link_to pedido.id, pedido_path(pedido) %></td>
+            <td><%= pedido.descricao.truncate(40) %></td>
+            <td><%= pedido.data %></td>
+            <td><%= pedido.setor.sigla %></td>
+            <td><%= pedido.operador.try(:logon) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <p style="text-align: right"><%= @pedidos.count %> pedidos encontrados.</p>
+    <%= link_to(icon(:plus, :black, 'Adicionar Pedido'), new_pedido_path, class: 'btn btn-default') %>
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Filtros</h3>
+      </div>
+      <div id="filtro_pedidos" class="panel-body">
+        <%= simple_form_for @search, url: pedidos_path, method: 'GET' do |f| %>
+          <%= f.input :setor_id_eq,
+                      label: "Setor Solicitante",
+                      collection: Setor.order("nome"),
+                      label_method: :nome_sigla,
+                      required: false,
+                      input_html: {:class => 'span3 select2_with_clear', 'data-placeholder' => 'Selecione'} %>
+          <%= f.input :motivo_eq,
+                      label: "Motivo",
+                      collection: Pedido::MOTIVOS,
+                      required: false,
+                      input_html: {:class => 'span3 select2_with_clear', 'data-placeholder' => 'Selecione'} %>
+          <%= f.input :tipo_contratacao_eq,
+                      label: "Tipo de Contratação",
+                      collection: Pedido::TIPOS_CONTRATACAO,
+                      required: false,
+                      input_html: {:class => 'span3 select2_with_clear', 'data-placeholder' => 'Selecione'} %>
+          <%= f.input :operador_id_eq,
+                      label: "Operador",
+                      collection: Usuario.order("nome"),
+                      label_method: :nome,
+                      required: false,
+                      input_html: {:class => 'span3 select2_with_clear', 'data-placeholder' => 'Selecione'} %>
+          <%= f.submit 'Filtrar', class: 'btn btn-info' %>
+          <%= button_tag 'Limpar', class: 'btn clear' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

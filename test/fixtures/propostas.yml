@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  pedido_id: 
+  fornecedor_id: 
+  data: 2013-09-25
+
+two:
+  pedido_id: 
+  fornecedor_id: 
+  data: 2013-09-25

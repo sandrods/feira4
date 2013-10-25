@@ -1,0 +1,13 @@
+<%= page_header "Editar Coleção" do %>
+
+  <%= link_to icon(:chevron_left, "Voltar"), colecoes_path, class: 'btn' %>
+
+  <%= link_to icon(:trash, 'Apagar esta Coleção'), 
+        @colecao, 
+        method: :delete, 
+        data: { confirm: 'Tem certeza?' }, 
+        class: 'btn btn-sm btn-danger' %>
+
+<% end %>
+
+<%= render 'form' %>

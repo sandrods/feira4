@@ -1,0 +1,13 @@
+<%= page_header "Editar Linha" do %>
+
+  <%= link_to icon(:chevron_left, "Voltar"), linhas_path, class: 'btn' %>
+
+  <%= link_to icon(:trash, 'Apagar este Linha'), 
+        @linha, 
+        method: :delete, 
+        data: { confirm: 'Tem certeza?' }, 
+        class: 'btn btn-sm btn-danger' %>
+
+<% end %>
+
+<%= render 'form' %>

@@ -1,0 +1,111 @@
+<%= page_header "Exibir Pedido", @pedido.id do %>
+  <%= link_to icon(:chevron_left, "Voltar"), pedidos_path, :class => 'btn' %>
+  <%= link_to icon(:edit, 'Editar Pedido'), edit_pedido_path(@pedido), class: 'btn btn-info' %>
+  <%= link_to icon(:envelope, 'Enviar Email'), new_pedido_email_path(@pedido), class: 'btn btn-success btn-small' %>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <h4 class="text-primary">
+      <%= @pedido.descricao %>
+    </h4>
+
+    <div class="row">
+      <div class="col-md-4 col-sm-6">
+
+        <dl class="dl-horizontal form">
+
+          <dt>Solicitante</dt>
+          <dd><%= @pedido.setor.sigla %></dd>
+
+          <dt>Motivo</dt>
+          <dd><%= @pedido.motivo_txt %></dd>
+
+          <dt>Prazo Entrega</dt>
+          <dd><%= @pedido.prazo %> dias</dd>
+
+        </dl>
+
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+
+        <dl class="dl-horizontal form">
+
+          <dt>Responsável</dt>
+          <dd><%= @pedido.responsavel.try(:nome) %></dd>
+
+          <dt>Tipo Contr.</dt>
+          <dd><%= @pedido.tipo_contratacao_txt %></dd>
+
+          <dt>Processo PAE</dt>
+          <dd><%= @pedido.numero_pae %></dd>
+
+        </dl>
+
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+
+        <dl class="dl-horizontal form">
+
+          <dt>Operador</dt>
+          <dd><%= @pedido.operador.try(:nome) %></dd>
+
+          <dt>Data do Pedido</dt>
+          <dd><%= @pedido.data %></dd>
+
+          <dt>Nro. Simba</dt>
+          <dd><%= @pedido.numero_simba %></dd>
+
+        </dl>
+
+      </div>
+
+    </div>
+
+    <h4>
+    <% @pedido.tags.each do |tag| %>
+        <span class="badge badge-primary"><%= tag.name %></span>
+    <% end %>
+    </h4>
+
+  </div>
+</div>
+
+<ul class="nav nav-tabs contrast">
+  <li class="active"><a href="#itens" data-toggle="tab">Itens</a></li>
+  <li><a href="#solicitacoes_proposta" data-toggle="tab">Solicitações de Proposta</a></li>
+  <li><a href="#propostas" data-toggle="tab">Propostas Recebidas</a></li>
+  <li><a href="#resultado" data-toggle="tab">Resultado</a></li>
+  <li><a href="#compras" data-toggle="tab">Compras</a></li>
+  <li><a href="#historico" data-toggle="tab">Histórico</a></li>
+  <li><a href="#arquivos" data-toggle="tab">Arquivos</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="itens">
+      <%= render 'item_pedidos/index' %>
+    </div>
+    <div class="tab-pane" id="arquivos">
+      <%= render 'arquivos/index' %>
+    </div>
+    <div class="tab-pane" id="fornecedores">
+    </div>
+    <div class="tab-pane" id="solicitacoes_proposta">
+      <%= render partial: 'solicitacoes_proposta' %>
+    </div>
+    <div class="tab-pane" id="propostas">
+      <%= render partial: 'propostas/index' %>
+    </div>
+    <div class="tab-pane" id="resultado">
+      <%= render 'resultado' %>
+    </div>
+    <div class="tab-pane" id="historico">
+      <%= render 'historico' %>
+    </div>
+    <div class="tab-pane" id="compras">
+      <%= render 'compras' %>
+    </div>
+</div>
