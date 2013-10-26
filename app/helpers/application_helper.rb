@@ -43,15 +43,26 @@ module ApplicationHelper
     end
     content_tag :span, nil, :class => names
   end
-  
-  def icon(*names)
-    text = names.pop
-    names << :white unless names.delete(:black)
-    raw(glyph(*names) + '&nbsp;'.html_safe + text)
+
+  def icon(_icon, text = nil)
+    ic = glyph(_icon)
+    ic += ('&nbsp;'.html_safe + text) if text
+    raw(ic)
   end
   
   def data_pt_BR(data)
     l(data) unless data.nil?
   end
+
+  def input_group(field, label, _icon, f)
+
+    f.input field, label: label do
+      content_tag(:div, class: "input-group") do
+        content_tag(:span, icon(_icon), class: 'input-group-addon') + f.input_field(field)
+      end
+    end
+
+  end
+
 
 end
