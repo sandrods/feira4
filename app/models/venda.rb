@@ -10,8 +10,8 @@ class Venda < ActiveRecord::Base
   validates_presence_of :cliente_id,  if: ->(v) { v.vendedor_id.blank? }
   validates_presence_of :vendedor_id, if: ->(v) { v.cliente_id.blank? }
 
-  acts_as_br_date :data
-  acts_as_br_float :desconto
+  # acts_as_br_date :data
+  # acts_as_br_float :desconto
 
   scope :clientes,      where(tipo: "C" )
   scope :comissionadas, where(tipo: "V" )

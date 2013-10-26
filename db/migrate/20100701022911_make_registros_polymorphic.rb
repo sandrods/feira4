@@ -1,6 +1,6 @@
 class MakeRegistrosPolymorphic < ActiveRecord::Migration
   def self.up
-    add_column :registros, :registravel_id, :integer, :limit=>9
+    add_column :registros, :registravel_id, :integer
     add_column :registros, :registravel_type, :string, :limit =>20 
   end
 

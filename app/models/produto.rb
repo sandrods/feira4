@@ -12,7 +12,7 @@ class Produto < ActiveRecord::Base
 
   validates :colecao_id, :linha_id, :fornecedor_id, :tipo_id, :ref, :valor, presence: true
 
-  acts_as_br_currency :custo, :valor
+  # acts_as_br_currency :custo, :valor
 
   def Produto.rentabilidade(_valor, _custo)
     return 0 if _custo == 0
