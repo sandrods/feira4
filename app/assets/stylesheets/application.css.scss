@@ -129,3 +129,19 @@ body {
         color: #333;
     }
 }
+
+.affix {
+    position: fixed;
+    top: 52px;
+    left: 0px;
+    z-index: 1000;
+    background-color: $navbar-inverse-link-color;
+    border: 1px solid $navbar-inverse-brand-color;
+    padding: 10px 0 7px;
+    width: 100%;
+
+    .pagination {
+        margin: 0 auto;
+    }
+
+}

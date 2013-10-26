@@ -1,0 +1,29 @@
+<%= page_header "Exibir Cliente" do %>
+  <%= link_to icon(:chevron_left, "Voltar"), clientes_path, class: 'btn' %>
+  <%= link_to icon(:edit, 'Editar Cliente'), edit_cliente_path(@cliente), class: 'btn btn-primary' %>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <h4 class="text-primary">
+      <%= @cliente.nome %>
+    </h4>
+
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6">
+
+        <dl class="dl-horizontal form">
+
+          <dt>Nome</dt>
+          <dd><%= @cliente.nome %></dd>
+
+        </dl>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

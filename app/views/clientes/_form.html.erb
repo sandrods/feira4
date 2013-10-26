@@ -1,0 +1,55 @@
+<%= simple_form_for(@cliente) do |f| %>
+
+  <div class="row">
+    <div class="col-sm-5 col-md-6">
+      <%= f.input :nome, label: 'Nome' %>
+    </div>
+    <div class="col-sm-5 col-md-4">
+      <%= input_group(:email, "email", :envelope, f) %>
+    </div>
+    <div class="col-sm-2 col-md-2">
+      <%= f.input :aniversario, label: "Aniversário" %>
+    </div>
+    <div class="col-sm-4">
+      <%= input_group(:fone_cel, "Celular", :phone, f) %>
+    </div>
+    <div class="col-sm-4">
+      <%= input_group(:fone_res, "Fone Residencial", :phone_alt, f) %>
+    </div>
+    <div class="col-sm-4">
+      <%= input_group(:fone_com, "Fone Comercial", :phone_alt, f) %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.input :endereco, label: 'Endereco' %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.input :bairro, label: 'Bairro' %>
+    </div>
+    <div class="col-sm-2">
+      <%= f.input :cep, label: 'CEP' %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.input :cidade, label: 'Cidade' %>
+    </div>
+    <div class="col-sm-2">
+      <%= f.input :uf, label: 'UF' %>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      <%= f.input :obs, label: 'Obs' %>
+    </div>
+
+  </div>
+
+  <%= f.button :submit, 'Salvar Cliente', class: 'btn btn-primary' %>
+
+  <%= link_to icon(:trash, 'Apagar este Cliente'), 
+        @cliente, 
+        method: :delete, 
+        data: { confirm: 'Tem certeza?' }, 
+        class: 'btn btn-sm text-danger pull-right' unless @cliente.new_record? %>
+
+<% end %>
