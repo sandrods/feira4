@@ -21,6 +21,8 @@ $navbar-inverse-bg: #563d7c;
 $navbar-inverse-link-color: lighten($navbar-inverse-bg, 54%);
 $navbar-inverse-brand-color: lighten($navbar-inverse-bg, 36%);
 
+$grid-float-breakpoint: 992px;
+
 $component-active-bg: $navbar-inverse-brand-color;
 
 $font-family-sans-serif: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
