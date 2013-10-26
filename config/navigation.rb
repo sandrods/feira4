@@ -6,7 +6,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :nav_produtos, 'Produtos', '#'
     primary.item :nav_compras, 'Compras', "#"
     primary.item :nav_forn, 'Fornecedores', '#' #, highlights_on: :subpath
-
+    primary.item :nav_cli, 'Clientes', clientes_path
+    
     primary.item :nav_config, 'Configurações' do |conf|
       conf.item :nav_colec, 'Coleções', colecoes_path
       conf.item :nav_cores, 'Cores', cores_path
