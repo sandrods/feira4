@@ -9,4 +9,10 @@
 
   <%= f.button :submit, 'Salvar Tipo', class: 'btn btn-primary' %>
 
+  <%= link_to icon(:trash, 'Apagar este Tipo'), 
+        @tipo, 
+        method: :delete, 
+        data: { confirm: 'Tem certeza?' }, 
+        class: 'btn btn-sm text-danger pull-right' unless @tipo.new_record? %>
+
 <% end %>

@@ -2,12 +2,6 @@
 
   <%%= link_to icon(:chevron_left, "Voltar"), <%= plural_table_name %>_path, class: 'btn' %>
 
-  <%%= link_to icon(:trash, 'Apagar este <%= singular_table_name.capitalize %>'), 
-        @<%= singular_table_name %>, 
-        method: :delete, 
-        data: { confirm: 'Tem certeza?' }, 
-        class: 'btn btn-sm btn-danger' %>
-
 <%% end %>
 
 <%%= render 'form' %>
