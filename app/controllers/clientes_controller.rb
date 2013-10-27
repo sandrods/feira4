@@ -4,7 +4,7 @@ class ClientesController < ApplicationController
 
   def index
     if params[:letra]
-      @clientes = Cliente.por_letra(params[:letra])
+      @clientes = Cliente.por_letra(params[:letra]).order(:nome)
       @search = Cliente.search
     else
       @search = Cliente.search(params[:q])
@@ -51,6 +51,6 @@ class ClientesController < ApplicationController
     end
 
     def cliente_params
-      params.require(:cliente).permit(:nome, :email, :fone_res, :fone_com, :fone_cel, :endereco, :bairro, :cep, :cidade, :uf, :obs)
+      params.require(:cliente).permit(:nome, :email, :fone_res, :fone_com, :fone_cel, :endereco, :bairro, :cep, :cidade, :uf, :obs, :aniversario)
     end
 end

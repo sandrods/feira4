@@ -31,7 +31,9 @@ class Cliente < ActiveRecord::Base
   end
 
   def aniversario=(aniver)
-    self.aniver_dia, self.aniver_mes = aniver.split("/")
+    a = aniver.split("/")
+    write_attribute(:aniver_dia, a[0])
+    write_attribute(:aniver_mes, a[1])
   end
 
   def self.por_letra(letra)
@@ -49,6 +51,7 @@ class Cliente < ActiveRecord::Base
 private
 
   def data_aniversario
+    errors.add(:aniversario, "Data Inválida") if aniver_dia.blank? != aniver_mes.blank?
     unless aniver_dia.blank? && aniver_mes.blank?
       dt = Date.new(2001, aniver_mes.to_i, aniver_dia.to_i) rescue nil
       errors.add(:aniversario, 'Data Inválida') unless dt
