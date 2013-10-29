@@ -18,6 +18,6 @@
         @<%= singular_table_name %>, 
         method: :delete, 
         data: { confirm: 'Tem certeza?' }, 
-        class: 'btn btn-sm btn-danger' unless @<%= singular_table_name %>.new_record? %>
+        class: 'btn btn-sm text-danger pull-right' unless @<%= singular_table_name %>.new_record? %>
 
 <%% end %>
