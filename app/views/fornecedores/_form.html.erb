@@ -1,0 +1,56 @@
+<%= simple_form_for(@fornecedor) do |f| %>
+
+  <div class="row">
+    <div class="col-sm-8 ">
+      <%= f.input :nome, label: 'Nome', input_html: { class: 'input-lg' } %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.input :cnpj, label: 'CNPJ' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <%= input_group(:email, "email", :envelope, f) %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.input :website, label: "Site" %>
+    </div>
+    <div class="col-sm-4">
+      <%= input_group(:fone, "Fone", :phone, f) %>
+    </div>
+
+
+    <div class="col-sm-6">
+      <%= f.input :endereco, label: 'Endereco' %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.input :bairro, label: 'Bairro' %>
+    </div>
+    <div class="col-sm-2">
+      <%= f.input :cep, label: 'CEP' %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.input :cidade, label: 'Cidade' %>
+    </div>
+    <div class="col-sm-2">
+      <%= f.input :uf, label: 'UF' %>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      <%= f.input :obs, label: 'Obs' %>
+    </div>
+
+  </div>
+
+  <%= f.button :submit, 'Salvar Fornecedor', class: 'btn btn-primary' %>
+
+  <%= link_to icon(:trash, 'Apagar este Fornecedor'), 
+        @fornecedor, 
+        method: :delete, 
+        data: { confirm: 'Tem certeza?' }, 
+        class: 'btn btn-sm text-danger pull-right' unless @fornecedor.new_record? %>
+
+<% end %>

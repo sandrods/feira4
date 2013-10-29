@@ -1,5 +1,7 @@
 Feira::Application.routes.draw do
 
+  resources :fornecedores
+
   resources :clientes
 
   resources :tamanhos
