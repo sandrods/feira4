@@ -1,5 +1,7 @@
 class Linha < ActiveRecord::Base
 
+  default_scope -> { order(:descricao) }
+  
   def Linha.to_select
     @@combo ||= Linha.update_select
   end
