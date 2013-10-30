@@ -20,6 +20,7 @@
 //= require bootstrap-datepicker
 
 //= require select2
+//= require jquery.maskMoney
 
 //= require util
 //= require spin

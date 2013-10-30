@@ -1,6 +1,7 @@
 $(document).ajaxComplete (event, request) ->
 
-  $('.money').maskMoney()
+  $('input.money').maskMoney()
+  $('.money input').maskMoney()
 
   $('.ttip').tooltip()
 
@@ -36,7 +37,8 @@ jQuery ->
     placeholder: 'Selecione'
     allowClear: true
 
-  #$('.money').maskMoney()
+  $('input.money').maskMoney()
+  $('.money input').maskMoney()
 
   $('.ttip').tooltip()
 
