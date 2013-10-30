@@ -10,13 +10,13 @@
   </div>
   <div class="row">
     <div class="col-sm-4">
-      <%= input_group(:email, "email", :envelope, f) %>
+      <%= input_group(f, :email, label: 'email', icon: :envelope) %>
     </div>
     <div class="col-sm-4">
       <%= f.input :website, label: "Site" %>
     </div>
     <div class="col-sm-4">
-      <%= input_group(:fone, "Fone", :phone, f) %>
+      <%= input_group(f, :fone, label: 'Fone', icon: :phone) %>
     </div>
 
 

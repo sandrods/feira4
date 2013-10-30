@@ -5,7 +5,7 @@
       <%= f.input :nome, label: 'Nome', input_html: { class: 'input-lg' } %>
     </div>
     <div class="col-sm-5 col-md-4">
-      <%= input_group(:email, "email", :envelope, f) %>
+      <%= input_group(f, :email, label: 'email', icon: :envelope) %>
     </div>
     <div class="col-sm-2 col-md-2">
       <%= f.input :aniversario, label: "Aniversário", placeholder: 'dd/mm' %>
@@ -13,13 +13,13 @@
   </div>
   <div class="row">
     <div class="col-sm-4">
-      <%= input_group(:fone_cel, "Celular", :phone, f) %>
+      <%= input_group(f, :fone_cel, label: 'Celular', icon: :phone) %>
     </div>
     <div class="col-sm-4">
-      <%= input_group(:fone_res, "Fone Residencial", :phone_alt, f) %>
+      <%= input_group(f, :fone_res, label: 'Fone Residencial', icon: :phone_alt) %>
     </div>
     <div class="col-sm-4">
-      <%= input_group(:fone_com, "Fone Comercial", :phone_alt, f) %>
+      <%= input_group(f, :fone_com, label: 'Fone Comercial', icon: :phone_alt) %>
     </div>
     <div class="col-sm-6">
       <%= f.input :endereco, label: 'Endereco' %>

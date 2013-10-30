@@ -54,11 +54,20 @@ module ApplicationHelper
     l(data) unless data.nil?
   end
 
-  def input_group(field, label, _icon, f)
+  def input_group(form_builder, field, opts = {})
 
-    f.input field, label: label do
+    _label   = opts.delete(:label)
+    _icon    = opts.delete(:icon)
+    _content = opts.delete(:content)
+
+    if_opts = {}
+    if_opts[:label] = _label if _label
+
+    addon_content = _icon ? icon(_icon) : _content
+
+    form_builder.input field, if_opts do
       content_tag(:div, class: "input-group") do
-        content_tag(:span, icon(_icon), class: 'input-group-addon') + f.input_field(field)
+        content_tag(:span, addon_content, class: 'input-group-addon') + form_builder.input_field(field, opts)
       end
     end
 
