@@ -1,0 +1,43 @@
+<%= page_header "Produtos" %>
+
+<div class="row">
+
+  <div class="col-md-8">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Ref</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @produtos.each do |produto| %>
+          <tr>
+            <td><%= link_to produto.ref, edit_produto_path(produto) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <p class="index_count"><span><%= @produtos.count %></span> produtos encontradas.</p>
+
+    <%= link_to(icon(:plus, 'Novo Produto'), new_produto_path, class: 'btn btn-primary') %>
+  
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Filtros</h3>
+      </div>
+      <div id="filtro_pedidos" class="panel-body">
+        <%= simple_form_for @search, url: produtos_path, method: 'GET' do |f| %>
+          <%= f.input :ref_cont, label: "Ref" %>
+
+          <%= f.submit 'Filtrar', class: 'btn btn-info' %>
+          <%= button_tag 'Limpar', class: 'btn btn-default clear' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

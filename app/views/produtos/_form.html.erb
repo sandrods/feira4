@@ -1,0 +1,62 @@
+<%= simple_form_for(@produto) do |f| %>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <%= f.input :ref, label: 'Ref', input_html: { class: 'input-lg'} %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.association :fornecedor, label: 'Fornecedor', label_method: :nome, input_html: { class: 'select2' } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <%= f.association :colecao, label: 'Coleção', label_method: :descricao, input_html: { class: 'select2' } %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.association :tipo, label: 'Tipo', label_method: :descricao, input_html: { class: 'select2' } %>
+     </div>
+    <div class="col-sm-4">     
+      <%= f.association :linha, label: 'Linha', label_method: :descricao, input_html: { class: 'select2' } %>
+    </div>
+  </div>
+
+<br/>
+  <fieldset>
+    <legend>Valores</legend>
+      <div class="row">
+        <div class="col-sm-3 col-xs-6 money">
+          <%= input_group(f, :custo, icon: :usd, class: 'input-lg') %>
+        </div>
+        <div class="col-sm-3 col-xs-6 money">
+          <%= input_group(f, :valor, label: 'Valor de Venda', icon: :usd, class: 'input-lg') %>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+          <div class="form-group">
+            <label>Lucro</label>
+            <%= content_tag(:p, number_to_currency(@produto.lucro), 
+                                class: 'form-control-static input-lg', 
+                                id: 'lucro') %>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <div class="form-group">
+            <label>Rentabilidade</label>
+            <%= content_tag(:p, number_to_percentage(@produto.rentabilidade), 
+                                class: 'form-control-static input-lg', 
+                                id: 'rentabilidade') %>
+          </div>
+        </div>
+
+      </div>
+  </fieldset>
+
+  <%= f.button :submit, 'Salvar Produto', class: 'btn btn-primary' %>
+
+  <%= link_to icon(:trash, 'Apagar este Produto'), 
+        @produto, 
+        method: :delete, 
+        data: { confirm: 'Tem certeza?' }, 
+        class: 'btn btn-sm text-danger pull-right' unless @produto.new_record? %>
+
+<% end %>
