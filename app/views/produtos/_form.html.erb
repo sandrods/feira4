@@ -51,6 +51,8 @@
       </div>
   </fieldset>
 
+  <%= f.button :submit, 'Salvar e Novo', class: 'btn btn-info' if @produto.new_record? -%>
+
   <%= f.button :submit, 'Salvar Produto', class: 'btn btn-primary' %>
 
   <%= link_to icon(:trash, 'Apagar este Produto'), 

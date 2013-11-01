@@ -3,8 +3,13 @@ class ProdutosController < ApplicationController
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
   def index
-    @search = Produto.search(params[:q])
-    @produtos = @search.result.order(:ref)
+    if params[:q]
+      @search = Produto.search(params[:q])
+      @produtos = @search.result.order(:ref)
+    else
+      @search = Produto.search
+      @produtos = Produto.none
+    end
   end
 
   def show
@@ -12,6 +17,10 @@ class ProdutosController < ApplicationController
 
   def new
     @produto = Produto.new
+    @produto.colecao_id     = params[:colecao_id]
+    @produto.fornecedor_id  = params[:fornecedor_id]
+    @produto.linha_id       = params[:linha_id]
+    @produto.tipo_id        = params[:tipo_id]
   end
 
   def edit
@@ -21,7 +30,8 @@ class ProdutosController < ApplicationController
     @produto = Produto.new(produto_params)
 
     if @produto.save
-      redirect_to produtos_path, notice: 'Produto criado com sucesso.'
+      flash[:notice] = 'Produto criado com sucesso.'
+      redirect_to_new_or_show
     else
       render action: 'new'
     end
@@ -43,6 +53,7 @@ class ProdutosController < ApplicationController
   def lucro
     custo = params[:custo].gsub(',', '.').to_f
     valor = params[:valor].gsub(',', '.').to_f
+
     @lucro = Produto.lucro(valor, custo)
     @rentab = Produto.rentabilidade(valor, custo)
 
@@ -51,11 +62,23 @@ class ProdutosController < ApplicationController
   end
 
   private
+
+    def redirect_to_new_or_show
+      if params[:commit] =~ /Novo/i
+        redirect_to new_produto_path colecao_id:      @produto.colecao_id, 
+                                      fornecedor_id:  @produto.fornecedor_id, 
+                                      linha_id:       @produto.linha_id,
+                                      tipo_id:        @produto.tipo_id 
+      else
+        redirect_to @produto
+      end
+    end
+
     def set_produto
       @produto = Produto.find(params[:id])
     end
 
     def produto_params
-      params.require(:produto).permit(:ref, :colecao_id, :tipo_id, :fornecedor_id, :linha_id)
+      params.require(:produto).permit(:ref, :colecao_id, :tipo_id, :fornecedor_id, :linha_id, :custo, :valor)
     end
 end
