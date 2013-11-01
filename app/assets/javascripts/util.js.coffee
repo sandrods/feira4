@@ -15,8 +15,9 @@ $(document).ajaxComplete (event, request) ->
     placeholder: 'Selecione'
     allowClear: true
 
-  $('select.select2').select2
+  $('select:not(.no_select2)').select2
       placeholder: 'Selecione'
+      allowClear: true
 
 jQuery ->
 
@@ -30,8 +31,9 @@ jQuery ->
     language: 'pt-BR'
   )
 
-  $('.select2').select2
+  $('select:not(.no_select2)').select2
     placeholder: 'Selecione'
+    allowClear: true
 
   $('.select2_with_clear').select2
     placeholder: 'Selecione'
