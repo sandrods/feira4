@@ -3,16 +3,20 @@
 <div class="row">
 
   <div class="col-md-8">
-    <table class="table table-hover table-striped">
+    <table class="table table-hover table-striped table-condensed">
       <thead>
         <tr>
           <th>Ref</th>
+          <th>Fornecedor</th>
+          <th>Coleção</th>
         </tr>
       </thead>
       <tbody>
         <% @produtos.each do |produto| %>
           <tr>
             <td><%= link_to produto.ref, edit_produto_path(produto) %></td>
+            <td><small><%= produto.fornecedor.try :nome %></small></td>
+            <td><%= produto.colecao.try :descricao %></td>
           </tr>
         <% end %>
       </tbody>
@@ -31,6 +35,12 @@
       </div>
       <div id="filtro_pedidos" class="panel-body">
         <%= simple_form_for @search, url: produtos_path, method: 'GET' do |f| %>
+
+          <%= f.input :colecao_id_eq, label: 'Coleção', collection: Colecao.to_select %>
+          <%= f.input :fornecedor_id_eq, label: 'Fornecedor', collection: Fornecedor.to_select %>
+          <%= f.input :linha_id_eq, label: 'Linha', collection: Linha.to_select %>
+          <%= f.input :tipo_id_eq, label: 'Tipo', collection: Tipo.to_select %>
+
           <%= f.input :ref_cont, label: "Ref" %>
 
           <%= f.submit 'Filtrar', class: 'btn btn-info' %>

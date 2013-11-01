@@ -15,3 +15,8 @@ jQuery ->
   $('#produto_custo').on 'blur', reload_lucro
   $('#produto_valor').on 'blur', reload_lucro
 
+
+  $('#filtro_pedidos .clear').on 'click', (e) ->
+    e.preventDefault()
+    $(s).select2("val", '') for s in $('#filtro_pedidos select')
+    $('#filtro_pedidos input:text').val('')
