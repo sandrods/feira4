@@ -34,10 +34,11 @@ jQuery ->
   $('select:not(.no_select2)').select2
     placeholder: 'Selecione'
     allowClear: true
+    minimumResultsForSearch: 12
 
-  $('.select2_with_clear').select2
-    placeholder: 'Selecione'
-    allowClear: true
+  # $('.select2_with_clear').select2
+  #   placeholder: 'Selecione'
+  #   allowClear: true
 
   $('input.money').maskMoney()
   $('.money input').maskMoney()
