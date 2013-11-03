@@ -98,7 +98,7 @@ body {
     dt { width: 110px; color: #555; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .dl-horizontal.form {
         dd { margin-left: 110px; }
         dt {
@@ -151,3 +151,14 @@ body {
 input.money, .money input {
     text-align: right;
 }
+
+.well-sm { 
+  h4 {
+    margin-top: 5px;
+    margin-left: 15px;
+  }
+  .dl-horizontal {
+    margin: 5px;
+  }
+}
+

@@ -26,7 +26,7 @@ class ClientesController < ApplicationController
     @cliente = Cliente.new(cliente_params)
 
     if @cliente.save
-      redirect_to clientes_path, notice: 'Cliente criado com sucesso.'
+      redirect_to @cliente, notice: 'Cliente criado com sucesso.'
     else
       render action: 'new'
     end
@@ -34,7 +34,7 @@ class ClientesController < ApplicationController
 
   def update
     if @cliente.update(cliente_params)
-      redirect_to clientes_path, notice: 'Cliente atualizado com sucesso.'
+      redirect_to @cliente, notice: 'Cliente atualizado com sucesso.'
     else
       render action: 'edit'
     end

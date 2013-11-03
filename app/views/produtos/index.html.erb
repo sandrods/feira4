@@ -14,7 +14,7 @@
       <tbody>
         <% @produtos.each do |produto| %>
           <tr>
-            <td><%= link_to produto.ref, edit_produto_path(produto) %></td>
+            <td><%= link_to produto.ref, produto %></td>
             <td><small><%= produto.fornecedor.try :nome %></small></td>
             <td><%= produto.colecao.try :descricao %></td>
           </tr>
