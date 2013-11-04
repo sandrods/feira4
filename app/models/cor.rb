@@ -1,5 +1,7 @@
 class Cor < ActiveRecord::Base
 
+  default_scope -> { order(:nome) }
+
   def Cor.to_select
     @@combo ||= Cor.update_select
   end

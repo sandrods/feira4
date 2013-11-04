@@ -1,0 +1,10 @@
+<%= content_tag_for(:tr, etiqueta) do %>
+  <td><%= etiqueta.cor.nome %></td>
+  <td><%= etiqueta.tamanho.nome %></td>
+  <td style="width: 30px;">
+    <%= link_to icon(:trash), 
+                [@produto, etiqueta], 
+                remote: true, 
+                method: :delete %>
+  </td>
+<% end -%>

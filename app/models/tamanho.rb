@@ -1,5 +1,7 @@
 class Tamanho < ActiveRecord::Base
 
+  default_scope -> { order('nome desc') }
+  
   def Tamanho.to_select
     @@combo ||= Tamanho.update_select
   end

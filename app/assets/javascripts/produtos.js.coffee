@@ -20,3 +20,5 @@ jQuery ->
     e.preventDefault()
     $(s).select2("val", '') for s in $('#filtro_pedidos select')
     $('#filtro_pedidos input:text').val('')
+
+    

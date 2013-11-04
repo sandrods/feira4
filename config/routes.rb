@@ -2,6 +2,7 @@ Feira::Application.routes.draw do
 
   resources :produtos do
     get :lucro, on: :collection
+    resources :etiquetas
   end
 
   resources :fornecedores
