@@ -3,6 +3,14 @@ class ProdutosController < ApplicationController
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
   def index
+
+    if params[:q]
+      params.delete(:q) if params[:q].values.all? { |v| v.blank? }        
+      session[:q] = params[:q]
+    else
+      params[:q] = session[:q] if session[:q]
+    end
+
     if params[:q]
       @search = Produto.search(params[:q])
       @produtos = @search.result.order(:ref)
