@@ -14,6 +14,7 @@
     formats:
       default: "%d/%m/%Y"
       short: "%d de %B"
+      medium: "%d de %B de %Y"
       long: "%A, %d de %B de %Y"
 
     day_names:

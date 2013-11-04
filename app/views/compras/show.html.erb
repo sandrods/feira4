@@ -1,0 +1,30 @@
+<%= page_header "Exibir Compra" do %>
+  <%= link_to icon(:chevron_left, "Voltar"), compras_path, class: 'btn' %>
+  <%= link_to icon(:edit, 'Editar Compra'), edit_compra_path(@compra), class: 'btn btn-sm btn-primary' %>
+<% end %>
+
+<div class="well well-sm show">
+
+  <div class="row">
+
+    <div class="col-sm-5 big">
+      <%= @compra.fornecedor.nome %>
+      <small><%= l @compra.data, format: :medium %></small>
+    </div>
+
+    <div class="col-sm-2 col-xs-4 big">
+      <%= @compra.itens.count %> <small>peças</small>
+    </div>
+
+    <div class="col-sm-3 col-xs-4 big">
+      <%= number_to_currency @compra.total %> <small>total</small>
+    </div>
+
+    <div class="col-sm-2 col-xs-4 big desconto">
+      <%= number_to_percentage @compra.desconto %>
+      <small><b>DESCONTO</b></small>
+    </div>
+
+  </div>
+
+</div>

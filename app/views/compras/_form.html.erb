@@ -1,0 +1,23 @@
+<%= simple_form_for(@compra) do |f| %>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <%= f.input :data %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.input :fornecedor_id, label: "Fornecedor", collection: Fornecedor.all, label_method: :nome %>
+    </div>
+    <div class="col-sm-3 col-md-2">
+      <%= input_group(f, :desconto, content: "%", position: 'after')%>
+    </div>
+  </div>
+
+  <%= f.button :submit, 'Salvar Compra', class: 'btn btn-primary' %>
+
+  <%= link_to icon(:trash, 'Apagar este Compra'), 
+        @compra, 
+        method: :delete, 
+        data: { confirm: 'Tem certeza?' }, 
+        class: 'btn btn-sm text-danger pull-right' unless @compra.new_record? %>
+
+<% end %>
