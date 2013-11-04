@@ -59,15 +59,19 @@ module ApplicationHelper
     _label   = opts.delete(:label)
     _icon    = opts.delete(:icon)
     _content = opts.delete(:content)
+    _position = opts.delete(:position) || 'before'
 
     if_opts = {}
     if_opts[:label] = _label if _label
 
     addon_content = _icon ? icon(_icon) : _content
 
+    group_content = [content_tag(:span, addon_content, class: 'input-group-addon'), form_builder.input_field(field, opts)]
+    group_content.reverse! if _position.to_s == 'after'
+
     form_builder.input field, if_opts do
       content_tag(:div, class: "input-group") do
-        content_tag(:span, addon_content, class: 'input-group-addon') + form_builder.input_field(field, opts)
+        group_content.join("").html_safe
       end
     end
 
