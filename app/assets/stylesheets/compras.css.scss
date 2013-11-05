@@ -25,3 +25,11 @@
         }
     }
 }
+
+.bar-code-input {
+    &:focus {
+        background-color: $alert-warning-bg;
+    }
+    margin-right: -5px;
+    text-align: center;
+}
