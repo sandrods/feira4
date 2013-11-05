@@ -1,6 +1,8 @@
 Feira::Application.routes.draw do
 
-  resources :compras
+  resources :compras do
+    resources :registros
+  end
 
   resources :produtos do
     get :lucro, on: :collection
