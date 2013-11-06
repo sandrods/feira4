@@ -4,7 +4,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
     primary.item :nav_produtos, 'Produtos', produtos_path
-    primary.item :nav_compras, 'Compras', "#"
+    primary.item :nav_compras, 'Compras', compras_path
     primary.item :nav_forn, 'Fornecedores', fornecedores_path #, highlights_on: :subpath
     primary.item :nav_cli, 'Clientes', clientes_path
     
