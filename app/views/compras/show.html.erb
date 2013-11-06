@@ -1,4 +1,4 @@
-<%= page_header "Exibir Compra" do %>
+<%= page_header "Compra ##{@compra.id}" do %>
   <%= link_to icon(:chevron_left, "Voltar"), compras_path, class: 'btn' %>
   <%= link_to icon(:edit, 'Editar Compra'), edit_compra_path(@compra), class: 'btn btn-sm btn-primary' %>
 <% end %>
@@ -13,11 +13,11 @@
     </div>
 
     <div class="col-sm-2 col-xs-4 big">
-      <%= @compra.itens.count %> <small>peças</small>
+      <span id="compra_itens_count"><%= @compra.itens.count %></span> <small>peças</small>
     </div>
 
     <div class="col-sm-3 col-xs-4 big">
-      <%= number_to_currency @compra.total %> <small>total</small>
+      <span id="compra_itens_total"><%= number_to_currency @compra.total %></span> <small>total</small>
     </div>
 
     <div class="col-sm-2 col-xs-4 big desconto">
@@ -30,6 +30,25 @@
 </div>
 
 <audio src="<%= asset_path('beep.mp3') %>" id="sound"></audio>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <h2 class="text-center text-info">camisa cetim ssang</h2>
+        <h2 class="text-center text-danger">est roxo</h2>
+        <h2 class="text-center text-danger">pp</h2>
+        <br/>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <div class="row">
 
   <div class="col-sm-7 col-md-7 col-lg-8">
@@ -37,7 +56,15 @@
     <div class="panel panel-info">
       <div class="panel-heading">
         <b class="panel-title">Peças</b>
-        <input type='text' class="pull-right bar-code-input" placeholder="Código de Barras" maxlength="10" />
+
+        <%= form_tag(compra_itens_compra_path(@compra), remote: true ) do %>
+          <%= text_field_tag :barcode, 
+                              nil, 
+                              maxlength: 10, 
+                              class: 'pull-right bar-code-input', 
+                              placeholder: "Código de Barras" %>
+        <%- end -%>
+
       </div>
       <table class="table table-condensed table-striped">
         <thead>
@@ -50,17 +77,8 @@
             <th>&nbsp;</th>
           </tr>               
         </thead>
-        <tbody>
-          <%- @compra.itens.each do |citem| -%>
-          <tr>
-            <td><small><%= citem.item.barcode %></small></td>
-            <td><%= citem.item.produto.ref %></td>
-            <td><small><%= citem.item.cor.try :nome %></small></td>
-            <td><small><%= citem.item.tamanho.try :nome %></small></td>
-            <td class="text-right"><%= number_to_currency citem.valor %></td>
-            <td>&nbsp;</td>
-          </tr>
-          <% end -%>
+        <tbody id="itens_compra_table">
+          <%= render partial: 'itens_compra/item', collection: @compra.itens %>
         </tbody>
       </table>
     </div>
