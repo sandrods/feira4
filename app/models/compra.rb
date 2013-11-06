@@ -13,7 +13,14 @@ class Compra < ActiveRecord::Base
   # acts_as_br_float :desconto
 
   def total
-    itens.sum(:valor)
+    tot = itens.sum(:valor)
+    tot = tot * (1 - desconto / 100) if desconto?
+    tot
   end
+
+  def desconto?
+    desconto.present? && desconto > 0
+  end
+
 
 end

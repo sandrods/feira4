@@ -21,7 +21,7 @@ class ComprasController < ApplicationController
     @compra = Compra.new(compra_params)
 
     if @compra.save
-      redirect_to compras_path, notice: 'Compra criada com sucesso.'
+      redirect_to @compra, notice: 'Compra criada com sucesso.'
     else
       render action: 'new'
     end
@@ -29,7 +29,7 @@ class ComprasController < ApplicationController
 
   def update
     if @compra.update(compra_params)
-      redirect_to compras_path, notice: 'Compra atualizada com sucesso.'
+      redirect_to @compra, notice: 'Compra atualizada com sucesso.'
     else
       render action: 'edit'
     end

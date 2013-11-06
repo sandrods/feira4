@@ -17,11 +17,11 @@
     </div>
 
     <div class="col-sm-3 col-xs-4 big">
-      <span id="compra_itens_total"><%= number_to_currency @compra.total %></span> <small>total</small>
+      <span id="compra_itens_total"><%= number_to_currency @compra.total %></span> <small>total com desconto</small>
     </div>
 
     <div class="col-sm-2 col-xs-4 big desconto">
-      <%= number_to_percentage @compra.desconto %>
+      <%= number_to_percentage @compra.desconto, precision: 1, format: "%n %" %>
       <small><b>DESCONTO</b></small>
     </div>
 
