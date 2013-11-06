@@ -4,3 +4,15 @@ $("#compra_itens_total").html("<%= number_to_currency @compra.total %>");
 $(".bar-code-input").val('');
 
 $("#sound")[0].play();
+
+$("#modal_ref").html('<%= @item.produto.ref %>')
+$("#modal_cor").html('<%= @item.cor.try :nome %>')
+$("#modal_tam").html('<%= @item.tamanho.try :nome %>')
+
+$("#item_modal").modal();
+
+setTimeout(function() {
+  $("#item_modal").modal('hide');
+  $(".bar-code-input").focus();
+}, 3000);
+

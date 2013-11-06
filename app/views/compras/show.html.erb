@@ -29,26 +29,6 @@
 
 </div>
 
-<audio src="<%= asset_path('beep.mp3') %>" id="sound"></audio>
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-body">
-        <h2 class="text-center text-info">camisa cetim ssang</h2>
-        <h2 class="text-center text-danger">est roxo</h2>
-        <h2 class="text-center text-danger">pp</h2>
-        <br/>
-      </div>
-
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
 <div class="row">
 
   <div class="col-sm-7 col-md-7 col-lg-8">
@@ -139,4 +119,21 @@
     </div>
   </div>
 
+</div>
+
+<audio src="<%= asset_path('beep.mp3') %>" id="sound"></audio>
+
+<div class="modal fade" id="item_modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <h2 class="text-center text-info"   id="modal_ref"></h2>
+        <h2 class="text-center text-danger" id="modal_cor"></h2>
+        <h2 class="text-center text-danger" id="modal_tam"></h2>
+        <br/>
+      </div>
+
+    </div>
+  </div>
 </div>
