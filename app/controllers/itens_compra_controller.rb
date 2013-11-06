@@ -7,6 +7,10 @@ class ItensCompraController < ApplicationController
     @item = @compra.itens.from_barcode(params[:barcode])
   end
 
+  def destroy
+    @compra.itens.find(params[:id]).destroy!
+  end
+
  private 
 
   def set_compra
