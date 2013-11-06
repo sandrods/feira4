@@ -24,8 +24,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.plural(/^(.*)l$/i, '\1is')
   inflect.singular(/^(.*)is$/i, '\1l')
 
-  inflect.irregular('fornecedor_pedido', 'fornecedores_pedido')
-  inflect.irregular('email', 'emails')
+  inflect.irregular('item_compra', 'itens_compra')
 
 end
 
