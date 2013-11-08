@@ -2,6 +2,8 @@
 
 class Cliente < ActiveRecord::Base
 
+  default_scope -> { order(:nome) }
+
   validates :nome, length: { maximum: 60 }, presence: true
 
   validate :data_aniversario
@@ -38,10 +40,6 @@ class Cliente < ActiveRecord::Base
 
   def self.por_letra(letra)
     where(["nome like ?", "#{letra}%"])
-  end
-
-  def self.to_select
-    Cliente.all.map {|c| [c.nome, c.id]}
   end
 
   def self.letras

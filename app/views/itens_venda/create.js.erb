@@ -1,0 +1,18 @@
+$("#itens_venda_table").prepend("<%= j render partial: 'itens_venda/item', object: @item %>");
+$("#venda_itens_count").html("<%= @venda.itens.count %>");
+$("#venda_itens_total").html("<%= number_to_currency @venda.total %>");
+$(".bar-code-input").val('');
+
+$("#sound")[0].play();
+
+$("#modal_ref").html('<%= @item.produto.ref %>')
+$("#modal_cor").html('<%= @item.cor.try :nome %>')
+$("#modal_tam").html('<%= @item.tamanho.try :nome %>')
+
+$("#item_modal").modal();
+
+setTimeout(function() {
+  $("#item_modal").modal('hide');
+  $(".bar-code-input").focus();
+}, 3000);
+

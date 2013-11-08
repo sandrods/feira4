@@ -3,7 +3,11 @@ class Venda < ActiveRecord::Base
   belongs_to :cliente
   belongs_to :vendedor
 
-  has_many :itens, class_name: "VendaItem", dependent: :destroy
+  has_many :itens, class_name: "ItemVenda", dependent: :destroy do
+    def from_barcode(bc)
+      ItemVenda.from_barcode(bc, proxy_association.owner.id)
+    end
+  end
   
   has_many :pagamentos, -> { where(cd: "C").order('data asc') },  class_name: "Registro", as: :registravel
 
@@ -13,8 +17,8 @@ class Venda < ActiveRecord::Base
   # acts_as_br_date :data
   # acts_as_br_float :desconto
 
-  scope :clientes,      where(tipo: "C" )
-  scope :comissionadas, where(tipo: "V" )
+  scope :clientes,      -> { where(tipo: "C" ) }
+  scope :comissionadas, -> { where(tipo: "V" ) }
 
   def cliente?
     tipo == 'C'
@@ -38,7 +42,13 @@ class Venda < ActiveRecord::Base
   end
 
   def total
-    itens.sum(:valor)
+    tot = itens.sum(:valor)
+    tot = tot * (1 - desconto / 100) if desconto?
+    tot
+  end
+
+  def desconto?
+    desconto.present? && desconto > 0
   end
 
 end

@@ -1,0 +1,3 @@
+$('#item_venda_<%= params[:id] %>').fadeOut();
+$("#venda_itens_count").html("<%= @venda.itens.count %>");
+$("#venda_itens_total").html("<%= number_to_currency @venda.total %>");

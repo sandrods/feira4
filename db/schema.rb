@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106013313) do
+ActiveRecord::Schema.define(version: 201311072334013) do
 
   create_table "clientes", force: true do |t|
     t.string   "nome",       limit: 60
@@ -106,6 +106,19 @@ ActiveRecord::Schema.define(version: 20131106013313) do
   add_index "itens_compra", ["compra_id"], name: "index_itens_compra_on_compra_id"
   add_index "itens_compra", ["item_id"], name: "index_itens_compra_on_item_id"
 
+  create_table "itens_venda", force: true do |t|
+    t.integer  "venda_id",   null: false
+    t.integer  "item_id",    null: false
+    t.float    "bruto"
+    t.float    "desconto"
+    t.float    "valor"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "itens_venda", ["item_id"], name: "index_itens_venda_on_item_id"
+  add_index "itens_venda", ["venda_id"], name: "index_itens_venda_on_venda_id"
+
   create_table "linhas", force: true do |t|
     t.string   "descricao",  limit: 30, null: false
     t.datetime "created_at"
@@ -181,19 +194,6 @@ ActiveRecord::Schema.define(version: 20131106013313) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "venda_itens", force: true do |t|
-    t.integer  "venda_id",   null: false
-    t.integer  "item_id",    null: false
-    t.float    "bruto"
-    t.float    "desconto"
-    t.float    "valor"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "venda_itens", ["item_id"], name: "index_venda_itens_on_item_id"
-  add_index "venda_itens", ["venda_id"], name: "index_venda_itens_on_venda_id"
 
   create_table "vendas", force: true do |t|
     t.integer  "cliente_id"

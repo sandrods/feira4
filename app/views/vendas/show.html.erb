@@ -1,0 +1,139 @@
+<%= page_header "Venda ##{@venda.id}" do %>
+  <%= link_to icon(:chevron_left, "Voltar"),vendas_path, class: 'btn' %>
+  <%= link_to icon(:edit, 'Editar Venda'), edit_venda_path(@venda), class: 'btn btn-sm btn-primary' %>
+<% end %>
+
+<div class="well well-sm show">
+
+  <div class="row">
+
+    <div class="col-sm-5 big">
+      <%= @venda.nome %>
+      <small><%= l @venda.data, format: :medium %></small>
+    </div>
+
+    <div class="col-sm-2 col-xs-4 big">
+      <span id="venda_itens_count"><%= @venda.itens.count %></span> <small>peças</small>
+    </div>
+
+    <div class="col-sm-3 col-xs-4 big">
+      <span id="venda_itens_total"><%= number_to_currency @venda.total %></span> <small>total com desconto</small>
+    </div>
+
+    <div class="col-sm-2 col-xs-4 big desconto">
+      <%= number_to_percentage @venda.desconto, precision: 1, format: "%n %" %>
+      <small><b>DESCONTO</b></small>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-7 col-md-7 col-lg-8">
+
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <b class="panel-title">Peças</b>
+
+        <%= form_tag(venda_itens_venda_path(@venda), remote: true ) do %>
+          <%= text_field_tag :barcode, 
+                              nil, 
+                              maxlength: 10, 
+                              class: 'pull-right bar-code-input', 
+                              placeholder: "Código de Barras" %>
+        <%- end -%>
+
+      </div>
+      <table class="table table-condensed table-striped">
+        <thead>
+          <tr>
+            <th>Cód.</th>
+            <th>Produto</th>
+            <th>Cor</th>
+            <th>Tam.</th>
+            <th class="text-right">Valor</th>
+            <th>&nbsp;</th>
+          </tr>               
+        </thead>
+        <tbody id="itensvenda_table">
+          <%= render partial: 'itens_venda/item', collection: @venda.itens %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="col-sm-5 col-md-5 col-lg-4">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <b class="panel-title">Pagamentos</b>
+        <%= button_tag icon(:plus, 'Incluir Pagamento'), class: 'btn btn-xs btn-default pull-right', id: 'add_pag' %>
+        <%= button_tag icon(:chevron_up, 'Terminei de incluir'), class: 'btn btn-xs btn-default pull-right', id: 'end_add_pag', style: "display: none;"%>
+      </div>
+
+      <div class="panel-body" id='add_pag_form' style="display: none;">
+        <%= simple_form_for [@venda, Registro.new], remote: true do |f| %>
+
+          <div class="row">
+
+            <div class="col-sm-5">
+              <%= f.input :data %>
+            </div>
+            <div class="col-sm-7">
+              <%= input_group(f, :valor, icon: :usd) %>
+            </div>
+
+          </div>
+
+          <%= f.association :conta, label_method: :nome %>
+
+          <div class="panel-actions pull-right">
+            <%= f.submit 'Salvar', class: 'btn btn-xs btn-primary' %>
+          </div>
+
+        <% end -%>
+      </div>
+
+      <table class="table table-condensed table-striped">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Conta</th>
+            <th class="text-right">Valor</th>
+            <th>&nbsp;</th>
+          </tr>               
+        </thead>
+        <tbody>
+          <%- @venda.pagamentos.each do |pag| -%>
+          <tr>
+            <td><%= pag.data %></td>
+            <td><small><%= pag.conta.try :nome %></small></td>
+            <td class="text-right"><%= number_to_currency pag.valor %></td>
+            <td>&nbsp;</td>
+          </tr>
+          <% end -%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<audio src="<%= asset_path('beep.mp3') %>" id="sound"></audio>
+
+<div class="modal fade" id="item_modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <h2 class="text-center text-info"   id="modal_ref"></h2>
+        <h2 class="text-center text-danger" id="modal_cor"></h2>
+        <h2 class="text-center text-danger" id="modal_tam"></h2>
+        <br/>
+      </div>
+
+    </div>
+  </div>
+</div>
