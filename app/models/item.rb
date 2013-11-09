@@ -11,11 +11,7 @@ class Item < ActiveRecord::Base
 
   has_many :compra_itens
 
-  def barcode
-    "#{cor_id.to_s.rjust(2, '0')}#{tamanho_id.to_s.rjust(2, '0')}#{produto_id.to_s.rjust(6, '0')}"
-  end
-
-  def Item.from_barcode(bc, create = true)
+  def self.from_barcode(bc, create = true)
 
     raise ItemException.new("Código de Barras Inválido: #{bc}") unless bc =~ /(\d{2})(\d{2})(\d{6})/
 
@@ -30,9 +26,10 @@ class Item < ActiveRecord::Base
     raise ItemException.new("Tamanho Inválido: #{tam_id}") unless tam
 
     item = Item.where(cor_id: cor.id, tamanho_id: tam.id, produto_id: produto.id).first
+
     unless item
       if create
-        item = Item.create(cor_id: cor.id, tamanho_id: tam.id, produto_id: produto.id, estoque: 0)
+        item = Item.create!(cor_id: cor.id, tamanho_id: tam.id, produto_id: produto.id, estoque: 0)
       else
         raise ItemException.new("Item não Cadastrado: #{bc}")
       end
@@ -42,6 +39,12 @@ class Item < ActiveRecord::Base
 
   end
 
+  def self.atualiza_estoques!
+    t1 = Time.now
+    all.each { |i| i.atualiza_estoque! }
+    puts Time.now - t1
+  end
+
   def atualiza_estoque!
     e = compra_itens.count
     # e -= venda_itens.count
@@ -49,14 +52,12 @@ class Item < ActiveRecord::Base
     update_attribute(:estoque, e)
   end
 
-  def self.atualiza_estoques!
-    t1 = Time.now
-    all.each { |i| i.atualiza_estoque! }
-    puts Time.now - t1
-  end
-
   def valor_estoque
     estoque * produto.valor
+  end
+
+  def barcode
+    "#{cor_id.to_s.rjust(2, '0')}#{tamanho_id.to_s.rjust(2, '0')}#{produto_id.to_s.rjust(6, '0')}"
   end
 
 end
