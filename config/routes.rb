@@ -1,6 +1,10 @@
 Feira::Application.routes.draw do
 
-  resources :sacolas
+  resources :sacolas do
+    resources :itens, controller: 'itens_sacola' do
+      post 'devolver', on: :collection
+    end
+  end
 
   resources :vendas do
     resources :itens, controller: 'itens_venda'

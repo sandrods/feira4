@@ -1,0 +1,11 @@
+<%= content_tag_for(:tr, item) do %>
+  <td><small><%= item.barcode %></small></td>
+  <td><small><%= item.produto.ref %></small></td>
+  <td><small><%= item.cor.try :nome %></small></td>
+  <td><small><%= item.tamanho.try :nome %></small></td>
+  <td class="text-right"><%= link_to icon(:trash), 
+                  sacola_item_path(@sacola, item), 
+                  method: 'delete', 
+                  class: 'btn btn-xs text-danger', 
+                  remote: true %></td>
+<% end -%>

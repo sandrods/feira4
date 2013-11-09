@@ -1,8 +1,10 @@
 # coding: utf-8
-class SacolaItem < ActiveRecord::Base
+class ItemSacola < ActiveRecord::Base
 
   belongs_to :sacola
   belongs_to :item
+
+  delegate :barcode, :produto, :cor, :tamanho, to: :item
 
   scope :incluidos,  -> { where(status: 'I') }
   scope :devolvidos, -> { where(status: 'D') }
@@ -13,7 +15,7 @@ class SacolaItem < ActiveRecord::Base
 
     sacola = Sacola.find(sacola_id)
 
-    return sacola.itens.create(item_id: item.id, status: 'I')
+    sacola.itens.create!(item_id: item.id, status: 'I')
 
   end
 
@@ -23,12 +25,12 @@ class SacolaItem < ActiveRecord::Base
 
     sacola = Sacola.find(sacola_id)
 
-    sacola_item = sacola.itens.find_by(item_id: item.id, status: 'I')
+    item_sacola = sacola.itens.find_by(item_id: item.id, status: 'I')
 
-    if sacola_item.nil?
+    if item_sacola.nil?
 
-      sacola_item = sacola.itens.find_by(item_id: item.id, status: 'D')
-      if sacola_item.nil?
+      item_sacola = sacola.itens.find_by(item_id: item.id, status: 'D')
+      if item_sacola.nil?
         raise ItemException.new("Esta peça NÃO pertence a esta Sacola")
       else
         raise ItemException.new("Esta peça já foi devolvida")
@@ -36,10 +38,13 @@ class SacolaItem < ActiveRecord::Base
       
     end
 
-    sacola_item.status = 'D'
-    sacola_item.save!
+    item_sacola.update_attribute(:status, 'D')
 
-    return sacola_item
+    item_sacola
+  end
+
+  def valor
+    produto && produto.valor
   end
 
 end

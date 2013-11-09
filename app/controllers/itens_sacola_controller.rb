@@ -1,0 +1,23 @@
+class ItensSacolaController < ApplicationController
+
+  before_action :set_sacola
+  
+  def create
+    @item = @sacola.itens.from_barcode(params[:barcode])
+  end
+
+  def destroy
+    @sacola.itens.find(params[:id]).destroy!
+  end
+
+  def devolver
+    @item = ItemSacola.devolve(params[:barcode], @sacola.id)
+  end
+
+ private 
+
+  def set_sacola
+    @sacola = Sacola.find(params[:sacola_id]) if params[:sacola_id]
+  end
+
+end

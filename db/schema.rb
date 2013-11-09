@@ -106,6 +106,14 @@ ActiveRecord::Schema.define(version: 201311072334013) do
   add_index "itens_compra", ["compra_id"], name: "index_itens_compra_on_compra_id"
   add_index "itens_compra", ["item_id"], name: "index_itens_compra_on_item_id"
 
+  create_table "itens_sacola", force: true do |t|
+    t.integer  "sacola_id",            null: false
+    t.integer  "item_id",              null: false
+    t.string   "status",     limit: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "itens_venda", force: true do |t|
     t.integer  "venda_id",   null: false
     t.integer  "item_id",    null: false
@@ -166,14 +174,6 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.datetime "updated_at"
     t.integer  "registravel_id",   limit: 9
     t.string   "registravel_type", limit: 20
-  end
-
-  create_table "sacola_itens", force: true do |t|
-    t.integer  "sacola_id",            null: false
-    t.integer  "item_id",              null: false
-    t.string   "status",     limit: 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "sacolas", force: true do |t|
