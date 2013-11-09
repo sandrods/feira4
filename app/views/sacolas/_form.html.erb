@@ -1,0 +1,18 @@
+<%= simple_form_for(@sacola) do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <%= f.input :nome, label: 'Nome' %>
+    </div>
+  </div>
+
+  <%= f.button :submit, 'Salvar Sacola', class: 'btn btn-primary' %>
+
+  <%= link_to icon(:trash, 'Apagar este Sacola'), 
+        @sacola, 
+        method: :delete, 
+        data: { confirm: 'Tem certeza?' }, 
+        class: 'btn btn-sm text-danger pull-right' unless @sacola.new_record? %>
+
+<% end %>

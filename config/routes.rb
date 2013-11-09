@@ -1,5 +1,7 @@
 Feira::Application.routes.draw do
 
+  resources :sacolas
+
   resources :vendas do
     resources :itens_venda
     resources :registros
