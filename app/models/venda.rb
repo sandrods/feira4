@@ -1,8 +1,6 @@
 class Venda < ActiveRecord::Base
-
-  belongs_to :cliente
-  belongs_to :vendedor
-
+  include ClienteOuVendedor
+  
   has_many :itens, class_name: "ItemVenda", dependent: :destroy do
     def from_barcode(bc)
       ItemVenda.from_barcode(bc, proxy_association.owner.id)
@@ -10,19 +8,6 @@ class Venda < ActiveRecord::Base
   end
   
   has_many :pagamentos, -> { where(cd: "C").order('data asc') },  class_name: "Registro", as: :registravel
-
-  validates_presence_of :cliente_id,  if: ->(v) { v.vendedor_id.blank? }
-  validates_presence_of :vendedor_id, if: ->(v) { v.cliente_id.blank? }
-
-  # acts_as_br_date :data
-  # acts_as_br_float :desconto
-
-  scope :clientes,      -> { where(tipo: "C" ) }
-  scope :comissionadas, -> { where(tipo: "V" ) }
-
-  def cliente?
-    tipo == 'C'
-  end
 
   def copia_da_sacola!(sacola_id)
     sacola = Sacola.find(sacola_id)
@@ -35,10 +20,6 @@ class Venda < ActiveRecord::Base
 
     return itens.create!(item_id: item.id, bruto: item.produto.valor, desconto: (desconto || 0), valor: liquido)
 
-  end
-
-  def nome
-    cliente? ? cliente.nome : vendedor.nome
   end
 
   def total

@@ -1,8 +1,7 @@
 class Sacola < ActiveRecord::Base
+  include ClienteOuVendedor
 
   has_many :itens, class_name: "SacolaItem", dependent: :destroy
-
-  belongs_to :vendedor
 
   def total
     itens.incluidos.all.sum { |i| i.item.try(:produto).try(:valor) }

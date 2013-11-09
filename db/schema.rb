@@ -181,6 +181,8 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.string   "status",      limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "cliente_id"
+    t.string   "tipo",        limit: 1
   end
 
   create_table "tamanhos", force: true do |t|
