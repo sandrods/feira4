@@ -21,7 +21,7 @@ class VendasController < ApplicationController
     @venda = Venda.new(venda_params)
 
     if @venda.save
-      redirect_to vendas_path, notice: 'Venda criado com sucesso.'
+      redirect_to @venda, notice: 'Venda criado com sucesso.'
     else
       render action: 'new'
     end
@@ -29,7 +29,7 @@ class VendasController < ApplicationController
 
   def update
     if @venda.update(venda_params)
-      redirect_to vendas_path, notice: 'Venda atualizado com sucesso.'
+      redirect_to @venda, notice: 'Venda atualizado com sucesso.'
     else
       render action: 'edit'
     end

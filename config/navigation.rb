@@ -12,7 +12,7 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item :nav_vendas, 'Vendas' do |venda|
-      venda.item :nav_cli, 'Venda Direta', clientes_path
+      venda.item :nav_cli, 'Venda Direta', vendas_path
       venda.item :nav_cli, 'Clientes', clientes_path
     end
 

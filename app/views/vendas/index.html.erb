@@ -14,8 +14,8 @@
       <tbody>
         <% @vendas.each do |venda| %>
           <tr>
-            <td><%= venda.data %></td>
-            <td><%= link_to venda.cliente.nome, edit_venda_path(venda) %></td>
+            <td width="80px"><small><%= venda.data %></small></td>
+            <td><%= link_to venda.cliente.nome, venda %></td>
             <td><%= venda.tipo %></td>
           </tr>
         <% end %>
