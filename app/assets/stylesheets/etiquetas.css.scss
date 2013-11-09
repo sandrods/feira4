@@ -3,9 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 tr.etiqueta {
-  a { display: none; }
+  a { color: #ccc; }
 
   &:hover {
-    a { display: block; }
+    a { color: #888; }
   }
 }
