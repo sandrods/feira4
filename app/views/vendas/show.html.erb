@@ -37,7 +37,7 @@
       <div class="panel-heading">
         <b class="panel-title">Peças</b>
 
-        <%= form_tag(venda_itens_venda_path(@venda), remote: true ) do %>
+        <%= form_tag(venda_itens_path(@venda), remote: true ) do %>
           <%= text_field_tag :barcode, 
                               nil, 
                               maxlength: 10, 

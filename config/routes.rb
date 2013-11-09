@@ -3,13 +3,13 @@ Feira::Application.routes.draw do
   resources :sacolas
 
   resources :vendas do
-    resources :itens_venda
+    resources :itens, controller: 'itens_venda'
     resources :registros
   end
 
   resources :compras do
     resources :registros
-    resources :itens_compra
+    resources :itens, controller: 'itens_compra'
   end
 
   resources :produtos do
