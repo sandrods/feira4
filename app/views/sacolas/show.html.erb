@@ -67,7 +67,7 @@
         <b class="panel-title">Peças Devolvidas</b>
 
         <%= form_tag(devolver_sacola_itens_path(@sacola), remote: true ) do %>
-          <%= text_field_tag :barcode, 
+          <%= text_field_tag :barcode_d, 
                               nil, 
                               maxlength: 10, 
                               class: 'pull-right bar-code-input', 

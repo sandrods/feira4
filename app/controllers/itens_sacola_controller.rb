@@ -11,7 +11,7 @@ class ItensSacolaController < ApplicationController
   end
 
   def devolver
-    @item = ItemSacola.devolve(params[:barcode], @sacola.id)
+    @item = ItemSacola.devolve(params[:barcode_d], @sacola.id)
   end
 
  private 
