@@ -57,10 +57,13 @@
             <th>&nbsp;</th>
           </tr>               
         </thead>
-        <tbody id="itensvenda_table">
+        <tbody id="itens_venda_table">
           <%= render partial: 'itens_venda/item', collection: @venda.itens %>
         </tbody>
       </table>
+      <div class="panel-footer text-right">
+        <small>Total</small> <%= number_to_currency @venda.itens.sum(:valor) %>
+      </div>
     </div>
 
   </div>

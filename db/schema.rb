@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
   end
 
   create_table "sacolas", force: true do |t|
-    t.integer  "vendedor_id",           null: false
+    t.integer  "vendedor_id"
     t.string   "status",      limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"

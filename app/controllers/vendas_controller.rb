@@ -12,12 +12,16 @@ class VendasController < ApplicationController
 
   def new
     @venda = Venda.new
+    @venda.data = Date.today
   end
 
   def edit
   end
 
   def create
+
+    from_sacola and return if params[:sacola_id]
+
     @venda = Venda.new(venda_params)
 
     if @venda.save
@@ -25,6 +29,7 @@ class VendasController < ApplicationController
     else
       render action: 'new'
     end
+
   end
 
   def update
@@ -46,6 +51,12 @@ class VendasController < ApplicationController
     end
 
     def venda_params
-      params.require(:venda).permit(:cliente_id)
+      params.require(:venda).permit(:cliente_id, :desconto, :data)
     end
+
+    def from_sacola
+      @venda = Venda.from_sacola(params[:sacola_id])
+      redirect_to @venda, notice: 'Venda criado com sucesso.' 
+    end
+
 end

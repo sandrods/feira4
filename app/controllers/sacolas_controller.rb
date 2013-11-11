@@ -19,6 +19,7 @@ class SacolasController < ApplicationController
 
   def create
     @sacola = Sacola.new(sacola_params)
+    @sacola.tipo = 'C'
 
     if @sacola.save
       redirect_to @sacola, notice: 'Sacola criada com sucesso.'

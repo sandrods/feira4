@@ -5,14 +5,14 @@ class ItemVenda < ActiveRecord::Base
 
   delegate :barcode, :produto, :cor, :tamanho, to: :item
 
-  def ItemVenda.from_barcode(bc, venda_id)
+  # def ItemVenda.from_barcode(bc, venda_id)
 
-    item = Item.from_barcode(bc)
+  #   item = Item.from_barcode(bc)
 
-    venda = Venda.find(venda_id)
+  #   venda = Venda.find(venda_id)
     
-    venda.adiciona_item!(item)
+  #   venda.adiciona_item!(item)
 
-  end
+  # end
 
 end
