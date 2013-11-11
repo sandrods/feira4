@@ -196,4 +196,10 @@ input.money, .money input {
 
 small { color: #999 }
 
+.link_delete {
+    color: #ccc;
+}
 
+tr:hover {
+    .link_delete  { color: #b94a48; }
+}
