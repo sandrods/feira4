@@ -3,18 +3,14 @@ $("#item_sacola_<%= @item.id %>").fadeOut();
 
 $("#sacola_itens_count").html("<%= @sacola.itens.incluidos.count %>");
 $("#sacola_itens_total").html("<%= number_to_currency @sacola.total %>");
+
 $(".bar-code-input").val('');
 
-$("#sound")[0].play();
-
-$("#modal_ref").html('<%= @item.produto.ref %>')
-$("#modal_cor").html('<%= @item.cor.try :nome %>')
-$("#modal_tam").html('<%= @item.tamanho.try :nome %>')
-
-$("#item_modal").modal();
-
-setTimeout(function() {
-  $("#item_modal").modal('hide');
-  $("#barcode_d").focus();
-}, 3000);
+window.show_item_box({
+  ref:   '<%= @item.produto.ref %>',
+  cor:   '<%= @item.cor.try :nome %>',
+  tam:   '<%= @item.tamanho.try :nome %>',
+  title: 'Item RETIRADO da Sacola',
+  focus: $('#barcode_d')
+});
 

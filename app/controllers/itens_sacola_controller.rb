@@ -1,7 +1,7 @@
 class ItensSacolaController < ApplicationController
 
   before_action :set_sacola
-  
+
   def create
     @item = @sacola.itens.from_barcode(params[:barcode])
   end
@@ -21,3 +21,4 @@ class ItensSacolaController < ApplicationController
   end
 
 end
+

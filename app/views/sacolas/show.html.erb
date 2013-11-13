@@ -100,19 +100,4 @@
 
 </div>
 
-<audio src="<%= asset_path('beep.mp3') %>" id="sound"></audio>
-
-<div class="modal fade" id="item_modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-body">
-        <h2 class="text-center text-info"   id="modal_ref"></h2>
-        <h2 class="text-center text-danger" id="modal_cor"></h2>
-        <h2 class="text-center text-danger" id="modal_tam"></h2>
-        <br/>
-      </div>
-
-    </div>
-  </div>
-</div>
+<%= render partial: 'itens/modals' %>
