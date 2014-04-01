@@ -9,11 +9,9 @@ class ItemSacola < ActiveRecord::Base
   scope :incluidos,  -> { where(status: 'I') }
   scope :devolvidos, -> { where(status: 'D') }
 
-  def self.from_barcode(bc, sacola_id)
+  def self.from_barcode(bc, sacola)
 
-    item = Item.from_barcode(bc, false)
-
-    sacola = Sacola.find(sacola_id)
+    item = Item.find_by_barcode!(bc)
 
     sacola.itens.create!(item_id: item.id, status: 'I')
 
@@ -21,7 +19,7 @@ class ItemSacola < ActiveRecord::Base
 
   def self.devolve(bc, sacola_id)
 
-    item = Item.from_barcode(bc, false)
+    item = Item.find_by_barcode!(bc)
 
     sacola = Sacola.find(sacola_id)
 
@@ -35,7 +33,7 @@ class ItemSacola < ActiveRecord::Base
       else
         raise ItemException.new("Esta peça já foi devolvida")
       end
-      
+
     end
 
     item_sacola.update_attribute(:status, 'D')

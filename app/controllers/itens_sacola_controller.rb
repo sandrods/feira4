@@ -3,7 +3,7 @@ class ItensSacolaController < ApplicationController
   before_action :set_sacola
 
   def create
-    @item = @sacola.itens.from_barcode(params[:barcode])
+    @item = @sacola.adiciona_item!(params[:barcode])
   end
 
   def destroy
@@ -14,11 +14,10 @@ class ItensSacolaController < ApplicationController
     @item = ItemSacola.devolve(params[:barcode_d], @sacola.id)
   end
 
- private 
+ private
 
   def set_sacola
     @sacola = Sacola.find(params[:sacola_id]) if params[:sacola_id]
   end
 
 end
-

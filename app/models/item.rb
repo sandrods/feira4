@@ -11,31 +11,30 @@ class Item < ActiveRecord::Base
 
   has_many :compra_itens
 
-  def self.from_barcode(bc, create = true)
+  def self.find_by_barcode!(_bc)
 
-    raise ItemException.new("Código de Barras Inválido: #{bc}") unless bc =~ /(\d{2})(\d{2})(\d{6})/
+    bc = Barcode.new(_bc)
 
-    cor_id, tam_id, ref = $1, $2, $3
+    item = bc.find_item
 
-    produto = Produto.find(ref.to_i) rescue nil
-    cor     = Cor.find(cor_id.to_i) rescue nil
-    tam     = Tamanho.find(tam_id.to_i) rescue nil
+    raise ItemException.new("Item não Cadastrado: #{bc}") unless item
 
-    raise ItemException.new("Produto Inválido: #{ref}") unless produto
-    raise ItemException.new("Cor Inválida: #{cor_id}") unless cor
-    raise ItemException.new("Tamanho Inválido: #{tam_id}") unless tam
+    item
 
-    item = Item.where(cor_id: cor.id, tamanho_id: tam.id, produto_id: produto.id).first
+  end
 
-    unless item
-      if create
-        item = Item.create!(cor_id: cor.id, tamanho_id: tam.id, produto_id: produto.id, estoque: 0)
-      else
-        raise ItemException.new("Item não Cadastrado: #{bc}")
-      end
-    end
+  def self.find_or_create_by_barcode(_bc)
 
-    return item
+    bc = Barcode.new(_bc)
+
+    item = bc.find_item
+
+    item = Item.create!(cor_id: bc.cor.id,
+                        tamanho_id: bc.tam.id,
+                        produto_id: bc.produto.id,
+                        estoque: 0) unless item
+
+    item
 
   end
 

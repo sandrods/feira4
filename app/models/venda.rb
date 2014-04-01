@@ -1,6 +1,6 @@
 class Venda < ActiveRecord::Base
   include ClienteOuVendedor
-  
+
   has_many :itens, class_name: "ItemVenda", dependent: :destroy do
     def from_barcode(bc)
       #ItemVenda.from_barcode(bc, proxy_association.owner.id)
@@ -8,7 +8,7 @@ class Venda < ActiveRecord::Base
       proxy_association.owner.adiciona_item!(item)
     end
   end
-  
+
   has_many :pagamentos, -> { where(cd: "C").order('data asc') },  class_name: "Registro", as: :registravel
 
   def self.from_sacola(sacola_id)
@@ -16,17 +16,13 @@ class Venda < ActiveRecord::Base
 
     venda = Venda.create!(data: Date.today, cliente_id: sacola.cliente_id, tipo: 'C', desconto: 0)
 
-    sacola.itens.incluidos.each { |item_sacola| venda.adiciona_item!(item_sacola.item) }
+    sacola.itens.incluidos.each { |item_sacola| ItemVenda.create_by_item(item_sacola.item, self) }
 
     venda
   end
 
-  def adiciona_item!(item)
-
-    # liquido = (desconto && desconto > 0) ? item.produto.valor * (1-(desconto/100)) : item.produto.valor
-
-    # return itens.create!(item_id: item.id, bruto: item.produto.valor, desconto: (desconto || 0), valor: liquido)
-    itens.create!(item_id: item.id, valor: item.produto.valor)
+  def adiciona_item!(bc)
+    ItemVenda.from_barcode(bc, self)
   end
 
   def total
