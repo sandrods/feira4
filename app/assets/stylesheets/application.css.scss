@@ -203,3 +203,7 @@ small { color: #999 }
 tr:hover {
     .link_delete  { color: #b94a48; }
 }
+
+table.table {
+    td.date { width: 80px; }
+}
