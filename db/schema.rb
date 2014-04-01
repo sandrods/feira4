@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(version: 201311072334013) do
 
+  create_table "categorias", force: true do |t|
+    t.string   "nome"
+    t.string   "cd"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "clientes", force: true do |t|
     t.string   "nome",       limit: 60
     t.string   "email",      limit: 40
@@ -174,6 +181,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.datetime "updated_at"
     t.integer  "registravel_id",   limit: 9
     t.string   "registravel_type", limit: 20
+    t.integer  "categoria_id"
   end
 
   create_table "sacolas", force: true do |t|

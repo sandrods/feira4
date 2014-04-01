@@ -1,0 +1,79 @@
+<%= page_header "Diário Financeiro" do %>
+  <%= button_tag icon(:plus, 'Novo Registro'), class: 'btn btn-primary btn-sm', data: { toggle: 'modal', target: '#modal_new_registro' } %>
+<% end %>
+
+<div class="row">
+
+  <div class="col-sm-6">
+
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <b class="panel-title">CAIXA</b>
+      </div>
+      <table class="table table-striped">
+        <tbody id="registros_conta_caixa">
+          <%= render partial: 'registro', collection: Registro.da_conta(Conta::CAIXA) %>
+        </tbody>
+      </table>
+      <div class="panel-footer text-right">
+        <small>Saldo</small> <%= number_to_currency 1_233.40 %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-sm-6">
+
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <b class="panel-title">BANCO</b>
+      </div>
+      <table class="table table-striped">
+        <tbody id="registros_conta_caixa">
+          <%= render partial: 'registro', collection: Registro.da_conta(Conta::BANCO) %>
+        </tbody>
+      </table>
+      <div class="panel-footer text-right">
+        <small>Saldo</small> <%= number_to_currency 1_734.60 %>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-6">
+
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <b class="panel-title">RECEITAS</b>
+      </div>
+      <table class="table table-striped">
+        <tbody id="registros_conta_caixa">
+          <%= render partial: 'registro', collection: Registro.da_conta(Conta::CPAGAR) %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="col-sm-6">
+
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <b class="panel-title">DESPESAS</b>
+      </div>
+      <table class="table table-striped">
+        <tbody id="registros_conta_caixa">
+          <%= render partial: 'registro', collection: Registro.da_conta(Conta::CRECEB) %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<%= render partial: 'new' %>

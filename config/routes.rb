@@ -1,5 +1,9 @@
 Feira::Application.routes.draw do
 
+  resources :categorias
+
+  resources :registros
+
   resources :sacolas do
     resources :itens, controller: 'itens_sacola' do
       post 'devolver', on: :collection
