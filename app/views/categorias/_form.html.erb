@@ -1,0 +1,19 @@
+<%= simple_form_for(@categoria) do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :nome, label: 'Nome' %>
+      <%= f.input :cd, label: 'Cd' %>
+
+    </div>
+  </div>
+
+  <%= f.button :submit, 'Salvar Categoria', class: 'btn btn-primary' %>
+
+  <%= link_to icon(:trash, 'Apagar esta Categoria'), 
+        @categoria,
+        method: :delete,
+        data: { confirm: 'Tem certeza?' },
+        class: 'btn btn-sm text-danger pull-right' unless @categoria.new_record? %>
+
+<% end %>
