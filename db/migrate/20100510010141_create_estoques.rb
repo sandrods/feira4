@@ -4,9 +4,9 @@ class CreateEstoques < ActiveRecord::Migration
       t.integer :compra_id
       t.integer :item_id,   :null => false
 
-      t.float   :valor
+      t.decimal :valor
       t.string  :tipo,      :null => false, :limit => 1
- 
+
       t.timestamps
     end
   end
