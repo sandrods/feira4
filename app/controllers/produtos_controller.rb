@@ -5,7 +5,7 @@ class ProdutosController < ApplicationController
   def index
 
     if params[:q]
-      params.delete(:q) if params[:q].values.all? { |v| v.blank? }        
+      params.delete(:q) if params[:q].values.all? { |v| v.blank? }
       session[:q] = params[:q]
     else
       params[:q] = session[:q] if session[:q]
@@ -73,10 +73,10 @@ class ProdutosController < ApplicationController
 
     def redirect_to_new_or_show
       if params[:commit] =~ /Novo/i
-        redirect_to new_produto_path colecao_id:      @produto.colecao_id, 
-                                      fornecedor_id:  @produto.fornecedor_id, 
+        redirect_to new_produto_path colecao_id:      @produto.colecao_id,
+                                      fornecedor_id:  @produto.fornecedor_id,
                                       linha_id:       @produto.linha_id,
-                                      tipo_id:        @produto.tipo_id 
+                                      tipo_id:        @produto.tipo_id
       else
         redirect_to @produto
       end

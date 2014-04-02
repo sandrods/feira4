@@ -71,6 +71,9 @@ gem 'jquery-turbolinks'
 
 gem 'delocalize', github: 'wanchic/delocalize'
 
+gem 'prawn'
+gem 'barby'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

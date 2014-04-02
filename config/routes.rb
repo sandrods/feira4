@@ -1,4 +1,4 @@
-Feira::Application.routes.draw do
+Rails.application.routes.draw do
 
   resources :categorias
 
@@ -24,6 +24,9 @@ Feira::Application.routes.draw do
     get :lucro, on: :collection
     resources :etiquetas
   end
+
+  get 'etiquetas' => 'etiquetas#index', as: 'etiquetas'
+  post 'etiquetas' => 'etiquetas#print', as: 'print_etiquetas'
 
   resources :fornecedores
 
