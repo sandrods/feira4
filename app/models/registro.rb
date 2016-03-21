@@ -5,8 +5,8 @@ class Registro < ActiveRecord::Base
 
   validates_presence_of :data, :descricao, :valor, :cd
 
-  scope :creditos, where(cd: 'C')
-  scope :debitos,  where(cd: 'D')
+  scope :creditos, -> { where(cd: 'C') }
+  scope :debitos,  -> { where(cd: 'D') }
 
   scope :da_conta, ->(conta) { where(conta_id: conta) }
 
