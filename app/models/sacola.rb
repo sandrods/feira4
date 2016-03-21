@@ -8,7 +8,7 @@ class Sacola < ActiveRecord::Base
   end
 
   def total
-    itens.incluidos.all.sum { |i| i.item.try(:produto).try(:valor) }
+    itens.incluidos.to_a.sum { |i| i.item.try(:produto).try(:valor) }
   end
 
 end

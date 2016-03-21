@@ -19,7 +19,9 @@ module ClienteOuVendedor
   end
 
   def nome
-    cliente? ? cliente.nome : vendedor.nome
+    cliente? ?
+      cliente.nome :
+      vendedor.nome
   end
-  
+
 end

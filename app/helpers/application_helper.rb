@@ -22,9 +22,15 @@ module ApplicationHelper
 
   def flash_messages
     _flashes = ""
-
     flash.each do |name, msg|
-      _type = name == :notice ? "success" : "danger"
+      case name.to_sym
+        when :notice, :success
+          _type = 'success'
+        when :danger, :error, :alert
+          _type = 'danger'
+        when :info
+          _type = 'info'
+        end
       _flashes << <<-HTML
       <div class="alert alert-dismissable alert-#{_type}">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -32,10 +38,10 @@ module ApplicationHelper
       </div>
       HTML
     end
-
+    flash.discard
     _flashes.html_safe
   end
-  
+
   def glyph(*names)
     names.map! { |name| name.to_s.gsub('_','-') }
     names.map! do |name|
@@ -49,7 +55,7 @@ module ApplicationHelper
     ic += ('&nbsp;'.html_safe + text) if text
     raw(ic)
   end
-  
+
   def data_pt_BR(data)
     l(data) unless data.nil?
   end
