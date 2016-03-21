@@ -1,5 +1,0 @@
-<%= page_header "Editar Pedido", @pedido.id do %>
-	<%= link_to icon(:trash, 'Apagar este pedido'), @pedido, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-small btn-danger' %>
-<% end %>
-
-<%= render 'form' %>
