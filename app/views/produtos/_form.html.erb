@@ -15,7 +15,7 @@
     <div class="col-sm-4">
       <%= f.association :tipo, label: 'Tipo', label_method: :descricao, input_html: { class: 'select2' } %>
      </div>
-    <div class="col-sm-4">     
+    <div class="col-sm-4">
       <%= f.association :linha, label: 'Linha', label_method: :descricao, input_html: { class: 'select2' } %>
     </div>
   </div>
@@ -34,16 +34,16 @@
         <div class="col-sm-3 col-xs-6">
           <div class="form-group">
             <label>Lucro</label>
-            <%= content_tag(:p, number_to_currency(@produto.lucro), 
-                                class: 'form-control-static input-lg', 
+            <%= content_tag(:p, number_to_currency(@produto.lucro),
+                                class: 'form-control-static input-lg',
                                 id: 'lucro') %>
           </div>
         </div>
         <div class="col-sm-3 col-xs-6">
           <div class="form-group">
             <label>Rentabilidade</label>
-            <%= content_tag(:p, number_to_percentage(@produto.rentabilidade), 
-                                class: 'form-control-static input-lg', 
+            <%= content_tag(:p, number_to_percentage(@produto.rentabilidade),
+                                class: 'form-control-static input-lg',
                                 id: 'rentabilidade') %>
           </div>
         </div>
@@ -51,14 +51,15 @@
       </div>
   </fieldset>
 
-  <%= f.button :submit, 'Salvar e Novo', class: 'btn btn-info' if @produto.new_record? -%>
+  <div class="bottom-actions">
+    <%= f.button :submit, 'Salvar e Novo', class: 'btn btn-info' if @produto.new_record? -%>
 
-  <%= f.button :submit, 'Salvar Produto', class: 'btn btn-primary' %>
+    <%= f.button :submit, 'Salvar Produto', class: 'btn btn-primary' %>
 
-  <%= link_to icon(:trash, 'Apagar este Produto'), 
-        @produto, 
-        method: :delete, 
-        data: { confirm: 'Tem certeza?' }, 
-        class: 'btn btn-sm text-danger pull-right' unless @produto.new_record? %>
-
+    <%= link_to icon(:trash, 'Apagar este Produto'),
+          @produto,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger pull-right' unless @produto.new_record? %>
+  </div>
 <% end %>

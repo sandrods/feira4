@@ -12,13 +12,14 @@
     </div>
   </div>
 
+  <div class="bottom-actions">
+    <%= f.button :submit, 'Salvar Venda', class: 'btn btn-primary' %>
 
-  <%= f.button :submit, 'Salvar Venda', class: 'btn btn-primary' %>
-
-  <%= link_to icon(:trash, 'Apagar esta Venda'),
-        @venda,
-        method: :delete,
-        data: { confirm: 'Tem certeza?' },
-        class: 'btn btn-sm text-danger pull-right' unless @venda.new_record? %>
+    <%= link_to icon(:trash, 'Apagar esta Venda'),
+          @venda,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger pull-right' unless @venda.new_record? %>
+  </div>
 
 <% end %>

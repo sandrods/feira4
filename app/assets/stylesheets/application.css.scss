@@ -152,7 +152,7 @@ input.money, .money input {
     text-align: right;
 }
 
-.well-sm { 
+.well-sm {
   h4 {
     margin-top: 5px;
     margin-left: 15px;
@@ -178,18 +178,18 @@ input.money, .money input {
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; 
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 
     &:focus {
       border-color: #66afe9;
       outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); 
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
     }
 
     &[disabled] {
       cursor: not-allowed;
-      background-color: #eeeeee; 
+      background-color: #eeeeee;
     }
   }
 }
@@ -206,4 +206,31 @@ tr:hover {
 
 table.table {
     td.date { width: 80px; }
+}
+
+.bottom-actions {
+    border: 1px solid #e0e0e0;
+    border-width: 1px 0 0 0;
+    background-color: #f8f8f8;
+    padding: 20px;
+    margin: 30px -20px -40px -20px;
+    display: block;
+}
+
+.well .bottom-actions {
+    border-width: 01px;
+    background-color: #f9f9f6;
+    padding: 15px;
+    margin: 30px -20px -20px -20px;
+    display: block;
+    border-radius: 0 0 4px 4px;
+}
+
+.panel .bottom-actions {
+    border-width: 01px;
+    background-color: #f9f9f6;
+    padding: 15px;
+    margin: 20px -16px -20px -16px;
+    display: block;
+    border-radius: 0 0 4px 4px;
 }
