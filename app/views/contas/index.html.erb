@@ -1,0 +1,21 @@
+<%= page_header "Contas" %>
+
+
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @contas.each do |conta| %>
+          <tr>
+            <td><%= link_to conta.nome, edit_conta_path(conta) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <p class="index_count"><span><%= @contas.count %></span> contas encontradas.</p>
+
+    <%= link_to(icon(:plus, 'Nova Conta'), new_conta_path, class: 'btn btn-primary') %>
