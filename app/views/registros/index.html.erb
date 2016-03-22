@@ -4,70 +4,58 @@
 
 <div class="row">
 
-  <div class="col-sm-6">
+<% Conta.all.each do |conta| %>
+
+  <div class="col-sm-12 col-md-6 col-lg-4">
 
     <div class="panel panel-info">
       <div class="panel-heading">
-        <b class="panel-title">CAIXA</b>
+        <b class="panel-title"> <%= conta.nome %> </b>
       </div>
       <table class="table table-striped">
         <tbody id="registros_conta_caixa">
-          <%= render partial: 'registro', collection: Registro.da_conta(Conta::CAIXA) %>
+          <%= render partial: 'registro', collection: conta.registros %>
         </tbody>
       </table>
       <div class="panel-footer text-right">
-        <small>Saldo</small> <%= number_to_currency 1_233.40 %>
+        <small>Saldo</small> <%= number_to_currency conta.saldo %>
       </div>
     </div>
 
   </div>
 
-  <div class="col-sm-6">
-
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <b class="panel-title">BANCO</b>
-      </div>
-      <table class="table table-striped">
-        <tbody id="registros_conta_caixa">
-          <%= render partial: 'registro', collection: Registro.da_conta(Conta::BANCO) %>
-        </tbody>
-      </table>
-      <div class="panel-footer text-right">
-        <small>Saldo</small> <%= number_to_currency 1_734.60 %>
-      </div>
-    </div>
-
-  </div>
+<% end %>
 
 </div>
 
+<hr/>
+
 <div class="row">
 
-  <div class="col-sm-6">
+  <div class="col-sm-12 col-md-6">
 
     <div class="panel panel-danger">
       <div class="panel-heading">
-        <b class="panel-title">RECEITAS</b>
+        <b class="panel-title">CONTAS A PAGAR</b>
       </div>
       <table class="table table-striped">
         <tbody id="registros_conta_caixa">
-          <%= render partial: 'registro', collection: Registro.da_conta(Conta::CPAGAR) %>
+          <%= render partial: 'registro', collection: Registro.a_pagar %>
         </tbody>
       </table>
     </div>
 
   </div>
 
-  <div class="col-sm-6">
+  <div class="col-sm-12 col-md-6">
 
     <div class="panel panel-success">
       <div class="panel-heading">
-        <b class="panel-title">DESPESAS</b>
+        <b class="panel-title">CONTAS A RECEBER</b>
       </div>
       <table class="table table-striped">
         <tbody id="registros_conta_caixa">
-          <%= render partial: 'registro', collection: Registro.da_conta(Conta::CRECEB) %>
+          <%= render partial: 'registro', collection: Registro.a_receber %>
         </tbody>
       </table>
     </div>

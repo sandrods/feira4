@@ -1,11 +1,6 @@
 class Conta < ActiveRecord::Base
 
-  CAIXA = 1
-  BANCO = 2
-  CPAGAR = 3
-  CRECEB = 4
-
-  validates_length_of :nome, maximum: 30
+  validates_length_of :nome, maximum: 20
 
   has_many :registros
 
@@ -15,6 +10,10 @@ class Conta < ActiveRecord::Base
 
   def Conta.update_select
     @@combo = Conta.all.map {|c| [c.nome, c.id]}
+  end
+
+  def saldo
+    registros.creditos.sum(:valor) - registros.debitos.sum(:valor)
   end
 
 end
