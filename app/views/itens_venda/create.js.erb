@@ -2,13 +2,10 @@ $("#itens_venda_table").prepend("<%= j render partial: 'itens_venda/item', objec
 $("#venda_itens_count").html("<%= @venda.itens.count %>");
 $("#venda_itens_total").html("<%= number_to_currency @venda.total %>");
 $(".bar-code-input").val('');
-
+$('#total_itens_venda').html('<%= number_to_currency @venda.itens.sum(:valor) %>')
 window.show_item_box({
   ref:   '<%= @item.produto.ref %>',
   cor:   '<%= @item.cor.try :nome %>',
   tam:   '<%= @item.tamanho.try :nome %>',
   title: 'Item INCLUÍDO'
 });
-
-
-
