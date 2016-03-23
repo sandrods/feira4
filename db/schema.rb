@@ -13,14 +13,14 @@
 
 ActiveRecord::Schema.define(version: 201311072334013) do
 
-  create_table "categorias", force: true do |t|
-    t.string   "nome"
-    t.string   "cd"
+  create_table "categorias", force: :cascade do |t|
+    t.string   "nome",       limit: 255
+    t.string   "cd",         limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "clientes", force: true do |t|
+  create_table "clientes", force: :cascade do |t|
     t.string   "nome",       limit: 60
     t.string   "email",      limit: 40
     t.string   "fone_res",   limit: 20
@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.datetime "updated_at"
   end
 
-  create_table "colecoes", force: true do |t|
+  create_table "colecoes", force: :cascade do |t|
     t.string   "descricao",  limit: 30, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "compras", force: true do |t|
+  create_table "compras", force: :cascade do |t|
     t.integer  "fornecedor_id",                         null: false
     t.date     "data"
     t.decimal  "valor",         precision: 9, scale: 2
@@ -53,25 +53,25 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.decimal  "desconto",      precision: 9, scale: 2
   end
 
-  create_table "contas", force: true do |t|
+  create_table "contas", force: :cascade do |t|
     t.string   "nome",       limit: 30, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "cores", force: true do |t|
+  create_table "cores", force: :cascade do |t|
     t.string   "nome",       limit: 20, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "etiquetas", force: true do |t|
+  create_table "etiquetas", force: :cascade do |t|
     t.integer "produto_id"
     t.integer "tamanho_id"
     t.integer "cor_id"
   end
 
-  create_table "fornecedores", force: true do |t|
+  create_table "fornecedores", force: :cascade do |t|
     t.string   "nome",       limit: 30,                 null: false
     t.string   "email",      limit: 60
     t.string   "website",    limit: 60
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.boolean  "ativo",                  default: true
   end
 
-  create_table "itens", force: true do |t|
+  create_table "itens", force: :cascade do |t|
     t.integer  "produto_id", null: false
     t.integer  "tamanho_id", null: false
     t.integer  "cor_id",     null: false
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
   add_index "itens", ["produto_id"], name: "index_itens_on_produto_id"
   add_index "itens", ["tamanho_id"], name: "index_itens_on_tamanho_id"
 
-  create_table "itens_compra", force: true do |t|
+  create_table "itens_compra", force: :cascade do |t|
     t.integer  "compra_id"
     t.integer  "item_id",              null: false
     t.float    "valor"
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
   add_index "itens_compra", ["compra_id"], name: "index_itens_compra_on_compra_id"
   add_index "itens_compra", ["item_id"], name: "index_itens_compra_on_item_id"
 
-  create_table "itens_sacola", force: true do |t|
+  create_table "itens_sacola", force: :cascade do |t|
     t.integer  "sacola_id",            null: false
     t.integer  "item_id",              null: false
     t.string   "status",     limit: 1
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.datetime "updated_at"
   end
 
-  create_table "itens_venda", force: true do |t|
+  create_table "itens_venda", force: :cascade do |t|
     t.integer  "venda_id",   null: false
     t.integer  "item_id",    null: false
     t.float    "bruto"
@@ -134,13 +134,13 @@ ActiveRecord::Schema.define(version: 201311072334013) do
   add_index "itens_venda", ["item_id"], name: "index_itens_venda_on_item_id"
   add_index "itens_venda", ["venda_id"], name: "index_itens_venda_on_venda_id"
 
-  create_table "linhas", force: true do |t|
+  create_table "linhas", force: :cascade do |t|
     t.string   "descricao",  limit: 30, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "menus", force: true do |t|
+  create_table "menus", force: :cascade do |t|
     t.string  "titulo",     limit: 30
     t.integer "ordem",      limit: 2
     t.integer "recurso_id", limit: 9
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
 
   add_index "menus", ["parent_id"], name: "menus_parent_fk_i"
 
-  create_table "produtos", force: true do |t|
+  create_table "produtos", force: :cascade do |t|
     t.string   "ref",           limit: 30
     t.integer  "colecao_id",                                                      null: false
     t.integer  "tipo_id",                                                         null: false
@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
   add_index "produtos", ["linha_id"], name: "index_produtos_on_linha_id"
   add_index "produtos", ["tipo_id"], name: "index_produtos_on_tipo_id"
 
-  create_table "registros", force: true do |t|
+  create_table "registros", force: :cascade do |t|
     t.date     "data"
     t.string   "descricao",        limit: 60
     t.decimal  "valor",                       precision: 2, scale: 5, null: false
@@ -182,9 +182,10 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.integer  "registravel_id",   limit: 9
     t.string   "registravel_type", limit: 20
     t.integer  "categoria_id"
+    t.date     "data_pagamento"
   end
 
-  create_table "sacolas", force: true do |t|
+  create_table "sacolas", force: :cascade do |t|
     t.integer  "vendedor_id"
     t.string   "status",      limit: 1
     t.datetime "created_at"
@@ -193,19 +194,19 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.string   "tipo",        limit: 1
   end
 
-  create_table "tamanhos", force: true do |t|
+  create_table "tamanhos", force: :cascade do |t|
     t.string   "nome",       limit: 10, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tipos", force: true do |t|
+  create_table "tipos", force: :cascade do |t|
     t.string   "descricao",  limit: 32, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "vendas", force: true do |t|
+  create_table "vendas", force: :cascade do |t|
     t.integer  "cliente_id"
     t.integer  "vendedor_id"
     t.date     "data"
@@ -220,7 +221,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
   add_index "vendas", ["cliente_id"], name: "index_vendas_on_cliente_id"
   add_index "vendas", ["vendedor_id"], name: "index_vendas_on_vendedor_id"
 
-  create_table "vendedores", force: true do |t|
+  create_table "vendedores", force: :cascade do |t|
     t.string   "nome",       limit: 50, null: false
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,0 +1,25 @@
+<div class="panel panel-danger" id="partial_vendas_registros_index">
+  <div class="panel-heading">
+    <b class="panel-title">Pagamentos</b>
+    <%= button_tag icon(:plus, 'Incluir Pagamento'), class: 'btn btn-xs btn-default pull-right', id: 'add_pag' %>
+    <%= button_tag icon(:chevron_up, 'Terminei de incluir'), class: 'btn btn-xs btn-default pull-right', id: 'end_add_pag', style: "display: none;"%>
+  </div>
+
+  <div class="panel-body" id='add_pag_form' style="display: none;">
+    <%= render partial: 'vendas/registros/form' %>
+  </div>
+
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Conta</th>
+        <th class="text-right">Valor</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody id='partial_vendas_registros_registro'>
+      <%= render partial: 'vendas/registros/registro', collection: @venda.pagamentos %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,8 @@
+<% if @registro.persisted? %>
+  $('#partial_vendas_registros_registro').html('<%= j render partial: "vendas/registros/registro", collection: @venda.pagamentos %>')
+  $('#registro_data').val('');
+  $('#registro_valor').val('');
+  $('#registro_conta_id').select2('data', null)
+<% else %>
+  $('#add_pag_form').html('<%= j render partial: "vendas/registros/form" %>')
+<% end %>

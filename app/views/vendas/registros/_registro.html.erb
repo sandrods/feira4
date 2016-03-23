@@ -1,0 +1,6 @@
+<tr>
+  <td><%= registro.data %></td>
+  <td><small><%= registro.conta.try :nome %></small></td>
+  <td class="text-right"><%= number_to_currency registro.valor %></td>
+  <td>&nbsp;</td>
+</tr>

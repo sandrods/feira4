@@ -1,0 +1,2 @@
+module Vendas::RegistrosHelper
+end
