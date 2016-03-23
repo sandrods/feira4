@@ -1,4 +1,4 @@
-$("#itens_venda_table").prepend("<%= j render partial: 'itens_venda/item', object: @item %>");
+$("#itens_venda_table").prepend("<%= j render partial: 'vendas/itens/item', object: @item %>");
 $("#venda_itens_count").html("<%= @venda.itens.count %>");
 $("#venda_itens_total").html("<%= number_to_currency @venda.total %>");
 $(".bar-code-input").val('');

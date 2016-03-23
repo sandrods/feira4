@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :vendas do
-    resources :itens, controller: 'itens_venda'
+    resources :itens, controller: 'vendas/itens'
     resources :registros, controller: 'vendas/registros'
   end
 
