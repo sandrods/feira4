@@ -1,0 +1,7 @@
+<%
+  lista = render partial: "vendas/registros/registro", collection: @venda.pagamentos
+  total = number_to_currency @venda.pagamentos.sum(:valor)
+%>
+
+$('#partial_vendas_registros_registro').html('<%= j lista %>')
+$('#total_pagamentos_venda').html('<%= total %>')

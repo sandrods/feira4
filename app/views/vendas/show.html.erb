@@ -62,7 +62,9 @@
         </tbody>
       </table>
       <div class="panel-footer text-right">
-        <small>Total</small> <%= number_to_currency @venda.itens.sum(:valor) %>
+        <small>Total</small>
+        <span id="total_itens_venda">
+          <%= number_to_currency @venda.itens.sum(:valor) %></span>
       </div>
     </div>
 

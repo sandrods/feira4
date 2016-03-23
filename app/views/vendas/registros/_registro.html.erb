@@ -2,5 +2,10 @@
   <td><%= registro.data %></td>
   <td><small><%= registro.conta.try :nome %></small></td>
   <td class="text-right"><%= number_to_currency registro.valor %></td>
-  <td>&nbsp;</td>
+  <td class="text-right"><%= link_to icon(:trash),
+                  venda_registro_path(@venda, registro),
+                  method: 'delete',
+                  class: 'btn btn-xs link_delete',
+                  data: { confirm: 'Confirma exclusão?' },
+                  remote: true %></td>
 </tr>
