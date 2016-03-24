@@ -1,7 +1,7 @@
 class Registro < ActiveRecord::Base
 
+  before_create :registrar_conta_forma_pagamento
   before_create :registrar_data_pagamento
-  before_save :registrar_conta_forma_pagamento
 
   # acts_as_br_date :data
   # acts_as_br_currency :valor
@@ -21,7 +21,7 @@ class Registro < ActiveRecord::Base
   belongs_to :forma
 
   def pendente?
-    data_pagamento.nil?
+    data_pagamento.blank?
   end
 
   def self.a_pagar
@@ -40,13 +40,13 @@ private
 
   def registrar_data_pagamento
     # registro já nasce conciliado se não for criado em data futura
-    data_pagamento = data if data <= Date.today
+    self.data_pagamento = self.data if data <= Date.today
   end
 
   def registrar_conta_forma_pagamento
-    # se trocar a forma de pagamento de registro ainda não consolidado,
-    # a conta deve ser trocada de forma correspondente
-    conta = forma.conta if pendente? && forma.conta
+    return unless forma && forma.conta
+
+    self.conta_id = forma.conta_id
   end
 
 end

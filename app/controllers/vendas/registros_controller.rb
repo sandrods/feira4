@@ -12,7 +12,7 @@ class Vendas::RegistrosController < ApplicationController
  private
 
   def registro_params
-    params.require(:registro).permit(:data, :valor, :conta_id)
+    params.require(:registro).permit(:data, :valor, :forma_id)
   end
 
 end
