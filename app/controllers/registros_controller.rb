@@ -7,4 +7,9 @@ class RegistrosController < ApplicationController
     @registro = Registro.new
   end
 
+  def edit
+    @registro = Registro.find params[:id]
+    render layout: false
+  end
+
 end

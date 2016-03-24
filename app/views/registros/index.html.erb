@@ -14,7 +14,7 @@
       </div>
       <table class="table table-striped">
         <tbody id="registros_conta_caixa">
-          <%= render partial: 'registro', collection: conta.registros %>
+          <%= render partial: 'registro', collection: conta.registros.pagos %>
         </tbody>
       </table>
       <div class="panel-footer text-right">
@@ -40,7 +40,7 @@
       </div>
       <table class="table table-striped">
         <tbody id="registros_conta_caixa">
-          <%= render partial: 'registro', collection: Registro.a_pagar %>
+          <%= render partial: 'pendente', collection: Registro.a_pagar, as: :registro %>
         </tbody>
       </table>
     </div>
@@ -55,7 +55,7 @@
       </div>
       <table class="table table-striped">
         <tbody id="registros_conta_caixa">
-          <%= render partial: 'registro', collection: Registro.a_receber %>
+          <%= render partial: 'pendente', collection: Registro.a_receber, as: :registro %>
         </tbody>
       </table>
     </div>
@@ -63,5 +63,3 @@
   </div>
 
 </div>
-
-<%= render partial: 'new' %>

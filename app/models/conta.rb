@@ -13,7 +13,7 @@ class Conta < ActiveRecord::Base
   end
 
   def saldo
-    registros.creditos.sum(:valor) - registros.debitos.sum(:valor)
+    registros.creditos.pagos.sum(:valor) - registros.debitos.pagos.sum(:valor)
   end
 
 end

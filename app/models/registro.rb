@@ -12,6 +12,7 @@ class Registro < ActiveRecord::Base
   scope :debitos,  -> { where(cd: 'D') }
 
   scope :pendentes,  -> { where(data_pagamento: nil) }
+  scope :pagos,      -> { where.not(data_pagamento: nil) }
 
   scope :da_conta, ->(conta) { where(conta_id: conta) }
 
