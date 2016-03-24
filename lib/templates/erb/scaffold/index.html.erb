@@ -20,8 +20,6 @@
 
     <p class="index_count"><span><%%= @<%= plural_table_name %>.count %></span> <%= plural_table_name %> encontradas.</p>
 
-    <%%= link_to(icon(:plus, 'Novo <%= singular_table_name.capitalize %>'), new_<%= singular_table_name %>_path, class: 'btn btn-primary') %>
-
   </div>
 
   <div class="col-md-4">
@@ -39,4 +37,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="bottom-actions">
+  <%%= link_to(icon(:plus, 'Incluir <%= singular_table_name.capitalize %>'), new_<%= singular_table_name %>_path, class: 'btn btn-primary') %>
 </div>

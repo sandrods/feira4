@@ -71,6 +71,15 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.integer "cor_id"
   end
 
+  create_table "formas", force: :cascade do |t|
+    t.string   "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "conta_id"
+  end
+
+  add_index "formas", ["conta_id"], name: "index_formas_on_conta_id"
+
   create_table "fornecedores", force: :cascade do |t|
     t.string   "nome",       limit: 30,                 null: false
     t.string   "email",      limit: 60
@@ -183,7 +192,10 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.string   "registravel_type", limit: 20
     t.integer  "categoria_id"
     t.date     "data_pagamento"
+    t.integer  "forma_id"
   end
+
+  add_index "registros", ["forma_id"], name: "index_registros_on_forma_id"
 
   create_table "sacolas", force: :cascade do |t|
     t.integer  "vendedor_id"
