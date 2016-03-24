@@ -25,10 +25,10 @@
     <legend>Valores</legend>
       <div class="row">
         <div class="col-sm-3 col-xs-6 money">
-          <%= input_group(f, :custo, icon: :usd, class: 'input-lg') %>
+          <%= currency_group(f, :custo, class: 'input-lg') %>
         </div>
         <div class="col-sm-3 col-xs-6 money">
-          <%= input_group(f, :valor, label: 'Valor de Venda', icon: :usd, class: 'input-lg') %>
+          <%= currency_group(f, :valor, label: 'Valor de Venda', class: 'input-lg') %>
         </div>
 
         <div class="col-sm-3 col-xs-6">

@@ -1,6 +1,7 @@
 $(document).ajaxComplete (event, request) ->
 
   $('input.money').maskMoney()
+  $('input.currency').maskMoney()
   $('.money input').maskMoney()
 
   $('.ttip').tooltip()
@@ -41,6 +42,7 @@ jQuery ->
   #   allowClear: true
 
   $('input.money').maskMoney()
+  $('input.currency').maskMoney()
   $('.money input').maskMoney()
 
   $('.ttip').tooltip()
@@ -57,3 +59,19 @@ jQuery ->
     data.offset.top    = data.offsetTop if data.offsetTop
 
     spy.affix(data)
+
+
+  $("[data-behavior~=load-modal]").on "click", (e) ->
+    e.preventDefault()
+
+    url = this.getAttribute("href") || this.getAttribute("data-url")
+
+    size = this.getAttribute("data-modal-size")
+    $("#global_modal .modal-dialog").addClass("modal-#{size}") if size?
+
+    $("#global_modal .modal-content").load(url)
+    $("#global_modal").modal("show")
+
+  $(".modal").on "hidden.bs.modal", ->
+    $(this).removeData("bs.modal")
+    $("#global_modal .modal-dialog").removeClass("modal-lg modal-sm")

@@ -83,5 +83,16 @@ module ApplicationHelper
 
   end
 
+  def currency_group(form_builder, field, opts = {})
+
+    opts[:as] = :currency
+    opts[:icon] = :usd
+
+    value = form_builder.object.send(field)
+    opts[:value] = number_with_precision(value, precision: 2)
+
+    input_group(form_builder, field, opts)
+  end
+
 
 end
