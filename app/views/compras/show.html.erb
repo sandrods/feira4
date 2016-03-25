@@ -38,10 +38,10 @@
         <b class="panel-title">Peças</b>
 
         <%= form_tag(compra_itens_path(@compra), remote: true ) do %>
-          <%= text_field_tag :barcode, 
-                              nil, 
-                              maxlength: 10, 
-                              class: 'pull-right bar-code-input', 
+          <%= text_field_tag :barcode,
+                              nil,
+                              maxlength: 10,
+                              class: 'pull-right bar-code-input',
                               placeholder: "Código de Barras" %>
         <%- end -%>
 
@@ -55,12 +55,17 @@
             <th>Tam.</th>
             <th class="text-right">Valor</th>
             <th>&nbsp;</th>
-          </tr>               
+          </tr>
         </thead>
         <tbody id="itens_compra_table">
-          <%= render partial: 'itens_compra/item', collection: @compra.itens %>
+          <%= render partial: 'compras/itens/item', collection: @compra.itens %>
         </tbody>
       </table>
+      <div class="panel-footer text-right">
+        <small>Total</small>
+        <span id="total_itens_compra">
+          <%= number_to_currency @compra.itens.sum(:valor) %></span>
+      </div>
     </div>
 
   </div>
@@ -103,7 +108,7 @@
             <th>Conta</th>
             <th class="text-right">Valor</th>
             <th>&nbsp;</th>
-          </tr>               
+          </tr>
         </thead>
         <tbody>
           <%- @compra.pagamentos.each do |pag| -%>

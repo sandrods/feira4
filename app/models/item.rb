@@ -13,6 +13,7 @@ class Item < ActiveRecord::Base
   has_many :itens_venda
 
   scope :ordenados, -> { includes(:cor, :tamanho).joins(:cor).order("tamanho_id, cores.nome") }
+
   def self.find_by_barcode!(_bc)
 
     bc = Barcode.new(_bc)

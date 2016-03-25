@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :compras do
     resources :registros
-    resources :itens, controller: 'itens_compra'
+    resources :itens, controller: 'compras/itens'
   end
 
   resources :produtos do
