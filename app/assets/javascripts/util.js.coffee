@@ -20,7 +20,7 @@ $(document).ajaxComplete (event, request) ->
       placeholder: 'Selecione'
       allowClear: true
 
-jQuery ->
+$(document).on "page:change", ->
 
   $(".nav-tabs a[href='#{window.location.hash}']").tab('show') if (window.location.hash)
   history.replaceState({}, '', location.href.replace(location.hash, '')) if location.hash
@@ -61,17 +61,18 @@ jQuery ->
     spy.affix(data)
 
 
-  $("[data-behavior~=load-modal]").on "click", (e) ->
-    e.preventDefault()
+  $('[data-behavior~=load-modal]').on 'click', (ev) ->
+    ev.preventDefault()
+    url = this.getAttribute('href') || this.getAttribute('data-url')
 
-    url = this.getAttribute("href") || this.getAttribute("data-url")
+    if size = this.getAttribute('data-modal-size')
+      $("#global_modal .modal-dialog").addClass("modal-#{size}")
 
-    size = this.getAttribute("data-modal-size")
-    $("#global_modal .modal-dialog").addClass("modal-#{size}") if size?
+    $("#global_modal .modal-content").load url
 
-    $("#global_modal .modal-content").load(url)
-    $("#global_modal").modal("show")
+    $('#global_modal').modal('show')
 
-  $(".modal").on "hidden.bs.modal", ->
-    $(this).removeData("bs.modal")
-    $("#global_modal .modal-dialog").removeClass("modal-lg modal-sm")
+
+  $(".modal").on 'hidden.bs.modal', (e) ->
+    $(this).removeData('bs.modal')
+    $("#global_modal .modal-dialog").removeClass('modal-lg modal-sm')

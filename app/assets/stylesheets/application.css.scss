@@ -55,6 +55,12 @@ body {
     }
 }
 
+html.turbolinks-progress-bar::before {
+  background-color: darken($navbar-inverse-bg, 15%) !important;
+  height: 5px !important;
+  z-index: 10000; /* Show progress bar above fixed navbar */
+}
+
 .page-header {
     margin: 10px 0 20px 0;
     padding-bottom: 0;
@@ -74,7 +80,7 @@ body {
         left: 0;
         height: 5px;
         width: 70px;
-        background-color: $navbar-inverse-brand-color;
+        background-color: lighten($navbar-inverse-bg, 1%);
     }
     .actions {
         position: absolute;
@@ -194,6 +200,31 @@ input.money, .money input {
   }
 }
 
+.modal {
+  .page-header {
+      margin: 0;
+  }
+  h1 {
+      margin-top: 5px;
+  }
+
+  .alert {
+    margin: 15px 0 0 0;
+    padding: 10px;
+  }
+
+  .alert-dismissable { padding-right: 30px;}
+}
+
+.modal-footer {
+  background-color: #f6f6f3;
+  border-radius: 0 0 6px 6px;
+}
+
+.right { text-align: right; }
+.strong {
+  font-weight: bold;
+}
 small { color: #999 }
 
 .link_delete {
@@ -233,4 +264,8 @@ table.table {
     margin: 20px -16px -20px -16px;
     display: block;
     border-radius: 0 0 4px 4px;
+}
+
+.label.label-md {
+  font-size: 90%;
 }
