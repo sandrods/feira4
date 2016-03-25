@@ -36,7 +36,7 @@ class ItemSacola < ActiveRecord::Base
 
     end
 
-    item_sacola.update_attribute(:status, 'D')
+    item_sacola.update! status: 'D'
 
     item_sacola
   end

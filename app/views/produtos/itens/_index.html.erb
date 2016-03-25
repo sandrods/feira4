@@ -1,0 +1,15 @@
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <b>Estoque</b>
+  </div>
+
+  <table class="table">
+    <tbody>
+      <%= render partial: 'produtos/itens/item', collection: @produto.itens.ordenados %>
+    </tbody>
+  </table>
+
+  <div class="panel-footer text-right">
+    <b><%= @produto.itens.sum(:estoque) %></b> itens
+  </div>
+</div>

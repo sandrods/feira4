@@ -67,7 +67,7 @@
         <%= button_tag icon(:plus, 'Incluir Etiquetas'), class: 'btn btn-xs btn-default pull-right', id: 'add_etiqueta' %>
         <%= button_tag icon(:chevron_up, 'Terminei de incluir'), class: 'btn btn-xs btn-default pull-right', id: 'end_add_etiqueta', style: "display: none;"%>
       </div>
-   
+
       <div class="panel-body" id='add_etiqueta_form' style="display: none;">
         <%= simple_form_for [@produto, Etiqueta.new], remote: true do |f| %>
 
@@ -84,7 +84,7 @@
                 <label for="quant_etiq">Quantidade</label>
                 <input type="text" class="form-control" id="quant_etiq" name='quantidade' value=1>
               </div>
-            </div>  
+            </div>
 
           </div>
 
@@ -94,7 +94,7 @@
 
         <% end -%>
       </div>
-   
+
       <table class="table">
         <tbody id='t_etiquetas'>
           <%= render partial: 'etiquetas/etiqueta', collection: @produto.etiquetas %>
@@ -108,9 +108,7 @@
 
   </div>
 
+  <div class="col-sm-6">
+    <%= render partial: 'produtos/itens/index' %>
+  </div>
 </div>
-
-
-
-
-

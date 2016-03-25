@@ -1,0 +1,2 @@
+module Produtos::ItensHelper
+end

@@ -1,5 +1,8 @@
 class ItemCompra < ActiveRecord::Base
 
+  after_create :increment_estoque
+  after_destroy :decrement_estoque
+
   belongs_to :compra
   belongs_to :item
 
@@ -15,8 +18,18 @@ class ItemCompra < ActiveRecord::Base
 
     # valor = (compra.desconto && compra.desconto > 0) ? item.produto.custo * (1-(compra.desconto/100)) : item.produto.custo
 
-    compra.itens.create(item_id: item.id, tipo: 'C', valor: item.produto.custo)
+    compra.itens.create!(item_id: item.id, tipo: 'C', valor: item.produto.custo)
 
+  end
+
+  private
+
+  def increment_estoque
+    item.increment!(:estoque)
+  end
+
+  def decrement_estoque
+    item.decrement!(:estoque)
   end
 
 end

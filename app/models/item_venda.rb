@@ -1,5 +1,8 @@
 class ItemVenda < ActiveRecord::Base
 
+  after_create :decrement_estoque
+  after_destroy :increment_estoque
+
   belongs_to :venda
   belongs_to :item
 
@@ -22,4 +25,15 @@ class ItemVenda < ActiveRecord::Base
     venda.itens.create!(item_id: item.id, valor: item.produto.valor)
 
   end
+
+  private
+
+  def increment_estoque
+    item.increment!(:estoque)
+  end
+
+  def decrement_estoque
+    item.decrement!(:estoque)
+  end
+
 end

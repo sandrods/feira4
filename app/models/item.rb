@@ -9,8 +9,10 @@ class Item < ActiveRecord::Base
   belongs_to :cor
   belongs_to :tamanho
 
-  has_many :compra_itens
+  has_many :itens_compra
+  has_many :itens_venda
 
+  scope :ordenados, -> { includes(:cor, :tamanho).joins(:cor).order("tamanho_id, cores.nome") }
   def self.find_by_barcode!(_bc)
 
     bc = Barcode.new(_bc)
@@ -45,8 +47,8 @@ class Item < ActiveRecord::Base
   end
 
   def atualiza_estoque!
-    e = compra_itens.count
-    # e -= venda_itens.count
+    e = itens_compra.count
+    e -= itens_venda.count
 
     update_attribute(:estoque, e)
   end
