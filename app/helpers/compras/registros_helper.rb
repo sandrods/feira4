@@ -1,0 +1,2 @@
+module Compras::RegistrosHelper
+end

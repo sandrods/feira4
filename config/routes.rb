@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   end
 
   resources :compras do
-    resources :registros
     resources :itens, controller: 'compras/itens'
+    resources :registros, controller: 'compras/registros'
   end
 
   resources :produtos do

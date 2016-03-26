@@ -1,0 +1,11 @@
+<%= content_tag_for(:tr, registro) do %>
+  <td><%= registro.data %></td>
+  <td><small><%= registro.conta.try :nome %></small></td>
+  <td class="text-right"><%= number_to_currency registro.valor %></td>
+  <td class="text-right"><%= link_to icon(:trash),
+                  compra_registro_path(@compra, registro),
+                  method: 'delete',
+                  class: 'btn btn-xs link_delete',
+                  data: { confirm: 'Confirma exclusão?' },
+                  remote: true %></td>
+<% end %>

@@ -2,7 +2,7 @@ class Vendas::RegistrosController < ApplicationController
   include BelongsToVenda
 
   def create
-    @registro = @venda.pagamentos.create registro_params.merge(descricao: "Venda #{@venda.id}: #{@venda.nome}")
+    @registro = @venda.pagamentos.create registro_params.merge(descricao: "Venda #{@venda.id} - #{@venda.nome}")
   end
 
   def destroy
@@ -12,7 +12,9 @@ class Vendas::RegistrosController < ApplicationController
  private
 
   def registro_params
-    params.require(:registro).permit(:data, :valor, :forma_id)
+    params.require(:registro)
+          .permit(:data, :valor, :forma_id)
+          .delocalize(data: :date, valor: :number)
   end
 
 end

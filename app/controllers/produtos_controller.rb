@@ -87,6 +87,8 @@ class ProdutosController < ApplicationController
     end
 
     def produto_params
-      params.require(:produto).permit(:ref, :colecao_id, :tipo_id, :fornecedor_id, :linha_id, :custo, :valor)
+      params.require(:produto)
+            .permit(:ref, :colecao_id, :tipo_id, :fornecedor_id, :linha_id, :custo, :valor)
+            .delocalize(valor: :number, custo: :number)
     end
 end
