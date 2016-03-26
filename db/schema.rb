@@ -11,11 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201311072334013) do
+ActiveRecord::Schema.define(version: 20160323144338) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "categorias", force: :cascade do |t|
-    t.string   "nome",       limit: 255
-    t.string   "cd",         limit: 255
+    t.string   "nome"
+    t.string   "cd"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -78,7 +81,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.integer  "conta_id"
   end
 
-  add_index "formas", ["conta_id"], name: "index_formas_on_conta_id"
+  add_index "formas", ["conta_id"], name: "index_formas_on_conta_id", using: :btree
 
   create_table "fornecedores", force: :cascade do |t|
     t.string   "nome",       limit: 30,                 null: false
@@ -106,21 +109,21 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.datetime "updated_at"
   end
 
-  add_index "itens", ["cor_id"], name: "index_itens_on_cor_id"
-  add_index "itens", ["produto_id"], name: "index_itens_on_produto_id"
-  add_index "itens", ["tamanho_id"], name: "index_itens_on_tamanho_id"
+  add_index "itens", ["cor_id"], name: "index_itens_on_cor_id", using: :btree
+  add_index "itens", ["produto_id"], name: "index_itens_on_produto_id", using: :btree
+  add_index "itens", ["tamanho_id"], name: "index_itens_on_tamanho_id", using: :btree
 
   create_table "itens_compra", force: :cascade do |t|
     t.integer  "compra_id"
-    t.integer  "item_id",              null: false
-    t.float    "valor"
-    t.string   "tipo",       limit: 1, null: false
+    t.integer  "item_id",                                      null: false
+    t.decimal  "valor",                precision: 9, scale: 2, null: false
+    t.string   "tipo",       limit: 1,                         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "itens_compra", ["compra_id"], name: "index_itens_compra_on_compra_id"
-  add_index "itens_compra", ["item_id"], name: "index_itens_compra_on_item_id"
+  add_index "itens_compra", ["compra_id"], name: "index_itens_compra_on_compra_id", using: :btree
+  add_index "itens_compra", ["item_id"], name: "index_itens_compra_on_item_id", using: :btree
 
   create_table "itens_sacola", force: :cascade do |t|
     t.integer  "sacola_id",            null: false
@@ -131,34 +134,23 @@ ActiveRecord::Schema.define(version: 201311072334013) do
   end
 
   create_table "itens_venda", force: :cascade do |t|
-    t.integer  "venda_id",   null: false
-    t.integer  "item_id",    null: false
-    t.float    "bruto"
-    t.float    "desconto"
-    t.float    "valor"
+    t.integer  "venda_id",                           null: false
+    t.integer  "item_id",                            null: false
+    t.decimal  "bruto",      precision: 9, scale: 2
+    t.decimal  "desconto",   precision: 4, scale: 2
+    t.decimal  "valor",      precision: 9, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "itens_venda", ["item_id"], name: "index_itens_venda_on_item_id"
-  add_index "itens_venda", ["venda_id"], name: "index_itens_venda_on_venda_id"
+  add_index "itens_venda", ["item_id"], name: "index_itens_venda_on_item_id", using: :btree
+  add_index "itens_venda", ["venda_id"], name: "index_itens_venda_on_venda_id", using: :btree
 
   create_table "linhas", force: :cascade do |t|
     t.string   "descricao",  limit: 30, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "menus", force: :cascade do |t|
-    t.string  "titulo",     limit: 30
-    t.integer "ordem",      limit: 2
-    t.integer "recurso_id", limit: 9
-    t.integer "parent_id",  limit: 11
-    t.string  "controller", limit: 50
-    t.string  "action",     limit: 30
-  end
-
-  add_index "menus", ["parent_id"], name: "menus_parent_fk_i"
 
   create_table "produtos", force: :cascade do |t|
     t.string   "ref",           limit: 30
@@ -175,27 +167,27 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.decimal  "rentabilidade",            precision: 9, scale: 2
   end
 
-  add_index "produtos", ["colecao_id"], name: "index_produtos_on_colecao_id"
-  add_index "produtos", ["fornecedor_id"], name: "index_produtos_on_fornecedor_id"
-  add_index "produtos", ["linha_id"], name: "index_produtos_on_linha_id"
-  add_index "produtos", ["tipo_id"], name: "index_produtos_on_tipo_id"
+  add_index "produtos", ["colecao_id"], name: "index_produtos_on_colecao_id", using: :btree
+  add_index "produtos", ["fornecedor_id"], name: "index_produtos_on_fornecedor_id", using: :btree
+  add_index "produtos", ["linha_id"], name: "index_produtos_on_linha_id", using: :btree
+  add_index "produtos", ["tipo_id"], name: "index_produtos_on_tipo_id", using: :btree
 
   create_table "registros", force: :cascade do |t|
     t.date     "data"
     t.string   "descricao",        limit: 60
-    t.decimal  "valor",                       precision: 2, scale: 5, null: false
+    t.decimal  "valor",                       precision: 9, scale: 2, null: false
     t.string   "cd",               limit: 1
     t.integer  "conta_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "registravel_id",   limit: 9
+    t.integer  "registravel_id"
     t.string   "registravel_type", limit: 20
     t.integer  "categoria_id"
     t.date     "data_pagamento"
     t.integer  "forma_id"
   end
 
-  add_index "registros", ["forma_id"], name: "index_registros_on_forma_id"
+  add_index "registros", ["forma_id"], name: "index_registros_on_forma_id", using: :btree
 
   create_table "sacolas", force: :cascade do |t|
     t.integer  "vendedor_id"
@@ -213,7 +205,7 @@ ActiveRecord::Schema.define(version: 201311072334013) do
   end
 
   create_table "tipos", force: :cascade do |t|
-    t.string   "descricao",  limit: 32, null: false
+    t.string   "descricao",  limit: 30, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -223,15 +215,15 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.integer  "vendedor_id"
     t.date     "data"
     t.string   "tipo",        limit: 1
-    t.float    "valor"
+    t.decimal  "valor",                   precision: 9, scale: 2
     t.string   "obs",         limit: 100
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "desconto",                precision: 9, scale: 2
   end
 
-  add_index "vendas", ["cliente_id"], name: "index_vendas_on_cliente_id"
-  add_index "vendas", ["vendedor_id"], name: "index_vendas_on_vendedor_id"
+  add_index "vendas", ["cliente_id"], name: "index_vendas_on_cliente_id", using: :btree
+  add_index "vendas", ["vendedor_id"], name: "index_vendas_on_vendedor_id", using: :btree
 
   create_table "vendedores", force: :cascade do |t|
     t.string   "nome",       limit: 50, null: false
@@ -239,4 +231,6 @@ ActiveRecord::Schema.define(version: 201311072334013) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "formas", "contas"
+  add_foreign_key "registros", "formas"
 end
