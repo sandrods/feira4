@@ -89,4 +89,7 @@ test:
 #   postgres://myuser:mypass@localhost/somedatabase
 #
 production:
-  url: <%= ENV["DATABASE_URL"] %>
+  <<: *default
+  database: feira4
+  username: rails
+  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
