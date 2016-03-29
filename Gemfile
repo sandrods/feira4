@@ -4,10 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.6'
 
 gem 'pg'
-
-group :development do
-  gem 'yaml_db'
-end
+gem 'yaml_db'
 
 group :production do
   gem 'rails_12factor'
@@ -19,7 +16,7 @@ gem 'thin'
 gem 'sass-rails', '~> 5.0'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '~> 2.7'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
