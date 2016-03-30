@@ -59,7 +59,7 @@ end
 
 gem 'commands'
 
-gem 'bootstrap-sass', '~> 3.1.1'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 gem "cancan"
 gem "kaminari"
@@ -78,6 +78,8 @@ gem 'delocalize'
 
 gem 'prawn'
 gem 'barby'
+
+gem "bootstrap-switch-rails"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

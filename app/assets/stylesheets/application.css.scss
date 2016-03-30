@@ -29,7 +29,10 @@ $font-family-sans-serif: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-s
 
 $headings-font-weight: 700;
 
+@import "bootstrap-sprockets";
 @import "bootstrap";
+
+@import "bootstrap3-switch";
 
 // see https://github.com/twbs/bootstrap/issues/9855
 .modal-open, .modal-open .navbar-fixed-top {
