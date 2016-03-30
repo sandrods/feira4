@@ -1,7 +1,7 @@
 class Registro < ActiveRecord::Base
 
   before_create :registrar_conta_forma_pagamento
-  before_create :registrar_data_pagamento
+  before_create :registrar_pagamento
 
   # acts_as_br_date :data
   # acts_as_br_currency :valor
@@ -11,8 +11,8 @@ class Registro < ActiveRecord::Base
   scope :creditos, -> { where(cd: 'C') }
   scope :debitos,  -> { where(cd: 'D') }
 
-  scope :pendentes,  -> { where(data_pagamento: nil) }
-  scope :pagos,      -> { where.not(data_pagamento: nil) }
+  scope :pendentes,  -> { where(pago: false) }
+  scope :pagos,      -> { where(pago: true) }
 
   scope :da_conta, ->(conta) { where(conta_id: conta) }
 
@@ -22,7 +22,7 @@ class Registro < ActiveRecord::Base
   belongs_to :forma
 
   def pendente?
-    data_pagamento.blank?
+    !pago
   end
 
   def self.a_pagar
@@ -37,11 +37,19 @@ class Registro < ActiveRecord::Base
     valor * (cd=="D" ? -1 : 1)
   end
 
+  def receita?
+    cd.upcase == 'C'
+  end
+
+  def despesa?
+    !receita?
+  end
+
 private
 
-  def registrar_data_pagamento
+  def registrar_pagamento
     # registro já nasce conciliado se não for criado em data futura
-    self.data_pagamento = self.data if data <= Date.today
+    self.pago = true if data <= Date.today
   end
 
   def registrar_conta_forma_pagamento

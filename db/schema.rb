@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323144338) do
+ActiveRecord::Schema.define(version: 20160326201048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 20160323144338) do
   create_table "registros", force: :cascade do |t|
     t.date     "data"
     t.string   "descricao",        limit: 60
-    t.decimal  "valor",                       precision: 9, scale: 2, null: false
+    t.decimal  "valor",                       precision: 9, scale: 2,                 null: false
     t.string   "cd",               limit: 1
     t.integer  "conta_id"
     t.datetime "created_at"
@@ -183,8 +183,8 @@ ActiveRecord::Schema.define(version: 20160323144338) do
     t.integer  "registravel_id"
     t.string   "registravel_type", limit: 20
     t.integer  "categoria_id"
-    t.date     "data_pagamento"
     t.integer  "forma_id"
+    t.boolean  "pago",                                                default: false
   end
 
   add_index "registros", ["forma_id"], name: "index_registros_on_forma_id", using: :btree
