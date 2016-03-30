@@ -1,5 +1,18 @@
 <%= page_header "Diário Financeiro" do %>
-  <%= button_tag icon(:plus, 'Novo Registro'), class: 'btn btn-primary btn-sm', data: { toggle: 'modal', target: '#modal_new_registro' } %>
+
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Incluir Registro <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><%= link_to icon(:plus, 'Receita'), new_registro_path(cd: 'C'), class: 'text-success', data: { behavior: 'load-modal'} %></li>
+      <li><%= link_to icon(:minus, 'Despesa'), new_registro_path(cd: 'D'), class: 'text-danger', data: { behavior: 'load-modal'} %></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="#">Transferência</a></li>
+    </ul>
+  </div>
+
+
 <% end %>
 
 <div class="row">
