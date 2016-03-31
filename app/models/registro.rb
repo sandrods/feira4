@@ -8,8 +8,8 @@ class Registro < ActiveRecord::Base
 
   validates_presence_of :data, :descricao, :valor, :cd
 
-  scope :creditos, -> { where(cd: 'C') }
-  scope :debitos,  -> { where(cd: 'D') }
+  scope :creditos, -> { where(cd: 'C').order(:data) }
+  scope :debitos,  -> { where(cd: 'D').order(:data) }
 
   scope :pendentes,  -> { where(pago: false) }
   scope :pagos,      -> { where(pago: true) }

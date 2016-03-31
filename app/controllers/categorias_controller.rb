@@ -21,7 +21,7 @@ class CategoriasController < ApplicationController
     @categoria = Categoria.new(categoria_params)
 
     if @categoria.save
-      redirect_to categorias_path, notice: 'Categoria criado com sucesso.'
+      redirect_to categorias_path, notice: 'Categoria criada com sucesso.'
     else
       render action: 'new'
     end
@@ -29,7 +29,7 @@ class CategoriasController < ApplicationController
 
   def update
     if @categoria.update(categoria_params)
-      redirect_to categorias_path, notice: 'Categoria atualizado com sucesso.'
+      redirect_to categorias_path, notice: 'Categoria atualizada com sucesso.'
     else
       render action: 'edit'
     end
@@ -37,7 +37,7 @@ class CategoriasController < ApplicationController
 
   def destroy
     @categoria.destroy
-    redirect_to categorias_path, notice: 'Categoria apagado com sucesso.'
+    redirect_to categorias_path, notice: 'Categoria apagada com sucesso.'
   end
 
   private

@@ -21,7 +21,7 @@ class ContasController < ApplicationController
     @conta = Conta.new(conta_params)
 
     if @conta.save
-      redirect_to contas_path, notice: 'Conta criado com sucesso.'
+      redirect_to contas_path, notice: 'Conta criada com sucesso.'
     else
       render action: 'new'
     end
@@ -29,7 +29,7 @@ class ContasController < ApplicationController
 
   def update
     if @conta.update(conta_params)
-      redirect_to contas_path, notice: 'Conta atualizado com sucesso.'
+      redirect_to contas_path, notice: 'Conta atualizada com sucesso.'
     else
       render action: 'edit'
     end
@@ -37,7 +37,7 @@ class ContasController < ApplicationController
 
   def destroy
     @conta.destroy
-    redirect_to contas_path, notice: 'Conta apagado com sucesso.'
+    redirect_to contas_path, notice: 'Conta apagada com sucesso.'
   end
 
   private

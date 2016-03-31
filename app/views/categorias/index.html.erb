@@ -7,21 +7,23 @@
       <thead>
         <tr>
           <th>Nome</th>
+          <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
         <% @categorias.each do |categoria| %>
           <tr>
             <td><%= link_to categoria.nome, edit_categoria_path(categoria) %></td>
+            <td><%= label_cd(categoria.cd) %>
           </tr>
         <% end %>
       </tbody>
     </table>
-    
+
     <p class="index_count"><span><%= @categorias.count %></span> categorias encontradas.</p>
 
-    <%= link_to(icon(:plus, 'Novo Categoria'), new_categoria_path, class: 'btn btn-primary') %>
-  
+    <%= link_to(icon(:plus, 'Nova Categoria'), new_categoria_path, class: 'btn btn-primary') %>
+
   </div>
 
   <div class="col-md-4">
@@ -40,4 +42,3 @@
     </div>
   </div>
 </div>
-
