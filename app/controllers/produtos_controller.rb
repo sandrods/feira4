@@ -13,7 +13,7 @@ class ProdutosController < ApplicationController
 
     if params[:q]
       @search = Produto.search(params[:q])
-      @produtos = @search.result.order(:ref)
+      @produtos = @search.result.includes(:fornecedor).order('fornecedores.nome, ref')
     else
       @search = Produto.search
       @produtos = Produto.none
@@ -47,7 +47,7 @@ class ProdutosController < ApplicationController
 
   def update
     if @produto.update(produto_params)
-      redirect_to produtos_path, notice: 'Produto atualizado com sucesso.'
+      redirect_to produto_path(@produto), notice: 'Produto atualizado com sucesso.'
     else
       render action: 'edit'
     end
