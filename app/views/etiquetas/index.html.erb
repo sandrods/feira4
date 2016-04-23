@@ -1,5 +1,5 @@
 <%= page_header "Etiquetas" do %>
-  <%= link_to icon(:barcode, ' Gerar Etiquetas'), print_etiquetas_path, method: 'POST', class: 'btn btn-success btn-md' %>
+  <%= link_to icon(:barcode, ' Gerar Etiquetas'), print_etiquetas_path(q: params[:q]), method: 'POST', class: 'btn btn-success btn-md' %>
 <% end %>
 
 <div class="row">

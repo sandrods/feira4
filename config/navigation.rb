@@ -6,6 +6,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :nav_produtos, 'Produtos' do |sub|
       sub.item :nav_produtos1, 'Produtos', produtos_path, highlights_on: :subpath
+      sub.item :nav_etiq, 'Etiquetas', etiquetas_path, highlights_on: :subpath
       sub.item :sep01, nil, class: 'divider'
       sub.item :nav_cores, 'Cores', cores_path
       sub.item :nav_linhas, 'Linhas', linhas_path

@@ -25,7 +25,7 @@ class EtiquetasController < ApplicationController
   end
 
   def print
-    @etiquetas = Etiqueta.all
+    index
 
     pdf = EtiquetasReport.new(@etiquetas)
 
