@@ -43,7 +43,7 @@ class Cliente < ActiveRecord::Base
   end
 
   def self.letras
-    Cliente.all.map {|c| c.nome[0].upcase }.uniq.sort
+    Cliente.all.map {|c| c.nome.try(:first).try(:upcase) }.uniq.sort
   end
 
 private
