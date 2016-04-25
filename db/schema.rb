@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326201048) do
+ActiveRecord::Schema.define(version: 20160425210538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,20 @@ ActiveRecord::Schema.define(version: 20160326201048) do
     t.datetime "updated_at"
     t.boolean  "ativo",                  default: true
   end
+
+  create_table "item_estoques", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "movimento_id"
+    t.string   "movimento_type"
+    t.string   "tipo",           limit: 1
+    t.decimal  "bruto",                    precision: 9, scale: 2
+    t.decimal  "desconto",                 precision: 4, scale: 2
+    t.decimal  "valor",                    precision: 9, scale: 2
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+  end
+
+  add_index "item_estoques", ["item_id"], name: "index_item_estoques_on_item_id", using: :btree
 
   create_table "itens", force: :cascade do |t|
     t.integer  "produto_id", null: false
@@ -232,5 +246,6 @@ ActiveRecord::Schema.define(version: 20160326201048) do
   end
 
   add_foreign_key "formas", "contas"
+  add_foreign_key "item_estoques", "itens"
   add_foreign_key "registros", "formas"
 end

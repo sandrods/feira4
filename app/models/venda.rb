@@ -1,7 +1,8 @@
 class Venda < ActiveRecord::Base
   include ClienteOuVendedor
 
-  has_many :itens, class_name: "ItemVenda", dependent: :destroy
+  #has_many :itens, class_name: "ItemVenda", dependent: :destroy
+  has_many :itens, -> { where(tipo: 'S') }, class_name: 'ItemEstoque', as: :movimento, dependent: :destroy
 
   has_many :pagamentos, -> { where(cd: "C").order('data asc') },  class_name: "Registro", as: :registravel
 
