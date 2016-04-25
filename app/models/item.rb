@@ -12,6 +12,8 @@ class Item < ActiveRecord::Base
   has_many :itens_compra
   has_many :itens_venda
 
+  delegate :ref, :fornecedor, :colecao, to: :produto
+
   scope :ordenados, -> { includes(:cor, :tamanho).joins(:cor).order("tamanho_id, cores.nome") }
 
   def self.find_by_barcode!(_bc)

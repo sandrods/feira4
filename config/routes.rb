@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :registros
 
+  resources :estoque
+
   resources :sacolas do
     resources :itens, controller: 'itens_sacola' do
       post 'devolver', on: :collection

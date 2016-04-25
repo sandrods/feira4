@@ -6,9 +6,9 @@ class ProdutosController < ApplicationController
 
     if params[:q]
       params.delete(:q) if params[:q].values.all? { |v| v.blank? }
-      session[:q] = params[:q]
+      session[:prod_q] = params[:q]
     else
-      params[:q] = session[:q] if session[:q]
+      params[:q] = session[:prod_q] if session[:prod_q]
     end
 
     if params[:q]

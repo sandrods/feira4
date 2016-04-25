@@ -1,0 +1,65 @@
+<%= page_header "Estoque" %>
+
+<div class="row">
+
+  <div class="col-md-8">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Ref</th>
+          <th>Fornecedor</th>
+          <th>Coleção</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @produtos.each do |produto, itens| %>
+          <tr>
+            <td><b><%= produto.ref %></b></td>
+            <td><%= produto.fornecedor.try :nome %></td>
+            <td><small><%= produto.colecao.try :descricao %></small></td>
+            <td>
+              <table class="table table-condensed clean">
+                <% itens.each do |item| %>
+                <tr>
+                  <td style="width: 60px;"><b><%= item.tamanho.nome %></b></td>
+                  <td><b><%= item.cor.nome %></b></td>
+                  <td class="right">
+                    <% lb = item.estoque == 0 ? 'label-default' : 'label-success'  %>
+                    <span class="label <%= lb %> bigger"> <%= item.estoque %></span>
+                  </td>
+                </tr>
+                <% end %>
+              </table>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <p class="index_count"><span><%= @itens.count %></span> itens encontradas.</p>
+
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Filtros</h3>
+      </div>
+      <div class="panel-body">
+        <%= simple_form_for @search, url: estoque_index_path, method: 'GET' do |f| %>
+
+          <%= f.input :produto_colecao_id_eq, label: 'Coleção', collection: Colecao.to_select %>
+          <%= f.input :produto_fornecedor_id_eq, label: 'Fornecedor', collection: Fornecedor.to_select %>
+          <%= f.input :produto_tipo_id_eq, label: 'Tipo', collection: Tipo.to_select %>
+
+          <%= f.input :produto_ref_cont, label: "Ref" %>
+
+          <%= f.submit 'Filtrar', class: 'btn btn-info' %>
+          <%= button_tag 'Limpar', class: 'btn btn-default clear' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
