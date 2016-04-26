@@ -9,8 +9,7 @@ class Item < ActiveRecord::Base
   belongs_to :cor
   belongs_to :tamanho
 
-  has_many :itens_compra
-  has_many :itens_venda
+  has_many :itens_estoque
 
   delegate :ref, :fornecedor, :colecao, to: :produto
 
@@ -50,8 +49,8 @@ class Item < ActiveRecord::Base
   end
 
   def atualiza_estoque!
-    e = itens_compra.count
-    e -= itens_venda.count
+    e = itens_estoque.where(tipo: 'E').count
+    e -= itens_estoque.where(tipo: 'S').count
 
     update_attribute(:estoque, e)
   end

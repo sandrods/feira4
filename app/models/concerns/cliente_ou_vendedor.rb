@@ -20,8 +20,8 @@ module ClienteOuVendedor
 
   def nome
     cliente? ?
-      cliente.nome :
-      vendedor.nome
+      cliente.try(:nome) :
+      vendedor.try(:nome)
   end
 
 end

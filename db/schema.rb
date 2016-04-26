@@ -100,20 +100,6 @@ ActiveRecord::Schema.define(version: 20160425210538) do
     t.boolean  "ativo",                  default: true
   end
 
-  create_table "item_estoques", force: :cascade do |t|
-    t.integer  "item_id"
-    t.integer  "movimento_id"
-    t.string   "movimento_type"
-    t.string   "tipo",           limit: 1
-    t.decimal  "bruto",                    precision: 9, scale: 2
-    t.decimal  "desconto",                 precision: 4, scale: 2
-    t.decimal  "valor",                    precision: 9, scale: 2
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-  end
-
-  add_index "item_estoques", ["item_id"], name: "index_item_estoques_on_item_id", using: :btree
-
   create_table "itens", force: :cascade do |t|
     t.integer  "produto_id", null: false
     t.integer  "tamanho_id", null: false
@@ -138,6 +124,20 @@ ActiveRecord::Schema.define(version: 20160425210538) do
 
   add_index "itens_compra", ["compra_id"], name: "index_itens_compra_on_compra_id", using: :btree
   add_index "itens_compra", ["item_id"], name: "index_itens_compra_on_item_id", using: :btree
+
+  create_table "itens_estoque", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "movimento_id"
+    t.string   "movimento_type"
+    t.string   "tipo",           limit: 1
+    t.decimal  "bruto",                    precision: 9, scale: 2
+    t.decimal  "desconto",                 precision: 4, scale: 2
+    t.decimal  "valor",                    precision: 9, scale: 2
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+  end
+
+  add_index "itens_estoque", ["item_id"], name: "index_itens_estoque_on_item_id", using: :btree
 
   create_table "itens_sacola", force: :cascade do |t|
     t.integer  "sacola_id",            null: false
@@ -246,6 +246,6 @@ ActiveRecord::Schema.define(version: 20160425210538) do
   end
 
   add_foreign_key "formas", "contas"
-  add_foreign_key "item_estoques", "itens"
+  add_foreign_key "itens_estoque", "itens"
   add_foreign_key "registros", "formas"
 end

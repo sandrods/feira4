@@ -1,6 +1,6 @@
 class CreateItemEstoques < ActiveRecord::Migration
   def change
-    create_table :item_estoques do |t|
+    create_table :itens_estoque do |t|
       t.references :item, index: true, foreign_key: true
 
       t.integer :movimento_id
@@ -13,6 +13,16 @@ class CreateItemEstoques < ActiveRecord::Migration
       t.decimal      :valor,    scale: 2, precision: 9
 
       t.timestamps null: false
+    end
+
+    ItemCompra.find_each do |itemC|
+      ItemEstoque.create!(
+        item_id: itemC.item_id,
+        movimento_id: itemC.compra_id,
+        movimento_type: 'Compra',
+        tipo: 'E',
+        valor: itemC.item.produto.custo
+        )
     end
   end
 end

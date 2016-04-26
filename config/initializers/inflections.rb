@@ -27,6 +27,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular('item_compra', 'itens_compra')
   inflect.irregular('item_venda',  'itens_venda' )
   inflect.irregular('item_sacola', 'itens_sacola')
+  inflect.irregular('item_estoque', 'itens_estoque')
 
 end
 

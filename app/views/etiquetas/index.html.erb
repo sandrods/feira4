@@ -9,6 +9,7 @@
       <thead>
         <tr>
           <th>Ref</th>
+          <th>Barcode</th>
           <th>Fornecedor</th>
           <th>Coleção</th>
         </tr>
@@ -17,6 +18,7 @@
         <% @etiquetas.each_with_index do |etiqueta, i| %>
           <tr <%= ((i+1) % 25) == 0 ? 'class=page' : '' %>>
             <td><%= etiqueta.ref %></td>
+            <td><%= etiqueta.barcode %></td>
             <td><%= etiqueta.fornecedor.try :nome %></td>
             <td><small><%= etiqueta.colecao.try :descricao %></small></td>
           </tr>
