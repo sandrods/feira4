@@ -7,6 +7,9 @@ class Etiqueta < ActiveRecord::Base
 
   validates :cor_id, :tamanho_id, :produto_id, presence: true
 
+  scope :selecionadas, -> { where.not(mark: nil).order(:mark)  }
+  scope :nao_selecionadas, -> { where(mark: nil) }
+
   def sub1
     "#{cor.nome} - #{tamanho.nome}"
   end
@@ -21,6 +24,22 @@ class Etiqueta < ActiveRecord::Base
 
   def valor
     ActionController::Base.helpers.number_to_currency produto.valor
+  end
+
+  def selecionada?
+    mark.present?
+  end
+
+  def mark!
+    update_column :mark, Time.now
+  end
+
+  def unmark!
+    update_column :mark, nil
+  end
+
+  def self.geradas!
+    Etiqueta.selecionadas.update_all gerada: true
   end
 
 end

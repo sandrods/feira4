@@ -31,6 +31,10 @@ Rails.application.routes.draw do
 
   get 'etiquetas' => 'etiquetas#index', as: 'etiquetas'
   post 'etiquetas' => 'etiquetas#print', as: 'print_etiquetas'
+  post 'etiquetas/:id/select'   => 'etiquetas#select',   as: 'select_etiqueta'
+  post 'etiquetas/:id/unselect' => 'etiquetas#unselect', as: 'unselect_etiqueta'
+  post 'etiquetas/unselect'     => 'etiquetas#unselect_all', as: 'unselect_all_etiquetas'
+  post 'etiquetas/select'       => 'etiquetas#select_page', as: 'select_page_etiquetas'
 
   resources :fornecedores
 

@@ -2,8 +2,21 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+window.DeleteRow = (tr) ->
+    row = $(tr).children('td')
+    	      .css(backgroundColor: "maroon", color: "white")
+
+    del = () =>
+            $(row)
+            .animate({ paddingTop: 0, paddingBottom: 0 }, 500)
+            .wrapInner('<div />')
+            .children()
+            .slideUp(200, () -> $(this).closest('tr').remove() )
+
+    setTimeout del, 200
+
 jQuery ->
-    
+
   $('#add_etiqueta').on 'click', (e) ->
     e.preventDefault()
     $('#add_etiqueta_form').slideDown()

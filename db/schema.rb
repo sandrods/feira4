@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425210538) do
+ActiveRecord::Schema.define(version: 20160426181216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,9 +69,11 @@ ActiveRecord::Schema.define(version: 20160425210538) do
   end
 
   create_table "etiquetas", force: :cascade do |t|
-    t.integer "produto_id"
-    t.integer "tamanho_id"
-    t.integer "cor_id"
+    t.integer  "produto_id"
+    t.integer  "tamanho_id"
+    t.integer  "cor_id"
+    t.boolean  "gerada",     default: false
+    t.datetime "mark"
   end
 
   create_table "formas", force: :cascade do |t|

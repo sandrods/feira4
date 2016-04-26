@@ -9,7 +9,9 @@ class EtiquetasController < ApplicationController
       @search = Etiqueta.search(produto_colecao_id_eq: Colecao.first.id)
     end
 
-    @etiquetas = @search.result.includes(produto: :fornecedor).order('fornecedores.nome, produtos.ref')
+    @etiquetas = @search.result.includes(produto: :fornecedor).order('etiquetas.gerada, fornecedores.nome, produtos.ref').references(:fornecedor)
+
+    @selected = Etiqueta.selecionadas.in_groups_of(5, false)
 
   end
 
@@ -25,14 +27,43 @@ class EtiquetasController < ApplicationController
   end
 
   def print
-    index
 
-    pdf = EtiquetasReport.new(@etiquetas)
+    pdf = EtiquetasReport.new(Etiqueta.selecionadas)
+
+    Etiqueta.geradas!
 
     send_data pdf.render, filename: "etiquetas.pdf",
                           type: "application/pdf",
                           disposition: "attachment"
 
+
+  end
+
+  def select
+    @etiqueta = Etiqueta.find(params[:id])
+    @etiqueta.mark!
+
+    @selected = Etiqueta.selecionadas.in_groups_of(5, false)
+  end
+
+  def unselect
+    @etiqueta = Etiqueta.find(params[:id])
+    @etiqueta.unmark!
+
+    @selected = Etiqueta.selecionadas.in_groups_of(5, false)
+    render :select
+  end
+
+  def unselect_all
+    Etiqueta.update_all mark: nil
+    redirect_to etiquetas_path
+  end
+
+  def select_page
+    index
+    Etiqueta.update_all mark: nil
+    @etiquetas.where(gerada: false).limit(25).each { |e| e.mark! }
+    redirect_to etiquetas_path
   end
 
  private
