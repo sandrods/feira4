@@ -23,6 +23,8 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :nav_vendas, 'Vendas' do |sub|
       sub.item :nav_vendas1, 'Vendas', vendas_path
+      sub.item :sep01, nil, class: 'divider'
+      sub.item :nav_sacolas, 'Sacolas', sacolas_path
       sub.item :nav_cli, 'Clientes', clientes_path
     end
 
