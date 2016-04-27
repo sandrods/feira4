@@ -4,10 +4,15 @@ class EtiquetasController < ApplicationController
   def index
 
     if params[:q]
-      @search = Etiqueta.search(params[:q])
+      params.delete(:q) if params[:q].values.all? { |v| v.blank? }
+      session[:etiq_q] = params[:q]
+    elsif session[:etiq_q].present?
+      params[:q] = session[:etiq_q]
     else
-      @search = Etiqueta.search(produto_colecao_id_eq: Colecao.first.id)
+      params[:q] = { produto_colecao_id_eq: Colecao.first.id }
     end
+
+    @search = Etiqueta.search(params[:q])
 
     @etiquetas = @search.result.includes(produto: :fornecedor).order('etiquetas.gerada, fornecedores.nome, produtos.ref').references(:fornecedor)
 
