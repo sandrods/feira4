@@ -61,9 +61,11 @@ class EtiquetasController < ApplicationController
 
   def select_page
     index
-    Etiqueta.update_all mark: nil
-    @etiquetas.where(gerada: false).limit(25).each { |e| e.mark! }
-    redirect_to etiquetas_path
+    selected = Etiqueta.selecionadas.count
+    if selected < 25
+      @etiquetas.where(gerada: false).limit(25 - selected).each { |e| e.mark! }
+    end
+    redirect_to etiquetas_path(params[:q])
   end
 
  private
