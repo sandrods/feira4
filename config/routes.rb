@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :ajustes
   resources :formas
   resources :contas
   resources :categorias

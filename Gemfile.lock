@@ -274,6 +274,3 @@ DEPENDENCIES
   uglifier (~> 2.7)
   web-console (~> 2.0)
   yaml_db
-
-BUNDLED WITH
-   1.10.6

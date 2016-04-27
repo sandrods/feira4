@@ -1,0 +1,29 @@
+<%= page_header "Exibir Ajuste" do %>
+  <%= link_to icon(:chevron_left, "Voltar"), ajustes_path, class: 'btn' %>
+  <%= link_to icon(:edit, 'Editar Ajuste'), edit_ajuste_path(@ajuste), class: 'btn btn-sm btn-primary' %>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <h4 class="text-primary">
+      <%= @ajuste.tipo %>
+    </h4>
+
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6">
+
+        <dl class="dl-horizontal form">
+
+          <dt>Tipo</dt>
+          <dd><%= @ajuste.tipo %></dd>
+
+        </dl>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
