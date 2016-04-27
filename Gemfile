@@ -81,5 +81,7 @@ gem 'barby'
 
 gem "bootstrap-switch-rails"
 
+gem 'odf-report'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
