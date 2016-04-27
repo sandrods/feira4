@@ -6,14 +6,16 @@
 t=`/bin/date +%Y%m%d`
 tt=`/bin/date +%H%M%S`
 
+db='feira_development'
+
 # Define o destino dos arquivos
 DST="/Users/sandro/Dropbox/pg_bkp/$t"
 
 # Cria o diretório do dia se ele não existir
 if [ -d /Users/sandro/Dropbox/pg_bkp/$t ]; then
-  cd /Users/sandro/Dropbox/pg_bkp/$t
+  cd $DST
 else
-`mkdir /Users/sandro/Dropbox/pg_bkp/$t`
+`mkdir $DST`
 fi
 
 # Define permissoes de leitura e gravacao para o diretorio
@@ -21,8 +23,11 @@ fi
 # `chown -R postgres /opt/data/backup/$t`
 # `chmod 0777 /opt/data/backup/$t`
 
-pg_dump feira_development -Fd -f $DST/$tt.bkp
+file="$DST/$db"_"$tt.bkp"
 
+pg_dump $db -Fd -f $file
+
+echo "BackUp to $file"
 # Loop para gerar arquivos dump
 # for i in `psql -l -U postgres | cut -f 2 -d " " -s`; do
 #     if [ $i != template1 -a $i != template0 -a $i != "rows)" -a $i != postgres ]; then
