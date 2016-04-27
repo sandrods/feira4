@@ -52,7 +52,7 @@ module ApplicationHelper
 
   def icon(_icon, text = nil)
     ic = glyph(_icon)
-    ic += ('&nbsp;'.html_safe + text) if text
+    ic += ('&nbsp;'.html_safe + text.html_safe) if text
     raw(ic)
   end
 

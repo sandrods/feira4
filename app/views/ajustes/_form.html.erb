@@ -1,10 +1,11 @@
 <%= simple_form_for(@ajuste) do |f| %>
 
   <div class="row">
-    <div class="col-md-6">
-      <%= f.input :tipo, label: 'Tipo' %>
-      <%= f.input :obs, label: 'Obs' %>
-
+    <div class="col-md-2">
+      <%= f.input :tipo, label: 'Tipo', collection: [['Entrada', 'E'], ['Saída', 'S']], as: :radio_buttons %>
+    </div>
+    <div class="col-md-10">
+      <%= f.input :obs, label: 'Descrição' %>
     </div>
   </div>
 

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :ajustes
   resources :formas
   resources :contas
   resources :categorias
@@ -23,6 +22,10 @@ Rails.application.routes.draw do
   resources :compras do
     resources :itens, controller: 'compras/itens'
     resources :registros, controller: 'compras/registros'
+  end
+
+  resources :ajustes do
+    resources :itens, controller: 'ajustes/itens'
   end
 
   resources :produtos do
