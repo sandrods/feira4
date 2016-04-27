@@ -35,6 +35,8 @@ class EtiquetasController < ApplicationController
 
     pdf = EtiquetasReport.new(Etiqueta.selecionadas)
 
+    pdf.offset = params[:offset].present?
+
     Etiqueta.geradas!
 
     send_data pdf.render, filename: "etiquetas.pdf",

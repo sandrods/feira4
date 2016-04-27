@@ -3,6 +3,8 @@ require 'barby/outputter/prawn_outputter'
 
 class EtiquetasReport
 
+  attr_accessor :offset
+
   def initialize(data)
     @pages = data.in_groups_of(25, false)
     @pages = @pages.map { |p| p.in_groups_of(5, false) }
@@ -25,11 +27,13 @@ class EtiquetasReport
 
   def render_page(linhas)
 
+    o = offset ? 5 - linhas.size : 0
+
     linhas.each_with_index do |linha, x|
 
       linha.each_with_index do |etiqueta, y|
 
-        @pdf.grid(x, y).bounding_box do
+        @pdf.grid(x + o, y).bounding_box do
 
           @pdf.move_down 34
           @pdf.text etiqueta.ref, align: :center, size: 8
