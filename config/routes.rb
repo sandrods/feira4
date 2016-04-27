@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :itens, controller: 'itens_sacola' do
       post 'devolver', on: :collection
     end
+    get 'print', on: :member
   end
 
   resources :vendas do

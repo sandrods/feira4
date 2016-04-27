@@ -1,6 +1,6 @@
 # coding: UTF-8
 class SacolasController < ApplicationController
-  before_action :set_sacola, only: [:show, :edit, :update, :destroy]
+  before_action :set_sacola, only: [:show, :edit, :update, :destroy, :print]
 
   def index
     @search = Sacola.search(params[:q])
@@ -39,6 +39,16 @@ class SacolasController < ApplicationController
   def destroy
     @sacola.destroy
     redirect_to sacolas_path, notice: 'Sacola apagada com sucesso.'
+  end
+
+  def print
+
+    report = RomaneioReport.new(@sacola)
+
+    send_data report.generate,
+              filename: "romaneio_#{@sacola.id}.odt",
+              disposition: 'attachment'
+
   end
 
   private

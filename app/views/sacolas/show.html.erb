@@ -1,12 +1,14 @@
 <%= page_header "Sacola ##{@sacola.id}" do %>
   <%= link_to icon(:chevron_left, "Voltar"), sacolas_path, class: 'btn' %>
+  <%= link_to icon(:print, 'Imprimir'), print_sacola_path(@sacola), class: 'btn btn-sm btn-warning' %>
   <%= link_to icon(:edit, 'Editar Sacola'), edit_sacola_path(@sacola), class: 'btn btn-sm btn-primary' %>
-  <%= link_to icon(:plus, 'Criar Venda'), 
+  <%= link_to icon(:plus, 'Criar Venda'),
               vendas_path(sacola_id: @sacola.id),
               method: 'POST',
               class: 'btn btn-sm btn-success',
               data: { confirm: 'Confirma criação de Venda com os itens incluídos ?' } %>
 <% end %>
+
 
 <div class="well well-sm show">
 
@@ -38,10 +40,10 @@
         <b class="panel-title">Peças Incluídas</b>
 
         <%= form_tag(sacola_itens_path(@sacola), remote: true ) do %>
-          <%= text_field_tag :barcode, 
-                              nil, 
-                              maxlength: 10, 
-                              class: 'pull-right bar-code-input', 
+          <%= text_field_tag :barcode,
+                              nil,
+                              maxlength: 10,
+                              class: 'pull-right bar-code-input',
                               placeholder: "incluir aqui" %>
         <%- end -%>
 
@@ -56,7 +58,7 @@
             <th>Tam.</th>
             <th class="text-right">Valor</th>
             <th>&nbsp;</th>
-          </tr>               
+          </tr>
         </thead>
         <tbody id="itens_sacola_table">
           <%= render partial: 'itens_sacola/item', collection: @sacola.itens.incluidos %>
@@ -72,10 +74,10 @@
         <b class="panel-title">Peças Devolvidas</b>
 
         <%= form_tag(devolver_sacola_itens_path(@sacola), remote: true ) do %>
-          <%= text_field_tag :barcode_d, 
-                              nil, 
-                              maxlength: 10, 
-                              class: 'pull-right bar-code-input', 
+          <%= text_field_tag :barcode_d,
+                              nil,
+                              maxlength: 10,
+                              class: 'pull-right bar-code-input',
                               placeholder: "devolver aqui" %>
         <%- end -%>
 
@@ -89,7 +91,7 @@
             <th>Cor</th>
             <th>Tam.</th>
             <th>&nbsp;</th>
-          </tr>               
+          </tr>
         </thead>
         <tbody id="itens_sacola_dev_table">
           <%= render partial: 'itens_sacola/item_devolvido', collection: @sacola.itens.devolvidos, as: 'item' %>
