@@ -11,7 +11,10 @@ class Venda < ActiveRecord::Base
 
     venda = Venda.create!(data: Date.today, cliente_id: sacola.cliente_id, tipo: sacola.tipo, desconto: 0)
 
-    sacola.itens.incluidos.each { |item_sacola| ItemVenda.create_by_item(item_sacola.item, self) }
+    sacola.itens.incluidos.each do |item_sacola|
+      item = item_sacola.item
+      venda.itens.create!(item_id: item.id, valor: item.produto.valor)
+    end
 
     venda
   end
