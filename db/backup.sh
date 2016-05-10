@@ -25,7 +25,7 @@ fi
 
 file="$DST/$db"_"$tt.bkp"
 
-pg_dump $db -Fd -f $file
+pg_dump $db -Fc -f $file
 
 echo "BackUp to $file"
 # Loop para gerar arquivos dump
