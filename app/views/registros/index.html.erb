@@ -56,6 +56,9 @@
           <%= render partial: 'pendente', collection: Registro.a_pagar, as: :registro %>
         </tbody>
       </table>
+      <div class="panel-footer text-right">
+        <small>Total</small> <%= number_to_currency Registro.a_pagar.sum(:valor) %>
+      </div>
     </div>
 
   </div>
@@ -71,6 +74,9 @@
           <%= render partial: 'pendente', collection: Registro.a_receber, as: :registro %>
         </tbody>
       </table>
+      <div class="panel-footer text-right">
+        <small>Total</small> <%= number_to_currency Registro.a_receber.sum(:valor) %>
+      </div>
     </div>
 
   </div>
