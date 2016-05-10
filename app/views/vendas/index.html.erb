@@ -1,4 +1,6 @@
-<%= page_header "Vendas" %>
+<%= page_header "Vendas" do %>
+  <%= link_to(icon(:plus, 'Nova Venda'), new_venda_path, class: 'btn btn-primary') %>
+<% end %>
 
 <div class="row">
 
@@ -16,16 +18,14 @@
           <tr>
             <td width="80px"><small><%= venda.data %></small></td>
             <td><%= link_to venda.cliente.nome, venda %></td>
-            <td><%= venda.tipo %></td>
+            <td class="right"><%= number_to_currency venda.total %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    
+
     <p class="index_count"><span><%= @vendas.count %></span> vendas encontradas.</p>
 
-    <%= link_to(icon(:plus, 'Nova Venda'), new_venda_path, class: 'btn btn-primary') %>
-  
   </div>
 
   <div class="col-md-4">
@@ -44,4 +44,3 @@
     </div>
   </div>
 </div>
-
