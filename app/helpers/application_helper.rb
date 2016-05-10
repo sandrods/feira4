@@ -70,6 +70,8 @@ module ApplicationHelper
     if_opts = {}
     if_opts[:label] = _label if _label
 
+    opts.merge!(class: 'form-control')
+
     addon_content = _icon ? icon(_icon) : _content
 
     group_content = [content_tag(:span, addon_content, class: 'input-group-addon'), form_builder.input_field(field, opts)]
