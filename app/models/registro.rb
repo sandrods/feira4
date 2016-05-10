@@ -25,6 +25,10 @@ class Registro < ActiveRecord::Base
     !pago
   end
 
+  def vencido?
+    data.past? && pendente?
+  end
+
   def self.a_pagar
     debitos.pendentes
   end
