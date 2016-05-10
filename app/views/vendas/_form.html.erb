@@ -6,6 +6,7 @@
     </div>
     <div class="col-sm-6">
       <%= f.association :cliente, label: 'Cliente', collection: Cliente.all, label_method: :nome %>
+      <%= f.hidden_field :tipo, value: 'C' %>
     </div>
     <div class="col-sm-3 col-md-2">
       <%= input_group(f, :desconto, content: "%", position: 'after', as: :string)%>
