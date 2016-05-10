@@ -25,7 +25,7 @@ class VendasController < ApplicationController
     @venda = Venda.new(venda_params)
 
     if @venda.save
-      redirect_to @venda, notice: 'Venda criado com sucesso.'
+      redirect_to @venda, notice: 'Venda criada com sucesso.'
     else
       render action: 'new'
     end
@@ -34,7 +34,7 @@ class VendasController < ApplicationController
 
   def update
     if @venda.update(venda_params)
-      redirect_to @venda, notice: 'Venda atualizado com sucesso.'
+      redirect_to @venda, notice: 'Venda atualizada com sucesso.'
     else
       render action: 'edit'
     end
@@ -42,7 +42,7 @@ class VendasController < ApplicationController
 
   def destroy
     @venda.destroy
-    redirect_to vendas_path, notice: 'Venda apagado com sucesso.'
+    redirect_to vendas_path, notice: 'Venda apagada com sucesso.'
   end
 
   private
@@ -51,12 +51,12 @@ class VendasController < ApplicationController
     end
 
     def venda_params
-      params.require(:venda).permit(:cliente_id, :desconto, :data)
+      params.require(:venda).permit(:cliente_id, :desconto, :data, :tipo)
     end
 
     def from_sacola
       @venda = Venda.from_sacola(params[:sacola_id])
-      redirect_to @venda, notice: 'Venda criado com sucesso.' 
+      redirect_to @venda, notice: 'Venda criada com sucesso.'
     end
 
 end
