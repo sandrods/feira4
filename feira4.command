@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cd /Users/sandro/dev/workspace/feira4
+
+pid="tmp/pids/server.pid"
+
+if [ -e "$pid" ]
+then
+  echo "Killing PID: $(cat $pid)"
+  kill -TERM $(cat $pid)
+fi
+
+rails server
