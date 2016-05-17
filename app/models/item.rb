@@ -14,6 +14,7 @@ class Item < ActiveRecord::Base
   delegate :ref, :fornecedor, :colecao, to: :produto
 
   scope :ordenados, -> { includes(:cor, :tamanho).joins(:cor).order("tamanho_id, cores.nome") }
+  scope :em_estoque, -> { where('itens.estoque > 0')}
 
   def self.find_by_barcode!(_bc)
 
@@ -61,6 +62,12 @@ class Item < ActiveRecord::Base
 
   def barcode
     "#{cor_id.to_s.rjust(2, '0')}#{tamanho_id.to_s.rjust(2, '0')}#{produto_id.to_s.rjust(6, '0')}"
+  end
+
+ private
+
+  def self.ransackable_scopes(auth_object = nil)
+    %i(em_estoque)
   end
 
 end

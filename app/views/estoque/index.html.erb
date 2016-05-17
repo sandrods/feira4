@@ -58,6 +58,8 @@
 
           <%= f.input :produto_ref_cont, label: "Ref" %>
 
+          <%= f.input :em_estoque, label: 'Exibir com estoque', as: :boolean %>
+
           <%= f.submit 'Filtrar', class: 'btn btn-info' %>
           <%= button_tag 'Limpar', class: 'btn btn-default clear' %>
         <% end %>
