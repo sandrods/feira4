@@ -15,11 +15,19 @@
 
 <% end %>
 
+<h2 style="text-align: center">
+  <%= link_to icon(:chevron_left), registros_path(mes: @cal.last_month) %>
+  <%= @cal.month %>
+  <%= link_to icon(:chevron_right), registros_path(mes: @cal.next_month) %>
+</h2>
+
+<hr/>
+
 <div class="row">
 
 <% Conta.all.each do |conta| %>
 
-  <div class="col-sm-12 col-md-6 col-lg-4">
+  <div class="col-sm-12 col-md-6">
 
     <div class="panel panel-info">
       <div class="panel-heading">
@@ -82,3 +90,7 @@
   </div>
 
 </div>
+
+<hr/>
+
+<%= column_chart Registro.saldos %>

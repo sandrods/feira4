@@ -49,6 +49,28 @@ class Registro < ActiveRecord::Base
     !receita?
   end
 
+  def self.saldos(data = Date.today)
+    range = (data.at_beginning_of_month..data.at_end_of_month)
+
+    anteriores = self.where('registros.data < ?', range.begin)
+    saldo_inicial = anteriores.creditos.sum(:valor) - anteriores.debitos.sum(:valor)
+
+
+    registros = self.where(data: range).group_by(&:data)
+
+    saldos = {}
+    saldo_atual = saldo_inicial
+
+    range.each do |dia|
+      saldo_do_dia = registros[dia].to_a.sum(&:valor_cd)
+      saldo_atual += saldo_do_dia
+      saldos[dia.day] = saldo_atual
+    end
+
+    saldos
+
+  end
+
 private
 
   def registrar_pagamento

@@ -20,6 +20,9 @@
 //= require bootstrap-datepicker
 //= require bootstrap-switch
 
+//= require Chart.bundle
+//= require chartkick
+
 //= require select2
 //= require jquery.maskMoney
 
