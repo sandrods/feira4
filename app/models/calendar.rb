@@ -17,6 +17,14 @@ class Calendar
     day.month == @date.month
   end
 
+  def future?
+    range.begin.future?
+  end
+
+  def past?
+    range.last.past?
+  end
+
   def month
     @date.strftime('%m/%Y')
   end
@@ -30,7 +38,7 @@ class Calendar
   end
 
   def range
-    @date.beginning_of_month..@date.end_of_month
+    @range ||= @date.beginning_of_month..@date.end_of_month
   end
 
 end

@@ -1,7 +1,7 @@
 class RegistrosController < ApplicationController
 
   def index
-    @cal = Calendar.new(params[:mes])
+    @diario = Diario.new(params[:mes])
   end
 
   def new

@@ -16,40 +16,44 @@
 <% end %>
 
 <h2 style="text-align: center">
-  <%= link_to icon(:chevron_left), registros_path(mes: @cal.last_month) %>
-  <%= @cal.month %>
-  <%= link_to icon(:chevron_right), registros_path(mes: @cal.next_month) %>
+  <%= link_to icon(:chevron_left), registros_path(mes: @diario.calendar.last_month) %>
+  <%= @diario.calendar.month %>
+  <%= link_to icon(:chevron_right), registros_path(mes: @diario.calendar.next_month) %>
 </h2>
 
 <hr/>
 
-<div class="row">
+<% unless @diario.calendar.future? %>
 
-<% Conta.all.each do |conta| %>
+  <div class="row">
 
-  <div class="col-sm-12 col-md-6">
+  <% @diario.contas.each do |conta| %>
 
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <b class="panel-title"> <%= conta.nome %> </b>
+    <div class="col-sm-12 col-md-6">
+
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <b class="panel-title"> <%= conta.nome %> </b>
+        </div>
+        <table class="table table-striped">
+          <tbody id="registros_conta_caixa">
+            <%= render partial: 'registro', collection: conta.registros.pagos %>
+          </tbody>
+        </table>
+        <div class="panel-footer text-right">
+          <small>Saldo</small> <%= number_to_currency conta.saldo %>
+        </div>
       </div>
-      <table class="table table-striped">
-        <tbody id="registros_conta_caixa">
-          <%= render partial: 'registro', collection: conta.registros.pagos %>
-        </tbody>
-      </table>
-      <div class="panel-footer text-right">
-        <small>Saldo</small> <%= number_to_currency conta.saldo %>
-      </div>
+
     </div>
+
+  <% end %>
 
   </div>
 
+  <hr/>
+
 <% end %>
-
-</div>
-
-<hr/>
 
 <div class="row">
 
@@ -61,11 +65,11 @@
       </div>
       <table class="table table-striped">
         <tbody id="registros_conta_caixa">
-          <%= render partial: 'pendente', collection: Registro.a_pagar, as: :registro %>
+          <%= render partial: 'pendente', collection: @diario.a_pagar, as: :registro %>
         </tbody>
       </table>
       <div class="panel-footer text-right">
-        <small>Total</small> <%= number_to_currency Registro.a_pagar.sum(:valor) %>
+        <small>Total</small> <%= number_to_currency @diario.a_pagar_total %>
       </div>
     </div>
 
@@ -79,11 +83,11 @@
       </div>
       <table class="table table-striped">
         <tbody id="registros_conta_caixa">
-          <%= render partial: 'pendente', collection: Registro.a_receber, as: :registro %>
+          <%= render partial: 'pendente', collection: @diario.a_receber, as: :registro %>
         </tbody>
       </table>
       <div class="panel-footer text-right">
-        <small>Total</small> <%= number_to_currency Registro.a_receber.sum(:valor) %>
+        <small>Total</small> <%= number_to_currency @diario.a_receber_total %>
       </div>
     </div>
 
@@ -92,5 +96,5 @@
 </div>
 
 <hr/>
-
-<%= column_chart Registro.saldos %>
+<h4>Saldo Total por Dia em <%= @diario.calendar.month %> </h4><br/>
+<%= column_chart @diario.saldos, label: "Saldo" %>
