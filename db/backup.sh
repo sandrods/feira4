@@ -9,10 +9,10 @@ tt=`/bin/date +%H%M%S`
 db='feira_development'
 
 # Define o destino dos arquivos
-DST="/Users/sandro/Dropbox/pg_bkp/$t"
+DST="/Users/sandro/Dropbox/pg_bkp"
 
 # Cria o diretório do dia se ele não existir
-if [ -d /Users/sandro/Dropbox/pg_bkp/$t ]; then
+if [ -d /Users/sandro/Dropbox/pg_bkp ]; then
   cd $DST
 else
 `mkdir $DST`
@@ -23,7 +23,7 @@ fi
 # `chown -R postgres /opt/data/backup/$t`
 # `chmod 0777 /opt/data/backup/$t`
 
-file="$DST/$db"_"$tt.bkp"
+file="$DST/$t"-"$tt"-"$db.bkp"
 
 pg_dump $db -Fc -f $file
 
