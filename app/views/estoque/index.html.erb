@@ -4,7 +4,7 @@
 
 <div class="row">
 
-  <div class="col-md-8">
+  <div class="col-md-9">
     <table class="table table-hover table-striped">
       <thead>
         <tr>
@@ -26,7 +26,8 @@
                 <tr>
                   <td style="width: 60px;"><b><%= item.tamanho.nome %></b></td>
                   <td><b><%= item.cor.nome %></b></td>
-                  <td class="right">
+                  <td class="right"><small><%= item.barcode %></small></td>
+                  <td class="right"style="width: 36px;">
                     <% lb = item.estoque == 0 ? 'label-default' : 'label-success'  %>
                     <span class="label <%= lb %> bigger"> <%= item.estoque %></span>
                   </td>
@@ -44,7 +45,7 @@
 
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Filtros</h3>
