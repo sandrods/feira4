@@ -51,7 +51,7 @@ class VendasController < ApplicationController
     end
 
     def venda_params
-      params.require(:venda).permit(:cliente_id, :desconto, :data, :tipo)
+      params.require(:venda).permit(:cliente_id, :desconto, :data, :tipo, :obs)
     end
 
     def from_sacola

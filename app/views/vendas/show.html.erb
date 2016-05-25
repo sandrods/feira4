@@ -27,6 +27,11 @@
 
   </div>
 
+  <% if @venda.obs.present? %>
+    <hr/>
+    <%= @venda.obs.gsub("\n", "<br/>") %>
+  <% end %>
+
 </div>
 
 <div class="row">
