@@ -10,7 +10,8 @@
         <tr>
           <th>Data</th>
           <th>Cliente</th>
-          <th>&nbsp;</th>
+          <th class="right">Peças</th>
+          <th class="right">Total</th>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +19,7 @@
           <tr>
             <td width="80px"><small><%= venda.data %></small></td>
             <td><%= link_to venda.cliente.nome, venda %></td>
+            <td class="right"><%= venda.itens.count %></td>
             <td class="right"><%= number_to_currency venda.total %></td>
           </tr>
         <% end %>
