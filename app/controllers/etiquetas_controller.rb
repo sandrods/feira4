@@ -68,10 +68,9 @@ class EtiquetasController < ApplicationController
 
   def select_page
     index
-    selected = Etiqueta.selecionadas.count
-    if selected < 25
-      @etiquetas.where(gerada: false).limit(25 - selected).each { |e| e.mark! }
-    end
+    dif = Etiqueta.selecionadas.count % 25
+    @etiquetas.where(gerada: false, mark: nil).limit(25 - dif).each { |e| e.mark! }
+
     redirect_to etiquetas_path(params[:q])
   end
 
