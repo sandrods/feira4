@@ -7,9 +7,12 @@ class RegistrosController < ApplicationController
 
   def create
     @registro = Registro.new registro_params
-    @registro.save!
+    if @registro.save
+    else
+      flash[:error] = "Não foi possível salvar registro: #{@registro.errors.full_messages}"
+    end
 
-    redirect_to registros_path
+    redirect_to financeiro_diario_path(mes: @registro.data)
   end
 
   def edit
@@ -19,16 +22,20 @@ class RegistrosController < ApplicationController
 
   def update
     @registro = Registro.find params[:id]
-    @registro.update! registro_params
 
-    redirect_to registros_path
+    if @registro.update registro_params
+    else
+      flash[:error] = "Não foi possível salvar registro: #{@registro.errors.full_messages}"
+    end
+
+    redirect_to financeiro_diario_path(mes: @registro.data)
   end
 
   private
 
    def registro_params
      params.require(:registro)
-           .permit(:data, :valor, :conta_id, :forma_id, :descricao, :pago, :cd)
+           .permit(:data, :valor, :conta_id, :forma_id, :descricao, :pago, :cd, :categoria_id)
            .delocalize(data: :date, valor: :number)
    end
 

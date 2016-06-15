@@ -2,7 +2,11 @@ class Vendas::RegistrosController < ApplicationController
   include BelongsToVenda
 
   def create
-    @registro = @venda.pagamentos.create registro_params.merge(descricao: "Venda #{@venda.id} - #{@venda.nome}")
+    defaults = {
+      descricao: "Venda #{@venda.id} - #{@venda.nome}",
+      categoria_id: Categoria::VENDAS
+    }
+    @registro = @venda.pagamentos.create registro_params.merge(defaults)
   end
 
   def destroy

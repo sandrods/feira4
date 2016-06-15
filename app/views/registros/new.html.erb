@@ -31,7 +31,14 @@
       </div>
     </div>
 
-    <%= f.input :pago, as: :boolean, label: false %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :pago, as: :boolean, label: false %>
+      </div>
+      <div class="col-md-6">
+        <%= f.association :categoria, collection: Categoria.por_cd(@registro.cd), label_method: :nome %>
+      </div>
+    </div>
 
   </div>
   <div class="modal-footer">
