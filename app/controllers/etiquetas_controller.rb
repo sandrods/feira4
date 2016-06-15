@@ -9,7 +9,7 @@ class EtiquetasController < ApplicationController
     elsif session[:etiq_q].present?
       params[:q] = session[:etiq_q]
     else
-      params[:q] = { produto_colecao_id_eq: Colecao.first.id }
+      params[:q] = { produto_colecao_id_eq: Colecao.last.id }
     end
 
     @search = Etiqueta.search(params[:q])
