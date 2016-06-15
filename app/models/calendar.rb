@@ -41,4 +41,8 @@ class Calendar
     @range ||= @date.beginning_of_month..@date.end_of_month
   end
 
+  def next_cal
+    @next_cal ||= Calendar.new(@date.next_month)
+  end
+
 end

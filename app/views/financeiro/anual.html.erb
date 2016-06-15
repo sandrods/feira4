@@ -1,0 +1,20 @@
+<%= page_header "Financeiro Anual" do %>
+
+<% end %>
+
+<h2 style="text-align: center">
+  <%= link_to icon(:chevron_left), financeiro_anual_path(ano: @anual.calendar.last_year) %>
+  <%= @anual.calendar.year %>
+  <%= link_to icon(:chevron_right), financeiro_anual_path(ano: @anual.calendar.next_year) %>
+</h2>
+
+<%= line_chart @anual.saldos,
+                  label: "Saldo",
+                  library: {
+                    plotOptions: {
+                      series: {
+                        dataLabels: { enabled: true }
+                      }
+                    }
+                  }
+ %>

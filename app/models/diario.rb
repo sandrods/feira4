@@ -24,10 +24,21 @@ class Diario
     a_receber.sum(:valor)
   end
 
-  def saldos
+  def saldo_inicial
+    @saldo_inicial ||= begin
+      anteriores = Registro.where('data < ?', @calendar.range.begin)
+      anteriores.to_a.sum(&:valor_cd)
+    end
+  end
 
-    anteriores = Registro.where('data < ?', @calendar.range.begin)
-    saldo_inicial = anteriores.creditos.sum(:valor) - anteriores.debitos.sum(:valor)
+  def saldo_final
+    @saldo_final ||= begin
+      anteriores = Registro.where('data <= ?', @calendar.range.last)
+      anteriores.to_a.sum(&:valor_cd)
+    end
+  end
+
+  def saldos
 
     registros = @registros.group_by(&:data)
 
@@ -37,11 +48,27 @@ class Diario
     @calendar.range.each do |dia|
       saldo_do_dia = registros[dia].to_a.sum(&:valor_cd)
       saldo_atual += saldo_do_dia
-      saldos[dia.day] = saldo_atual
+      saldos[dia.to_s(:db)] = saldo_atual
     end
 
     saldos
 
+  end
+
+  def despesas
+    @registros.where.not(categoria_id: nil).where(cd: 'D').group(:categoria).sum(:valor)
+  end
+
+  def total_despesas
+    @registros.debitos.sum(:valor)
+  end
+
+  def receitas
+    @registros.where.not(categoria_id: nil).where(cd: 'C').group(:categoria).sum(:valor)
+  end
+
+  def total_receitas
+    @registros.creditos.sum(:valor)
   end
 
   class Conta

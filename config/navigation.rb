@@ -29,7 +29,8 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item :nav_finan, 'Financeiro' do |sub|
-      sub.item :nav_registros, 'Diário', registros_path
+      sub.item :nav_registros, 'Diário', financeiro_diario_path
+      sub.item :nav_registros, 'Anual', financeiro_anual_path
       sub.item :sep02, nil, class: 'divider'
       sub.item :nav_contas, 'Contas', contas_path
       sub.item :nav_cat, 'Categorias', categorias_path
