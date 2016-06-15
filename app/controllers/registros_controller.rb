@@ -1,9 +1,5 @@
 class RegistrosController < ApplicationController
 
-  def index
-    @diario = Diario.new(params[:mes])
-  end
-
   def new
     @registro = Registro.new(cd: params[:cd])
     render layout: false

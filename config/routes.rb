@@ -55,6 +55,9 @@ Rails.application.routes.draw do
 
   resources :cores
 
+  get 'financeiro/diario'
+  get 'financeiro/anual'
+
   root 'dashboard#index'
 
 end

@@ -1,0 +1,177 @@
+<%= page_header "Diário Financeiro" do %>
+
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Incluir Registro <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><%= link_to icon(:plus, 'Receita'), new_registro_path(cd: 'C'), class: 'text-success', data: { behavior: 'load-modal'} %></li>
+      <li><%= link_to icon(:minus, 'Despesa'), new_registro_path(cd: 'D'), class: 'text-danger', data: { behavior: 'load-modal'} %></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="#">Transferência</a></li>
+    </ul>
+  </div>
+
+
+<% end %>
+
+<h2 style="text-align: center">
+  <%= link_to icon(:chevron_left), financeiro_diario_path(mes: @diario.calendar.last_month) %>
+  <%= @diario.calendar.month %>
+  <%= link_to icon(:chevron_right), financeiro_diario_path(mes: @diario.calendar.next_month) %>
+</h2>
+
+<hr/>
+
+<% unless @diario.calendar.future? %>
+
+  <div class="row">
+
+  <% @diario.contas.each do |conta| %>
+
+    <div class="col-sm-12 col-md-6">
+
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <b class="panel-title"> <%= conta.nome %> </b>
+        </div>
+        <table class="table table-striped">
+          <tbody id="registros_conta_caixa">
+            <%= render partial: 'registros/registro', collection: conta.registros.pagos %>
+          </tbody>
+        </table>
+        <div class="panel-footer text-right">
+          <small>Saldo</small> <%= number_to_currency conta.saldo %>
+        </div>
+      </div>
+
+    </div>
+
+  <% end %>
+
+  </div>
+
+  <hr/>
+
+<% end %>
+
+<div class="row">
+
+  <div class="col-sm-12 col-md-6">
+
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <b class="panel-title">CONTAS A PAGAR</b>
+      </div>
+      <table class="table table-striped">
+        <tbody id="registros_conta_caixa">
+          <%= render partial: 'registros/pendente', collection: @diario.a_pagar, as: :registro %>
+        </tbody>
+      </table>
+      <div class="panel-footer text-right">
+        <small>Total</small> <%= number_to_currency @diario.a_pagar_total %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <b class="panel-title">CONTAS A RECEBER</b>
+      </div>
+      <table class="table table-striped">
+        <tbody id="registros_conta_caixa">
+          <%= render partial: 'registros/pendente', collection: @diario.a_receber, as: :registro %>
+        </tbody>
+      </table>
+      <div class="panel-footer text-right">
+        <small>Total</small> <%= number_to_currency @diario.a_receber_total %>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<hr/>
+<br/>
+<h3>Saldo Total por Dia</h3><br/>
+<%= line_chart @diario.saldos,
+                label: "Saldo",
+                library: {
+                  plotOptions: {
+                    series: {
+                      dataLabels: { enabled: false }
+                    }
+                  }
+                }
+ %>
+
+<hr/>
+<br/>
+<h3>Receitas e Despesas - Totais do Mês </h3><br/>
+
+<div class="well stats">
+  <div class="row">
+    <div class="col-sm-6 col-md-3 text-muted">
+      <h1> <%= number_to_currency @diario.saldo_inicial %></h1>
+      <small>SALDO ANTERIOR</small>
+    </div>
+    <div class="col-sm-6 col-md-3 text-danger">
+      <h1> <%= number_to_currency @diario.total_despesas %></h1>
+      <small>TOTAL DE DESPESAS</small>
+    </div>
+    <div class="col-sm-6 col-md-3 text-success">
+      <h1> <%= number_to_currency @diario.total_receitas %></h1>
+      <small>TOTAL DE RECEITAS</small>
+    </div>
+    <div class="col-sm-6 col-md-3 text-info">
+      <h1> <%= number_to_currency @diario.saldo_final %></h1>
+      <small>SALDO FINAL</small>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-sm-12 col-md-6">
+
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <b class="panel-title">DESPESAS</b>
+      </div>
+      <table class="table table-striped">
+        <tbody>
+          <% @diario.despesas.each do |cat, valor| %>
+          <tr>
+            <td><%= cat.nome %></td>
+            <td class='text-right' ><%= number_to_currency(valor) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <b class="panel-title">RECEITAS</b>
+      </div>
+      <table class="table table-striped">
+        <tbody>
+          <% @diario.receitas.each do |cat, valor| %>
+          <tr>
+            <td><%= cat.nome %></td>
+            <td class='text-right' ><%= number_to_currency(valor) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
