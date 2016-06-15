@@ -20,7 +20,8 @@
 //= require bootstrap-datepicker
 //= require bootstrap-switch
 
-//= require Chart.bundle
+// require Chart.bundle
+//= require highcharts
 //= require chartkick
 
 //= require select2

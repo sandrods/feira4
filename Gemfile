@@ -84,6 +84,7 @@ gem "bootstrap-switch-rails"
 gem 'odf-report'
 
 gem "chartkick"
+gem "highcharts-rails"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
