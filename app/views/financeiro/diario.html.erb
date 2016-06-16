@@ -8,7 +8,7 @@
       <li><%= link_to icon(:plus, 'Receita'), new_registro_path(cd: 'C'), class: 'text-success', data: { behavior: 'load-modal'} %></li>
       <li><%= link_to icon(:minus, 'Despesa'), new_registro_path(cd: 'D'), class: 'text-danger', data: { behavior: 'load-modal'} %></li>
       <li role="separator" class="divider"></li>
-      <li><a href="#">Transferência</a></li>
+      <li><%= link_to icon(:transfer, 'Transferência'), new_transferencia_path, class: 'text-info', data: { behavior: 'load-modal'} %></li>
     </ul>
   </div>
 

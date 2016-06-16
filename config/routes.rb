@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :categorias
 
   resources :registros
+  resources :transferencias, controller: 'registros/transferencias'
 
   resources :estoque
 

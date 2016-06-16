@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427193716) do
+ActiveRecord::Schema.define(version: 20160616011626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(version: 20160427193716) do
     t.integer  "categoria_id"
     t.integer  "forma_id"
     t.boolean  "pago",                                                default: false
+    t.integer  "transf_id"
   end
 
   add_index "registros", ["forma_id"], name: "index_registros_on_forma_id", using: :btree
