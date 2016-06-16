@@ -31,6 +31,14 @@ class RegistrosController < ApplicationController
     redirect_to financeiro_diario_path(mes: @registro.data)
   end
 
+  def destroy
+    @registro = Registro.find params[:id]
+
+    @registro.destroy!
+
+    redirect_to financeiro_diario_path(mes: @registro.data)
+  end
+
   private
 
    def registro_params
