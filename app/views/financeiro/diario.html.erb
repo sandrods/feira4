@@ -12,16 +12,17 @@
     </ul>
   </div>
 
-
 <% end %>
 
-<h2 style="text-align: center">
-  <%= link_to icon(:chevron_left), financeiro_diario_path(mes: @diario.calendar.last_month) %>
-  <%= @diario.calendar.month %>
-  <%= link_to icon(:chevron_right), financeiro_diario_path(mes: @diario.calendar.next_month) %>
-</h2>
 
-<hr/>
+<div class="well well-sm stats">
+  <h2 style="text-align: center">
+    <%= link_to icon(:chevron_left), financeiro_diario_path(mes: @diario.calendar.last_month) %>
+    <%= @diario.calendar.month %>
+    <%= link_to icon(:chevron_right), financeiro_diario_path(mes: @diario.calendar.next_month) %>
+  </h2>
+</div>
+
 
 <% unless @diario.calendar.future? %>
 
@@ -103,14 +104,23 @@
                 library: {
                   plotOptions: {
                     series: {
-                      dataLabels: { enabled: false }
+                      dataLabels: { enabled: false },
+                      negativeColor: 'red'
                     }
                   }
                 }
  %>
 
-<hr/>
+
 <br/>
+<div class="well well-sm stats">
+  <h2 style="text-align: center">
+    <%= link_to icon(:chevron_left), financeiro_diario_path(mes: @diario.calendar.last_month) %>
+    <%= @diario.calendar.month %>
+    <%= link_to icon(:chevron_right), financeiro_diario_path(mes: @diario.calendar.next_month) %>
+  </h2>
+</div>
+
 <h3>Receitas e Despesas - Totais do Mês </h3><br/>
 
 <div class="well stats">
