@@ -17,6 +17,9 @@ class RegistrosController < ApplicationController
 
   def edit
     @registro = Registro.find params[:id]
+
+    redirect_to edit_transferencia_path(@registro) and return if @registro.transferencia?
+
     render layout: false
   end
 

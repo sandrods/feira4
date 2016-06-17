@@ -49,6 +49,10 @@ class Registro < ActiveRecord::Base
     !receita?
   end
 
+  def transferencia?
+    transf_id.present?
+  end
+
 private
 
   def registrar_pagamento

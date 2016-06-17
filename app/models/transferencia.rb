@@ -1,11 +1,34 @@
 class Transferencia
   include ActiveModel::Model
-  attr_accessor :conta_origem, :conta_destino, :data, :valor
+  attr_accessor :conta_origem, :conta_destino, :data, :valor, :reg_origem, :reg_destino
 
-  validates :conta_origem, :conta_destino, :data, :valor, presence: true
+  validates :conta_origem, :conta_destino, :data, :valor, presence: true, on: :create
+  validates :data, :valor, presence: true, on: :update
 
-  def save
-    return false unless valid?
+  def self.find(id)
+
+    r1 = Registro.find id
+    r2 = Registro.find r1.transf_id
+
+    params = {}
+
+    if r1.despesa?
+      params[:reg_origem] = r1
+      params[:reg_destino] = r2
+    else
+      params[:reg_origem] = r2
+      params[:reg_destino] = r1
+    end
+
+    params[:data] = r1.data
+    params[:valor] = r1.valor
+
+    new(params)
+
+  end
+
+  def create
+    return false unless valid?(:create)
 
     origem = Conta.find @conta_origem
     destino = Conta.find @conta_destino
@@ -27,6 +50,42 @@ class Transferencia
 
     end
 
+  end
+
+  def update params
+
+    @valor = params[:valor]
+    @data = params[:data]
+
+    return false unless valid?(:update)
+
+    attrs = {
+      valor: @valor,
+      data: @data
+    }
+
+    Registro.transaction do
+      @reg_origem.update! attrs
+      @reg_destino.update! attrs
+    end
+
+  end
+
+  def destroy
+
+    Registro.transaction do
+      @reg_origem.destroy!
+      @reg_destino.destroy!
+    end
+
+  end
+
+  def to_param
+    persisted? ? @reg_origem.id.to_s : nil
+  end
+
+  def persisted?
+    @reg_origem.present?
   end
 
 end

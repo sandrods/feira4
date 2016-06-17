@@ -8,10 +8,34 @@ class Registros::TransferenciasController < ApplicationController
   def create
     @transf = Transferencia.new transf_params
 
-    if @transf.save
+    if @transf.create
     else
-      flash[:error] = "Não foi possível salvar registro: #{@transf.errors.full_messages}"
+      flash[:error] = "Não foi possível salvar transferência: #{@transf.errors.full_messages}"
     end
+
+    redirect_to financeiro_diario_path(mes: @transf.data)
+  end
+
+  def edit
+    @transf = Transferencia.find params[:id]
+    render layout: false
+  end
+
+  def update
+    @transf = Transferencia.find params[:id]
+
+    if @transf.update transf_params
+    else
+      flash[:error] = "Não foi possível salvar transferência: #{@transf.errors.full_messages}"
+    end
+
+    redirect_to financeiro_diario_path(mes: @transf.data)
+  end
+
+  def destroy
+    @transf = Transferencia.find params[:id]
+
+    @transf.destroy
 
     redirect_to financeiro_diario_path(mes: @transf.data)
   end
