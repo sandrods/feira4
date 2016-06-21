@@ -1,29 +1,52 @@
-<%= page_header "Exibir Coleção" do %>
+<%= page_header @colecao.descricao, 'Coleção' do %>
   <%= link_to icon(:chevron_left, "Voltar"), colecoes_path, class: 'btn' %>
   <%= link_to icon(:edit, 'Editar Coleção'), edit_colecao_path(@colecao), class: 'btn btn-primary' %>
 <% end %>
 
-<div class="panel panel-default">
-  <div class="panel-body">
+<div class="row">
 
-    <h4 class="text-primary">
-      <%= @colecao.descricao %>
-    </h4>
+  <div class="col-sm-12 col-md-6">
 
-    <div class="row">
-
-      <div class="col-md-4 col-sm-6">
-
-        <dl class="dl-horizontal form">
-
-          <dt>Descrição</dt>
-          <dd><%= @colecao.descricao %></dd>
-
-        </dl>
-
+    <div class="well stats">
+      <div class="row">
+        <div class="col-md-6 text-danger">
+          <h1> <%= @colecao.quantidade_item_comprados %></h1>
+          <small>PEÇAS COMPRADAS</small>
+        </div>
+        <div class="col-md-6 text-success">
+          <h1> <%= @colecao.quantidade_item_vendidos %></h1>
+          <small>PEÇAS VENDIDAS</small>
+        </div>
       </div>
 
     </div>
 
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= @colecao.porcent_vendidos %>%">
+      </div>
+    </div>
+
   </div>
+
+  <div class="col-sm-12 col-md-6">
+    <div class="well stats">
+      <div class="row">
+        <div class="col-md-6 text-danger">
+          <h1> <%= number_to_currency @colecao.total_despesas %></h1>
+          <small>TOTAL DESPESAS</small>
+        </div>
+        <div class="col-md-6 text-success">
+          <h1> <%= number_to_currency @colecao.total_receitas %></h1>
+          <small>TOTAL RECEITAS</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= @colecao.porcent_receitas %>%">
+      </div>
+    </div>
+
+  </div>
+
 </div>

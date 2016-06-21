@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616011626) do
+ActiveRecord::Schema.define(version: 20160620222703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,10 @@ ActiveRecord::Schema.define(version: 20160616011626) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "desconto",      precision: 9, scale: 2
+    t.integer  "colecao_id"
   end
+
+  add_index "compras", ["colecao_id"], name: "index_compras_on_colecao_id", using: :btree
 
   create_table "contas", force: :cascade do |t|
     t.string   "nome",       limit: 30, null: false
@@ -209,8 +212,10 @@ ActiveRecord::Schema.define(version: 20160616011626) do
     t.integer  "forma_id"
     t.boolean  "pago",                                                default: false
     t.integer  "transf_id"
+    t.integer  "colecao_id"
   end
 
+  add_index "registros", ["colecao_id"], name: "index_registros_on_colecao_id", using: :btree
   add_index "registros", ["forma_id"], name: "index_registros_on_forma_id", using: :btree
 
   create_table "sacolas", force: :cascade do |t|
@@ -255,7 +260,9 @@ ActiveRecord::Schema.define(version: 20160616011626) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "compras", "colecoes"
   add_foreign_key "formas", "contas"
   add_foreign_key "itens_estoque", "itens"
+  add_foreign_key "registros", "colecoes"
   add_foreign_key "registros", "formas"
 end

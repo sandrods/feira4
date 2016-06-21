@@ -138,6 +138,10 @@ html.turbolinks-progress-bar::before {
     color: #aaa;
     span {
         color: #333;
+        font-weight: bold;
+        &.label {
+          color: #fff;
+        }
     }
 }
 

@@ -41,7 +41,7 @@
       </tbody>
     </table>
 
-    <p class="index_count"><span><%= @itens.count %></span> itens encontradas.</p>
+    <p class="index_count"><span class="label label-success bigger"><%= @itens.sum(:estoque) %></span> peças em estoque.</p>
 
   </div>
 

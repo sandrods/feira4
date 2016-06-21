@@ -4,6 +4,8 @@ class Compra < ActiveRecord::Base
 # acts_as_br_float :desconto
 
   belongs_to :fornecedor
+  belongs_to :colecao
+
   #has_many :itens, class_name: 'ItemCompra', dependent: :destroy
   has_many :itens, -> { where(tipo: 'E') }, class_name: 'ItemEstoque', as: :movimento, dependent: :destroy
 

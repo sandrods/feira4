@@ -12,16 +12,16 @@
       <tbody>
         <% @colecoes.each do |colecao| %>
           <tr>
-            <td><%= link_to colecao.descricao, edit_colecao_path(colecao) %></td>
+            <td><%= link_to colecao.descricao, colecao_path(colecao) %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    
+
     <p class="index_count"><span><%= @colecoes.count %></span> coleções encontradas.</p>
 
     <%= link_to(icon(:plus, 'Nova Coleção'), new_colecao_path, class: 'btn btn-primary') %>
-  
+
   </div>
 
   <div class="col-md-4">
@@ -40,4 +40,3 @@
     </div>
   </div>
 </div>
-

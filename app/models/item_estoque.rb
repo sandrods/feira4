@@ -10,6 +10,7 @@ class ItemEstoque < ActiveRecord::Base
 
   validates :tipo, presence: true, inclusion: { in: ['E', 'S'] }
 
+  scope :vendidos, -> { where(tipo: 'S', movimento_type: 'Venda') }
 
   private
 

@@ -46,6 +46,6 @@ class ComprasController < ApplicationController
     end
 
     def compra_params
-      params.require(:compra).permit(:fornecedor_id, :data, :desconto)
+      params.require(:compra).permit(:fornecedor_id, :data, :desconto, :colecao_id)
     end
 end

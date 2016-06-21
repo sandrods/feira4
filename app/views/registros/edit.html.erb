@@ -32,13 +32,18 @@
 
     <div class="row">
       <div class="col-md-6">
-        <%= f.input :pago, as: :boolean, label: false %>
-      </div>
-      <div class="col-md-6">
         <%= f.association :categoria, collection: Categoria.por_cd(@registro.cd), label_method: :nome %>
+      </div>      
+      <div class="col-md-6">
+        <%= f.association :colecao, collection: Colecao.to_select, label: 'Coleção' %>
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :pago, as: :boolean, label: false %>
+      </div>
+    </div>
 
 
   </div>
