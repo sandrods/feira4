@@ -8,6 +8,7 @@ class ColecoesController < ApplicationController
   end
 
   def show
+    @resultado = Colecao::Resultado.new(@colecao)
   end
 
   def new
