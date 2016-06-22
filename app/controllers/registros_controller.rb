@@ -46,7 +46,7 @@ class RegistrosController < ApplicationController
 
    def registro_params
      params.require(:registro)
-           .permit(:data, :valor, :conta_id, :forma_id, :descricao, :pago, :cd, :categoria_id)
+           .permit(:data, :valor, :conta_id, :forma_id, :descricao, :pago, :cd, :categoria_id, :colecao_id)
            .delocalize(data: :date, valor: :number)
    end
 
