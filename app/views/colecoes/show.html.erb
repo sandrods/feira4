@@ -1,4 +1,4 @@
-<%= page_header @colecao.descricao, 'Coleção' do %>
+<%= page_header @colecao.descricao, 'Resultados' do %>
   <%= link_to icon(:chevron_left, "Voltar"), colecoes_path, class: 'btn' %>
   <%= link_to icon(:edit, 'Editar Coleção'), edit_colecao_path(@colecao), class: 'btn btn-primary' %>
 <% end %>
@@ -18,12 +18,7 @@
           <small>PEÇAS VENDIDAS</small>
         </div>
       </div>
-
-    </div>
-
-    <div class="progress">
-      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= @resultado.total.porcent_vendidos %>%">
-      </div>
+      <%= progress(@resultado.total.porcent_vendidos) %>
     </div>
 
   </div>
@@ -32,21 +27,33 @@
     <div class="well stats">
       <div class="row">
         <div class="col-md-6 text-danger">
-          <h1> <%= number_to_currency @resultado.total.despesas %></h1>
+          <h1> <%= number_to_currency @resultado.total.valor_despesas %></h1>
           <small>TOTAL DESPESAS</small>
         </div>
         <div class="col-md-6 text-success">
-          <h1> <%= number_to_currency @resultado.total.receitas %></h1>
+          <h1> <%= number_to_currency @resultado.total.valor_receitas %></h1>
           <small>TOTAL RECEITAS</small>
         </div>
       </div>
-    </div>
+      
+      <%= progress(@resultado.total.porcent_receitas) %>
 
-    <div class="progress">
-      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= @resultado.total.porcent_receitas %>%">
-      </div>
-    </div>
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Despesas</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @resultado.total.despesas.each do |d| %>
+          <tr>
+            <td><%= d[:descr] %></td>
+            <td class="right"><%= number_to_currency d[:valor] %></td>
+          </tr>
+        <% end %>
+      </table>
 
+    </div>
   </div>
 
 </div>
@@ -71,22 +78,26 @@
           <small>PEÇAS VENDIDAS</small>
         </div>
       </div>
-      <br/>
 
-      <ul class="list-group">
-        <% f.vendas_por_tipo.each do |tipo, itens| %>
-        <li class="list-group-item">
-          <span class="badge"> <%= itens.size %> </span>
-          <%= tipo.descricao %>
-        </li>
+      <%= progress(f.porcent_vendidos) %>
+
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th class="right">Vendidas</th>
+          </tr>
+        </thead>
+        <% f.vendas_por_tipo.each do |item| %>
+          <tr>
+            <td><%= item[0].descricao %></td>
+            <td class="right"><%= item[1].size %></td>
+          </tr>
         <% end %>
-      </ul>
+      </table>
+
     </div>
 
-    <div class="progress">
-      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= f.porcent_vendidos %>%">
-      </div>
-    </div>
     <br/>
 
     <% end %>

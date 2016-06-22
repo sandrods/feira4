@@ -18,8 +18,16 @@ class Colecao::Resultado
 
     total.compras = @colecao.compras
 
-    total.despesas = @colecao.compras.to_a.sum(&:total) + @colecao.despesas.sum(:valor)
-    total.receitas = total.item_vendidos.sum(:valor)
+    total.valor_despesas = @colecao.compras.to_a.sum(&:total) + @colecao.despesas.sum(:valor)
+    total.valor_receitas = total.item_vendidos.sum(:valor) + @colecao.receitas.sum(:valor)
+
+    @colecao.compras.each do |c|
+      total.despesas << { descr: "Compra #{c.fornecedor.nome}", valor: c.total }
+    end
+
+    @colecao.despesas.each do |c|
+      total.despesas << { descr: c.descricao, valor: c.valor }
+    end
 
     total
   end
@@ -50,11 +58,17 @@ class Colecao::Resultado
 
     attr_accessor :quantidade_comprados,
                   :receitas,
+                  :valor_receitas,
                   :despesas,
+                  :valor_despesas,
                   :fornecedor,
                   :item_vendidos,
                   :compras
 
+    def initialize
+      @receitas = []
+      @despesas = []
+    end
 
     def quantidade_vendidos
       item_vendidos.count
@@ -65,15 +79,15 @@ class Colecao::Resultado
     end
 
     def porcent_vendidos
-      (quantidade_vendidos.to_f / quantidade_comprados * 100).to_i
+      (quantidade_vendidos.to_f / quantidade_comprados * 100).to_i rescue 0
     end
 
     def porcent_receitas
-      (receitas.to_f / despesas * 100).to_i
+      (valor_receitas.to_f / valor_despesas * 100).to_i rescue 0
     end
 
     def vendas_por_tipo
-      item_vendidos.group_by { |it| it.item.produto.tipo }
+      item_vendidos.group_by { |it| it.item.produto.tipo }.to_a.sort_by { |i| i[1].size }.reverse
     end
 
   end
