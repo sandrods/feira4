@@ -35,7 +35,7 @@
           <small>TOTAL RECEITAS</small>
         </div>
       </div>
-      
+
       <%= progress(@resultado.total.porcent_receitas) %>
 
       <table class="table table-condensed">
@@ -47,8 +47,8 @@
         </thead>
         <% @resultado.total.despesas.each do |d| %>
           <tr>
-            <td><%= d[:descr] %></td>
-            <td class="right"><%= number_to_currency d[:valor] %></td>
+            <td><%= d.descr %></td>
+            <td class="right"><%= number_to_currency d.valor %></td>
           </tr>
         <% end %>
       </table>
@@ -90,8 +90,8 @@
         </thead>
         <% f.vendas_por_tipo.each do |item| %>
           <tr>
-            <td><%= item[0].descricao %></td>
-            <td class="right"><%= item[1].size %></td>
+            <td><%= item.tipo %></td>
+            <td class="right"><%= item.quant %></td>
           </tr>
         <% end %>
       </table>

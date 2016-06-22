@@ -4,90 +4,110 @@ class Colecao::Resultado
 
   def initialize(colecao)
     @colecao = colecao
-    @total = calcula_total
-    @por_fornecedor = calcula_por_fornecedor
+    @total = Total.new(@colecao)
+    @por_fornecedor = Fornecedor.por(@colecao)
   end
 
-  private
+  class Total
 
-  def calcula_total
-    total = Dados.new
+    Line = Struct.new(:descr, :valor)
 
-    total.item_vendidos = ItemEstoque.vendidos.joins(item: :produto)
-                                              .where(produtos: { colecao_id: @colecao.id })
-
-    total.compras = @colecao.compras
-
-    total.valor_despesas = @colecao.compras.to_a.sum(&:total) + @colecao.despesas.sum(:valor)
-    total.valor_receitas = total.item_vendidos.sum(:valor) + @colecao.receitas.sum(:valor)
-
-    @colecao.compras.each do |c|
-      total.despesas << { descr: "Compra #{c.fornecedor.nome}", valor: c.total }
+    def initialize(colecao)
+      @colecao = colecao
     end
 
-    @colecao.despesas.each do |c|
-      total.despesas << { descr: c.descricao, valor: c.valor }
-    end
-
-    total
-  end
-
-  def calcula_por_fornecedor
-
-    fornecedores.map do |forn|
-
-      d = Dados.new
-
-      d.fornecedor = forn
-
-      d.compras = @colecao.compras.where(fornecedor_id: forn.id)
-
-      d.item_vendidos = ItemEstoque.vendidos.joins(item: :produto)
-                                          .where(produtos:
-                                                  { colecao_id: @colecao.id,
-                                                    fornecedor_id: forn.id })
-      d
-    end
-  end
-
-  def fornecedores
-    @colecao.compras.map(&:fornecedor).uniq
-  end
-
-  class Dados
-
-    attr_accessor :quantidade_comprados,
-                  :receitas,
-                  :valor_receitas,
-                  :despesas,
-                  :valor_despesas,
-                  :fornecedor,
-                  :item_vendidos,
-                  :compras
-
-    def initialize
-      @receitas = []
-      @despesas = []
+    def itens_vendidos
+      @iv ||= ItemEstoque
+                .vendidos
+                .joins(item: :produto)
+                .where(produtos: { colecao_id: @colecao.id })
     end
 
     def quantidade_vendidos
-      item_vendidos.count
+      @qv ||= itens_vendidos.count
     end
 
     def quantidade_comprados
-      compras.to_a.sum { |c| c.itens.count }
+      @qc ||= @colecao.compras.to_a.sum { |c| c.itens.count }
     end
 
     def porcent_vendidos
       (quantidade_vendidos.to_f / quantidade_comprados * 100).to_i rescue 0
     end
 
+    def valor_despesas
+      @vd ||= @colecao.compras.to_a.sum(&:total) + @colecao.despesas.sum(:valor)
+    end
+
+    def valor_receitas
+      @vr ||= itens_vendidos.sum(:valor) + @colecao.receitas.sum(:valor)
+    end
+
     def porcent_receitas
       (valor_receitas.to_f / valor_despesas * 100).to_i rescue 0
     end
 
+    def despesas
+      @despesas ||= begin
+        desp = []
+
+        @colecao.compras.each do |c|
+          desp << Line.new("Compra #{c.fornecedor.nome}", c.total)
+        end
+
+        @colecao.despesas.each do |c|
+          desp << Line.new(c.descricao, c.valor)
+        end
+
+        desp
+      end
+    end
+
+  end
+
+  class Fornecedor
+
+    PorTipo = Struct.new(:tipo, :quant)
+
+    attr_accessor :fornecedor
+
+    def self.por(colecao)
+      fornecedores = colecao.compras.map(&:fornecedor).uniq
+      fornecedores.map { |f| Fornecedor.new(colecao, f) }
+    end
+
+    def initialize(colecao, fornecedor)
+      @colecao = colecao
+      @fornecedor = fornecedor
+
+      @compras = @colecao.compras.where(fornecedor_id: @fornecedor.id)
+    end
+
+    def itens_vendidos
+      @iv ||= ItemEstoque.vendidos.joins(item: :produto)
+                                  .where(produtos:
+                                            { colecao_id: @colecao.id,
+                                              fornecedor_id: @fornecedor.id })
+    end
+
+    def quantidade_vendidos
+      @qv ||= itens_vendidos.count
+    end
+
+    def quantidade_comprados
+      @qc ||= @compras.to_a.sum { |c| c.itens.count }
+    end
+
+    def porcent_vendidos
+      (quantidade_vendidos.to_f / quantidade_comprados * 100).to_i rescue 0
+    end
+
     def vendas_por_tipo
-      item_vendidos.group_by { |it| it.item.produto.tipo }.to_a.sort_by { |i| i[1].size }.reverse
+      itens_vendidos
+        .group_by { |it| it.item.produto.tipo }
+        .map      { |tipo, itens| PorTipo.new(tipo.descricao, itens.size) }
+        .sort_by  { |i| i.quant }
+        .reverse
     end
 
   end
