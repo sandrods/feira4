@@ -2,16 +2,30 @@
 
   <div class="row">
 
-    <div class="col-sm-5">
+    <div class="col-sm-6">
       <%= f.input :data %>
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-6">
       <%= currency_group(f, :valor) %>
     </div>
 
   </div>
 
-  <%= f.association :forma, label_method: :nome, label: 'Forma de Pagamento' %>
+  <div class="row">
+
+    <div class="col-sm-8">
+      <%= f.association :forma, label_method: :nome, label: 'Forma de Pagamento' %>
+    </div>
+    <div class="col-sm-4">
+      <div class="control-group">
+        <label for="">Parcelas</label>
+        <%= select_tag :parcelas, options_for_select((1..6).to_a), class: 'form-control no_select2' %>
+      </div>
+    </div>
+
+  </div>
+
+
 
   <div class="panel-actions pull-right">
     <%= f.submit 'Salvar', class: 'btn btn-xs btn-primary' %>

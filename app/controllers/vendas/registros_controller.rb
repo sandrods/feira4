@@ -6,7 +6,26 @@ class Vendas::RegistrosController < ApplicationController
       descricao: "Venda #{@venda.id} - #{@venda.nome}",
       categoria_id: Categoria::VENDAS
     }
-    @registro = @venda.pagamentos.create registro_params.merge(defaults)
+
+    if params[:parcelas] && params[:parcelas].to_i > 1
+
+      parcelas = params[:parcelas].to_i
+
+      valor = ((registro_params[:valor].to_f / parcelas) * 100).to_i.to_f / 100
+
+      data = registro_params[:data].to_date
+
+      parcelas.times do |i|
+        defaults[:descricao] = "Venda #{@venda.id} - #{@venda.nome} (#{i+1}/#{parcelas})"
+        defaults[:valor] = valor
+        defaults[:data] = data
+        @registro = @venda.pagamentos.create! registro_params.merge(defaults)
+        data = data.next_month
+      end
+
+    else
+      @registro = @venda.pagamentos.create! registro_params.merge(defaults)
+    end
   end
 
   def destroy
