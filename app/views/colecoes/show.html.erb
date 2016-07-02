@@ -9,13 +9,17 @@
 
     <div class="well stats">
       <div class="row">
-        <div class="col-md-6 text-danger">
-          <h1> <%= @resultado.total.quantidade_comprados %></h1>
+        <div class="col-md-4 text-danger">
+          <h1> <%= qc = @resultado.total.quantidade_comprados %></h1>
           <small>PEÇAS COMPRADAS</small>
         </div>
-        <div class="col-md-6 text-success">
-          <h1> <%= @resultado.total.quantidade_vendidos %></h1>
+        <div class="col-md-4 text-success divider">
+          <h1> <%= qv = @resultado.total.quantidade_vendidos %></h1>
           <small>PEÇAS VENDIDAS</small>
+        </div>
+        <div class="col-md-4 text-very-muted divider">
+          <h1> <%= qc - qv %></h1>
+          <small>EM ESTOQUE</small>
         </div>
       </div>
       <%= progress(@resultado.total.porcent_vendidos) %>
@@ -69,13 +73,17 @@
     <div class="well stats">
 
       <div class="row">
-        <div class="col-md-6 text-danger">
-          <h1> <%= f.quantidade_comprados %></h1>
+        <div class="col-md-4 text-danger">
+          <h1> <%= qc = f.quantidade_comprados %></h1>
           <small>PEÇAS COMPRADAS</small>
         </div>
-        <div class="col-md-6 text-success">
-          <h1> <%= f.quantidade_vendidos %></h1>
+        <div class="col-md-4 text-success divider">
+          <h1> <%= qv = f.quantidade_vendidos %></h1>
           <small>PEÇAS VENDIDAS</small>
+        </div>
+        <div class="col-md-4 text-very-muted divider">
+          <h1> <%= qc - qv %></h1>
+          <small>EM ESTOQUE</small>
         </div>
       </div>
 

@@ -10,6 +10,9 @@ class Etiqueta < ActiveRecord::Base
   scope :selecionadas, -> { where.not(mark: nil).order(:mark)  }
   scope :nao_selecionadas, -> { where(mark: nil) }
 
+  scope :geradas,   -> { where(gerada: true) }
+  scope :pendentes, -> { where(gerada: false) }
+
   def sub1
     "#{cor.nome} - #{tamanho.nome}"
   end
