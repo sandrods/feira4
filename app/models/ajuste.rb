@@ -1,6 +1,6 @@
 class Ajuste < ActiveRecord::Base
 
-  has_many :itens, -> { where(tipo: 'E') }, class_name: 'ItemEstoque', as: :movimento, dependent: :destroy
+  has_many :itens, class_name: 'ItemEstoque', as: :movimento, dependent: :destroy
 
   validates :tipo, presence: true, inclusion: { in: ['E', 'S'] }
 
