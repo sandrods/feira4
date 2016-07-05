@@ -8,6 +8,9 @@ class AjustesController < ApplicationController
   end
 
   def show
+    @itens =  @ajuste.itens
+                    .includes(item: [:tamanho, :cor, produto: [:fornecedor, :colecao]])
+                    .order('colecoes.id desc, produtos.ref, itens.tamanho_id')
   end
 
   def new
