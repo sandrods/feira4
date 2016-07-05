@@ -11,7 +11,11 @@ class EstoqueController < ApplicationController
 
     if params[:q]
       @search = Item.search(params[:q])
-      @itens = @search.result.includes(:tamanho, :cor, produto: [:fornecedor, :colecao]).order('fornecedores.nome, produtos.ref, itens.tamanho_id')
+      @itens = @search
+                .result
+                .includes(:tamanho, :cor, produto: [:fornecedor, :colecao])
+                .order('fornecedores.nome, produtos.ref, itens.tamanho_id')
+
       @produtos = @itens.group_by { |i| i.produto }
     else
       @search = Item.search
