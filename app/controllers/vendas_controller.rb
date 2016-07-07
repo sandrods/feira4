@@ -45,6 +45,10 @@ class VendasController < ApplicationController
     redirect_to vendas_path, notice: 'Venda apagada com sucesso.'
   end
 
+  def mensal
+    @vendas = Venda::Mensal.new params[:mes]
+  end
+
   private
     def set_venda
       @venda = Venda.find(params[:id])
