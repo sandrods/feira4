@@ -38,13 +38,15 @@ class Transferencia
       o = origem.registros.create!  data: @data,
                                     descricao: "Transferência #{origem.nome} -> #{destino.nome}",
                                     valor: @valor,
-                                    cd: "D"
+                                    cd: "D",
+                                    pago: true
 
       d = destino.registros.create! data: @data,
                                     descricao: "Transferência #{origem.nome} -> #{destino.nome}",
                                     valor: @valor,
                                     cd: "C",
-                                    transf_id: o.id
+                                    transf_id: o.id,
+                                    pago: true
 
       o.update_columns transf_id: d.id
 
