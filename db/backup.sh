@@ -31,3 +31,12 @@ pg_dump $db -Fc -f $file
 echo "BackUp to $DST/$file"
 
 ln -f -s $file last.bkp
+
+
+# restore
+# pg_restore db/bkp/last.bkp -d feira_development -c
+
+# restore --force
+# rake db:drop
+# rake db:create
+# pg_restore db/bkp/last.bkp -d feira_development
