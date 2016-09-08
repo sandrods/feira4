@@ -48,14 +48,14 @@ group :development do
   gem 'spring'
 end
 
-group :test do
-  gem "rspec-rails", "~> 2.14"
-  gem "capybara"
-  gem 'shoulda'
-  gem "factory_girl"
-  gem "database_cleaner", "~> 1.0.1"
-  gem "ffaker"
-end
+# group :test do
+#   gem "rspec-rails", "~> 2.14"
+#   gem "capybara"
+#   gem 'shoulda'
+#   gem "factory_girl"
+#   gem "database_cleaner", "~> 1.0.1"
+#   gem "ffaker"
+# end
 
 gem 'commands'
 
