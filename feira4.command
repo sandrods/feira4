@@ -10,4 +10,4 @@ then
   kill -TERM $(cat $pid)
 fi
 
-rails server -b 0.0.0.0
+rails server -b 0.0.0.0 -e production

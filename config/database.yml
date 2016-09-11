@@ -90,6 +90,6 @@ test:
 #
 production:
   <<: *default
-  database: feira4
+  database: feira_development
   # username: rails
   # password: <%= ENV['APP_DATABASE_PASSWORD'] %>
