@@ -89,3 +89,19 @@
   </div>
 
 </div>
+
+<hr/>
+<%= column_chart [
+  { name: 'Valores', data: @graf.valor_por_mes }
+],
+  library: {
+    plotOptions: {
+      series: {
+        dataLabels: { enabled: true, format: 'R$ {point.y:.0f}' },
+      }
+    }
+  }
+ %>
+
+
+<br/>
