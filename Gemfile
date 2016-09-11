@@ -85,6 +85,7 @@ gem 'odf-report'
 
 gem "chartkick"
 gem "highcharts-rails"
+gem 'groupdate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
