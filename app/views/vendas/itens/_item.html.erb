@@ -3,11 +3,15 @@
   <td><%= item.produto.ref %></td>
   <td><small><%= item.cor.try :nome %></small></td>
   <td><small><%= item.tamanho.try :nome %></small></td>
-  <td class="text-right"><%= number_to_currency item.valor %></td>
-  <td class="text-right"><%= link_to icon(:trash),
-                  venda_item_path(@venda, item),
-                  method: 'delete',
+  <td class="text-right">
+    <%= number_to_percentage item.desconto, precision: 1, format: "%n %" %>
+  </td>
+  <td class="text-right">
+    <%= number_to_currency item.valor %>
+  </td>
+  <td class="text-right">
+    <%= link_to icon(:edit),
+                  edit_venda_item_path(@venda, item),
                   class: 'btn btn-xs link_delete',
-                  data: { confirm: 'Confirma exclusão?' },
-                  remote: true %></td>
+                  data: { behavior: 'load-modal' } %></td>
 <% end -%>

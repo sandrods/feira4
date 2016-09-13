@@ -1,0 +1,31 @@
+
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h4 class="modal-title"><%= @item.produto.ref %> <small>Editar Produto</small> </h4>
+</div>
+<%= simple_form_for @item, url: venda_item_path(@venda, @item), remote: true do |f| %>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <%= percentage_group(f, :desconto) %>
+        <%= f.submit "Salvar Desconto", class: 'btn btn-xs btn-primary' %>
+      </div>
+      <div class="col-sm-6">
+          <%= currency_group(f, :valor) %>
+        <%= f.submit "Salvar Valor", class: 'btn btn-xs btn-primary' %>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+
+    <%= link_to icon(:trash, 'Remover este Produto'),
+          venda_item_path(@venda, @item),
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger pull-left' %>
+
+
+  </div>
+<% end %>

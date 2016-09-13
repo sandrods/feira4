@@ -12,6 +12,16 @@ class ItemEstoque < ActiveRecord::Base
 
   scope :vendidos, -> { where(tipo: 'S', movimento_type: 'Venda') }
 
+  def set_desconto(_desconto)
+    _valor = self.bruto * (1-(_desconto.to_f/100))
+    update! desconto: _desconto, valor: _valor
+  end
+
+  def set_valor(_valor)
+    _desconto = (1-(_valor.to_f/self.bruto)) * 100
+    update! desconto: _desconto, valor: _valor
+  end
+
   private
 
   def ajusta_estoque
