@@ -62,15 +62,16 @@ module ApplicationHelper
 
   def input_group(form_builder, field, opts = {})
 
-    _label   = opts.delete(:label)
-    _icon    = opts.delete(:icon)
-    _content = opts.delete(:content)
+    _label    = opts.delete(:label)
+    _icon     = opts.delete(:icon)
+    _content  = opts.delete(:content)
     _position = opts.delete(:position) || 'before'
+    _class    = opts.delete(:class)
 
     if_opts = {}
     if_opts[:label] = _label if _label
 
-    opts.merge!(class: 'form-control')
+    opts.merge!(class: "form-control #{_class}")
 
     addon_content = _icon ? icon(_icon) : _content
 
@@ -85,6 +86,19 @@ module ApplicationHelper
 
   end
 
+  def percentage_group(form_builder, field, opts = {})
+
+    opts[:as] = :string
+    opts[:content] = '%'
+    opts[:position] = 'after'
+    opts[:class] = 'percentage'
+
+    value = form_builder.object.send(field)
+    opts[:value] = number_with_precision(value, precision: 1)
+
+    input_group(form_builder, field, opts)
+  end
+
   def currency_group(form_builder, field, opts = {})
 
     opts[:as] = :currency
@@ -95,6 +109,5 @@ module ApplicationHelper
 
     input_group(form_builder, field, opts)
   end
-
 
 end

@@ -4,6 +4,8 @@ $(document).ajaxComplete (event, request) ->
   $('input.currency').maskMoney()
   $('.money input').maskMoney()
 
+  $('input.percentage').maskMoney(precision: 0)
+
   $('.ttip').tooltip()
 
   $(".datepicker").datepicker
@@ -44,6 +46,8 @@ $(document).on "page:change", ->
   $('input.money').maskMoney()
   $('input.currency').maskMoney()
   $('.money input').maskMoney()
+
+  $('input.percentage').maskMoney(precision: 0)
 
   $('.ttip').tooltip()
 
