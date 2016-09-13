@@ -1,3 +1,14 @@
+$(document).on 'click', '[data-behavior~=load-modal]', (ev) ->
+  ev.preventDefault()
+  url = this.getAttribute('href') || this.getAttribute('data-url')
+
+  if size = this.getAttribute('data-modal-size')
+    $("#global_modal .modal-dialog").addClass("modal-#{size}")
+
+  $("#global_modal .modal-content").load url
+
+  $('#global_modal').modal('show')
+
 $(document).ajaxComplete (event, request) ->
 
   $('input.money').maskMoney()
@@ -63,18 +74,6 @@ $(document).on "page:change", ->
     data.offset.top    = data.offsetTop if data.offsetTop
 
     spy.affix(data)
-
-
-  $('[data-behavior~=load-modal]').on 'click', (ev) ->
-    ev.preventDefault()
-    url = this.getAttribute('href') || this.getAttribute('data-url')
-
-    if size = this.getAttribute('data-modal-size')
-      $("#global_modal .modal-dialog").addClass("modal-#{size}")
-
-    $("#global_modal .modal-content").load url
-
-    $('#global_modal').modal('show')
 
 
   $(".modal").on 'hidden.bs.modal', (e) ->
