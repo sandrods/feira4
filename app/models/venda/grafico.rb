@@ -13,8 +13,12 @@ class Venda::Grafico
   end
 
   def valor_por_mes
-    Hash[@vendas.to_a.group_by_month(format: "%b %Y", &:data).map { |k, v| [k, v.sum(&:total)] }]
+    Hash[@itens.to_a.group_by_month(format: "%b %Y") { |i| i.movimento.data }.map { |k, v| [k, v.sum(&:valor)] }]
   end
+
+  # def valor_por_mes
+  #   Hash[@vendas.to_a.group_by_month(format: "%b %Y", &:data).map { |k, v| [k, v.sum(&:total)] }]
+  # end
 
   class Calendar
     attr_accessor :year

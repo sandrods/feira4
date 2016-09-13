@@ -13,11 +13,11 @@ class Venda::Mensal
   end
 
   def total_valor
-    @tv ||= @vendas.to_a.sum(&:total)
+    @tv ||= @itens.sum(:valor)
   end
 
   def valor_medio
-    total_valor / total_pecas rescue 0
+    total_pecas > 0 ? total_valor / total_pecas : 0
   end
 
   def por_fornecedor
