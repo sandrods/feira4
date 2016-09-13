@@ -23,18 +23,16 @@ class Venda < ActiveRecord::Base
 
     item = Item.find_by_barcode!(bc)
 
-    # liquido = (venda.desconto?) ? item.produto.valor * (1-(venda.desconto/100)) : item.produto.valor
+    liquido = (self.desconto?) ? item.produto.valor * (1-(self.desconto/100)) : item.produto.valor
 
-    # itens.create!(item_id: item.id, bruto: item.produto.valor, desconto: (desconto || 0), valor: liquido)
+    self.itens.create!(item_id: item.id, bruto: item.produto.valor, desconto: (desconto || 0), valor: liquido)
 
-    self.itens.create!(item_id: item.id, valor: item.produto.valor)
+    #self.itens.create!(item_id: item.id, valor: item.produto.valor)
 
   end
 
   def total
-    tot = itens.sum(:valor)
-    tot = tot * (1 - desconto / 100) if desconto?
-    tot
+    itens.sum(:valor)
   end
 
   def desconto?
