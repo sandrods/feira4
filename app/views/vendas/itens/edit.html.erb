@@ -6,6 +6,9 @@
 <%= simple_form_for @item, url: venda_item_path(@venda, @item), remote: true do |f| %>
 
   <div class="modal-body">
+    <label>Preço do Produto </label><br/>
+    <%= number_to_currency(@item.produto.valor) %>
+    <hr/>
     <div class="row">
       <div class="col-sm-6">
         <%= percentage_group(f, :desconto) %>
