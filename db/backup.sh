@@ -6,7 +6,7 @@
 t=`/bin/date +%Y%m%d`
 tt=`/bin/date +%H%M%S`
 
-db='feira_development'
+db='feira4'
 
 # Define o destino dos arquivos
 DST="/Users/sandro/Dropbox/pg_bkp"
