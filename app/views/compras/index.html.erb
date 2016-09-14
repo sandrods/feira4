@@ -1,4 +1,6 @@
-<%= page_header "Compras" %>
+<%= page_header "Compras" do %>
+  <%= link_to(icon(:plus, 'Nova Compra'), new_compra_path, class: 'btn btn-primary') %>
+<% end %>
 
 <div class="row">
 
@@ -23,8 +25,6 @@
     </table>
 
     <p class="index_count"><span><%= @compras.count %></span> compras encontradas.</p>
-
-    <%= link_to(icon(:plus, 'Nova Compra'), new_compra_path, class: 'btn btn-primary') %>
 
   </div>
 
