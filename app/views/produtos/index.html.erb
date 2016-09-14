@@ -11,7 +11,8 @@
           <th>Ref</th>
           <th>Fornecedor</th>
           <th>Coleção</th>
-          <th>&nbsp;</th>
+          <th class="right">Etiquetas</th>
+          <th class="right">Estoque</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +25,9 @@
               <% if produto.etiquetas.present? %>
                 <span class="badge"> <%= produto.etiquetas.count %></span>
               <% end %>
+            </td>
+            <td class="right">
+              <%= label_estoque(produto.itens.sum(:estoque)) %>
             </td>
           </tr>
         <% end %>
