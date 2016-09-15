@@ -41,8 +41,12 @@ class ClientesController < ApplicationController
   end
 
   def destroy
-    @cliente.destroy
-    redirect_to clientes_path, notice: 'Cliente apagado com sucesso.'
+    if @cliente.destroy
+      redirect_to clientes_path, notice: 'Cliente apagado com sucesso.'
+    else
+      flash[:error] = "Não foi possível apagar este cliente"
+      render action: 'edit'
+    end
   end
 
   private

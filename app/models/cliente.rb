@@ -1,6 +1,6 @@
-# coding: utf-8
-
 class Cliente < ActiveRecord::Base
+
+  has_many :vendas, dependent: :restrict_with_error
 
   default_scope -> { order(:nome) }
 
