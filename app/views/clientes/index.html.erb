@@ -1,10 +1,12 @@
-<%= page_header "Clientes" %>
+<%= page_header "Clientes" do %>
+  <%= link_to(icon(:plus, 'Novo Cliente'), new_cliente_path, class: 'btn btn-primary') %>
+<% end %>
 
 <div class="text-center affix1" data-offset-top="70"><%= links_letras %></div>
 
 <div class="row">
 
-  <div class="col-md-8">
+  <div class="col-md-9">
 
     <table class="table table-hover table-striped">
       <thead>
@@ -26,14 +28,12 @@
         <% end %>
       </tbody>
     </table>
-    
+
     <p class="index_count"><span><%= @clientes.count %></span> clientes encontradas.</p>
 
-    <%= link_to(icon(:plus, 'Novo Cliente'), new_cliente_path, class: 'btn btn-primary') %>
-  
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Filtros</h3>
@@ -49,4 +49,3 @@
     </div>
   </div>
 </div>
-
