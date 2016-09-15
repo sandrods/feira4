@@ -60,7 +60,7 @@ class Diario
   end
 
   def total_despesas
-    @registros.debitos.sum(:valor)
+    @registros.debitos.where(transf_id: nil).sum(:valor)
   end
 
   def receitas
@@ -68,7 +68,7 @@ class Diario
   end
 
   def total_receitas
-    @registros.creditos.sum(:valor)
+    @registros.creditos.where(transf_id: nil).sum(:valor)
   end
 
   class Conta
