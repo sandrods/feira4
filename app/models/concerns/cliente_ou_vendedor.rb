@@ -3,7 +3,7 @@ module ClienteOuVendedor
 
   included do
 
-    belongs_to :cliente
+    belongs_to :cliente, counter_cache: true
     belongs_to :vendedor
 
     validates_presence_of :cliente_id,  if: ->(v) { v.vendedor_id.blank? }

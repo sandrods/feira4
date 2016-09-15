@@ -15,6 +15,7 @@
           <th>email</th>
           <th>Fone</th>
           <th>Aniver</th>
+          <th>Vendas</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +25,7 @@
             <td><small><%= cliente.email %></small></td>
             <td><%= cliente.fone %></td>
             <td><%= cliente.aniversario %></td>
+            <td class="right"><%= label_estoque(cliente.vendas_count) %></td>
           </tr>
         <% end %>
       </tbody>
