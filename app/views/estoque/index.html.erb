@@ -24,8 +24,8 @@
               <table class="table table-condensed clean">
                 <% itens.each do |item| %>
                 <tr>
-                  <td style="width: 60px;"><b><%= item.tamanho.nome %></b></td>
-                  <td><b><%= item.cor.nome %></b></td>
+                  <td style="width: 60px;"><b><%= item.tamanho.try :nome %></b></td>
+                  <td><b><%= item.cor.try :nome %></b></td>
                   <td class="right"><small><%= item.barcode %></small></td>
                   <td class="right"style="width: 36px;">
                     <% lb = item.estoque == 0 ? 'label-default' : 'label-success'  %>
