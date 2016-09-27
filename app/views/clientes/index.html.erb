@@ -25,7 +25,7 @@
             <td><small><%= cliente.email %></small></td>
             <td><%= cliente.fone %></td>
             <td><%= cliente.aniversario %></td>
-            <td class="right"><%= label_estoque(cliente.vendas_count) %></td>
+            <td class="right"><%= label_estoque(cliente.vendas.count) %></td>
           </tr>
         <% end %>
       </tbody>
