@@ -20,7 +20,7 @@ class CoresController < ApplicationController
     @cor = Cor.new(cor_params)
 
     if @cor.save
-      redirect_to cores_path, notice: 'Cor was successfully created.' 
+      redirect_to cores_path, notice: 'Cor was successfully created.'
     else
       render action: 'new'
     end
@@ -36,8 +36,12 @@ class CoresController < ApplicationController
   end
 
   def destroy
-    @cor.destroy
-    redirect_to cores_url
+    if @cor.destroy
+      redirect_to cores_path, notice: 'Cor apagada com sucesso.'
+    else
+      flash[:error] = "Não foi possível apagar esta Cor"
+      render action: 'edit'
+    end
   end
 
   private

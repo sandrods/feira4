@@ -36,8 +36,12 @@ class TiposController < ApplicationController
   end
 
   def destroy
-    @tipo.destroy
-    redirect_to tipos_path, notice: 'Tipo apagado com sucesso.'
+    if @tipo.destroy
+      redirect_to tipos_path, notice: 'Tipo apagado com sucesso.'
+    else
+      flash[:error] = "Não foi possível apagar este Tipo"
+      render action: 'edit'
+    end
   end
 
   private

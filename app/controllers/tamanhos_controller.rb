@@ -36,8 +36,12 @@ class TamanhosController < ApplicationController
   end
 
   def destroy
-    @tamanho.destroy
-    redirect_to tamanhos_path, notice: 'Tamanho apagado com sucesso.'
+    if @tamanho.destroy
+      redirect_to tamanhos_path, notice: 'Tamanho apagado com sucesso.'
+    else
+      flash[:error] = "Não foi possível apagar este Tamanho"
+      render action: 'edit'
+    end
   end
 
   private
