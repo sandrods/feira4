@@ -24,3 +24,12 @@
     background-color: #fdfdfd;
   }
 }
+
+.financeiro.diario {
+  .panel-footer {
+    background-color: #fffbf0;
+    &.upper {
+      border-bottom: 1px solid #ddd;
+    }
+  }
+}

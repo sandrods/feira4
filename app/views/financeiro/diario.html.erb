@@ -36,13 +36,16 @@
         <div class="panel-heading">
           <b class="panel-title"> <%= conta.nome %> </b>
         </div>
+        <div class="panel-footer upper text-right">
+          <small>Saldo Inicial</small> &nbsp; <%= number_to_currency conta.saldo_inicial %>
+        </div>
         <table class="table table-striped">
           <tbody id="registros_conta_caixa">
             <%= render partial: 'registros/registro', collection: conta.registros.pagos %>
           </tbody>
         </table>
         <div class="panel-footer text-right">
-          <small>Saldo</small> <%= number_to_currency conta.saldo %>
+          <small>Saldo Final</small> &nbsp; <%= number_to_currency conta.saldo %>
         </div>
       </div>
 
