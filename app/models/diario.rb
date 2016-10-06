@@ -84,8 +84,13 @@ class Diario
       @conta.registros.where(data: @range)
     end
 
+    def saldo_inicial
+      r = @conta.registros.where('data < ?', @range.begin)
+      r.creditos.pagos.sum(:valor) - r.debitos.pagos.sum(:valor)
+    end
+
     def saldo
-      r = @conta.registros.where('data < ?', @range.last)
+      r = @conta.registros.where('data <= ?', @range.last)
       r.creditos.pagos.sum(:valor) - r.debitos.pagos.sum(:valor)
     end
 
