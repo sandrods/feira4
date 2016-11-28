@@ -2,7 +2,12 @@ class Compras::RegistrosController < ApplicationController
   include BelongsToCompra
 
   def create
-    @registro = @compra.pagamentos.create registro_params.merge(descricao: "Compra #{@compra.id} - #{@compra.fornecedor.try :nome}")
+    defaults = {
+      descricao: "Compra #{@compra.id} - #{@compra.fornecedor.try :nome}",
+      categoria_id: Categoria::COMPRAS
+    }
+
+    @registro = @compra.pagamentos.create registro_params.merge(defaults)
   end
 
   def destroy
