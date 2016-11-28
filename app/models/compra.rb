@@ -9,7 +9,7 @@ class Compra < ActiveRecord::Base
   #has_many :itens, class_name: 'ItemCompra', dependent: :destroy
   has_many :itens, -> { where(tipo: 'E') }, class_name: 'ItemEstoque', as: :movimento, dependent: :destroy
 
-  has_many :pagamentos, -> { where(cd: 'D').order('data desc') }, class_name: "Registro", as: :registravel
+  has_many :pagamentos, -> { where(cd: 'D').order('data') }, class_name: "Registro", as: :registravel
 
   def adiciona_item!(bc)
 
