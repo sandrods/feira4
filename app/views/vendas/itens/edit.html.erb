@@ -26,7 +26,7 @@
     <%= link_to icon(:trash, 'Remover este Produto'),
           venda_item_path(@venda, @item),
           method: :delete,
-          data: { confirm: 'Tem certeza?' },
+          data: { confirm: 'Tem certeza?', remote: true },
           class: 'btn btn-sm text-danger pull-left' %>
 
 
