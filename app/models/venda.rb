@@ -9,11 +9,11 @@ class Venda < ActiveRecord::Base
   def self.from_sacola(sacola_id)
     sacola = Sacola.find(sacola_id)
 
-    venda = Venda.create!(data: Date.today, cliente_id: sacola.cliente_id, tipo: sacola.tipo, desconto: 0)
+    venda = Venda.create!(data: Date.today, cliente_id: sacola.cliente_id, tipo: sacola.tipo)
 
     sacola.itens.incluidos.each do |item_sacola|
       item = item_sacola.item
-      venda.itens.create!(item_id: item.id, valor: item.produto.valor)
+      venda.itens.create!(item_id: item.id, valor: item.produto.valor, desconto: 0, bruto: item.produto.valor)
     end
 
     venda
