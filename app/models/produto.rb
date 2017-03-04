@@ -5,8 +5,8 @@ class Produto < ActiveRecord::Base
   belongs_to :colecao
   belongs_to :fornecedor
 
-  has_many :itens
-  has_many :etiquetas
+  has_many :itens, dependent: :destroy
+  has_many :etiquetas, dependent: :destroy
 
   before_save :calcula_lucro
 
