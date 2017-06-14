@@ -58,7 +58,7 @@
           </tr>
         </thead>
         <tbody id="itens_compra_table">
-          <%= render partial: 'compras/itens/item', collection: @compra.itens %>
+          <%= render partial: 'compras/itens/item', collection: @compra.itens.order('itens_estoque.id') %>
         </tbody>
       </table>
       <div class="panel-footer text-right">
