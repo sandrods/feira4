@@ -42,6 +42,14 @@ class RegistrosController < ApplicationController
     redirect_to financeiro_diario_path(mes: @registro.data)
   end
 
+  def duplicate
+    @registro = Registro.find params[:id]
+
+    new_reg = @registro.duplicate!
+
+    redirect_to financeiro_diario_path(mes: new_reg.data)
+  end
+
   private
 
    def registro_params

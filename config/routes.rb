@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :contas
   resources :categorias
 
-  resources :registros
+  resources :registros do
+    post :duplicate, on: :member
+  end
   resources :transferencias, controller: 'registros/transferencias'
 
   resources :estoque

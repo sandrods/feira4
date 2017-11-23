@@ -54,6 +54,19 @@ class Registro < ActiveRecord::Base
     transf_id.present?
   end
 
+  def duplicate!
+    reg = self.dup
+
+    reg.data = self.data + 1.month
+    reg.pago = false
+
+    reg.tap { |r| r.save! }
+  end
+
+  def month
+    data.beginning_of_month
+  end
+
 private
 
   def registrar_pagamento
