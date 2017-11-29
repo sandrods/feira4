@@ -10,7 +10,7 @@ class Colecao::Resultado
 
   class Total
 
-    Line = Struct.new(:descr, :valor)
+    Line = Struct.new(:descr, :valor, :data)
 
     def initialize(colecao)
       @colecao = colecao
@@ -52,11 +52,11 @@ class Colecao::Resultado
         desp = []
 
         @colecao.compras.each do |c|
-          desp << Line.new("Compra #{c.fornecedor.nome}", c.total)
+          desp << Line.new("Compra #{c.fornecedor.nome}", c.total, c.data)
         end
 
         @colecao.despesas.each do |c|
-          desp << Line.new(c.descricao, c.valor)
+          desp << Line.new(c.descricao, c.valor, c.data)
         end
 
         desp

@@ -45,12 +45,13 @@
       <table class="table table-condensed">
         <thead>
           <tr>
-            <th>Despesas</th>
+            <th colspan="2">Despesas</th>
             <th></th>
           </tr>
         </thead>
         <% @resultado.total.despesas.each do |d| %>
           <tr>
+            <td class="text-muted"><%= d.data %></td>
             <td><%= d.descr %></td>
             <td class="right"><%= number_to_currency d.valor %></td>
           </tr>
