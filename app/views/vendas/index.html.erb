@@ -8,7 +8,7 @@
     <table class="table table-hover table-striped">
       <thead>
         <tr>
-          <th>Data</th>
+          <th width="80px">Data</th>
           <th>Cliente</th>
           <th class="right">Peças</th>
           <th class="right">Total</th>
@@ -17,7 +17,7 @@
       <tbody>
         <% @vendas.each do |venda| %>
           <tr>
-            <td width="80px"><small><%= venda.data %></small></td>
+            <td><small><%= venda.data %></small></td>
             <td><%= link_to venda.cliente.nome, venda %></td>
             <td class="right"><%= venda.itens.count %></td>
             <td class="right"><%= number_to_currency venda.total %></td>
