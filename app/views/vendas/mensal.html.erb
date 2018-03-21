@@ -91,29 +91,36 @@
 </div>
 
 <hr/>
-<%= column_chart [
-  { name: 'Valores', data: @graf.valor_por_mes }
-],
-  library: {
-    plotOptions: {
-      series: {
-        dataLabels: { enabled: true, format: 'R$ {point.y:.0f}' },
-      }
-    }
-  }
- %>
 
- <%= column_chart [
-   { name: 'Valores', data: @graf.last_year.valor_por_mes }
- ],
-   library: {
-     plotOptions: {
-       series: {
-         dataLabels: { enabled: true, format: 'R$ {point.y:.0f}' },
-       }
-     }
-   }
-  %>
-
-
+<br/><h4>Valores de Vendas</h4><br/>
+<%= column_chart @graf.valor_por_mes,
+      library: {
+        plotOptions: {
+          series: {
+            dataLabels: { enabled: true, format: 'R$ {point.y:.0f}' } } } } %>
 <br/>
+<%= column_chart @graf.last_year.valor_por_mes,
+      colors: ['#eeb6c2'],
+      library: {
+        plotOptions: {
+          series: {
+            dataLabels: { enabled: true, format: 'R$ {point.y:.0f}' } } } } %>
+
+
+<hr/>
+
+<br/><h4>Quantidades de Vendas</h4><br/>
+
+<%= column_chart @graf.quantidade_por_mes,
+      library: {
+        plotOptions: {
+          series: {
+            dataLabels: { enabled: true } } } } %>
+<br/>
+<%= column_chart @graf.last_year.quantidade_por_mes,
+      colors: ['#eeb6c2'],
+      library: {
+        plotOptions: {
+          series: {
+            dataLabels: { enabled: true } } } }
+%>
