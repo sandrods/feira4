@@ -3,7 +3,7 @@ class Diario
   attr_accessor :calendar, :contas
 
   def initialize(data)
-    @calendar = Calendar.new(data)
+    @calendar = Calendar.new(date: data)
     @contas = ::Conta.all.map { |c| Conta.new(c, @calendar.range) }
     @registros = Registro.where(data: @calendar.range)
   end
@@ -26,15 +26,15 @@ class Diario
 
   def saldo_inicial
     @saldo_inicial ||= begin
-      anteriores = Registro.where('data < ?', @calendar.range.begin)
-      anteriores.to_a.sum(&:valor_cd)
+      ant = Registro.where('data < ?', @calendar.range.begin)
+      ant.creditos.sum(:valor) - ant.debitos.sum(:valor)
     end
   end
 
   def saldo_final
     @saldo_final ||= begin
-      anteriores = Registro.where('data <= ?', @calendar.range.last)
-      anteriores.to_a.sum(&:valor_cd)
+      ant = Registro.where('data <= ?', @calendar.range.last)
+      ant.creditos.sum(:valor) - ant.debitos.sum(:valor)
     end
   end
 
@@ -56,19 +56,19 @@ class Diario
   end
 
   def despesas
-    @registros.where.not(categoria_id: nil).where(cd: 'D').group(:categoria).sum(:valor)
+    @registros.debitos.efetivos.group(:categoria).sum(:valor)
   end
 
   def total_despesas
-    @registros.debitos.where(transf_id: nil).sum(:valor)
+    @registros.debitos.efetivos.sum(:valor)
   end
 
   def receitas
-    @registros.where.not(categoria_id: nil).where(cd: 'C').group(:categoria).sum(:valor)
+    @registros.creditos.efetivos.group(:categoria).sum(:valor)
   end
 
   def total_receitas
-    @registros.creditos.where(transf_id: nil).sum(:valor)
+    @registros.creditos.efetivos.sum(:valor)
   end
 
   class Conta

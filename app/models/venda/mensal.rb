@@ -3,7 +3,7 @@ class Venda::Mensal
   attr_accessor :calendar
 
   def initialize(data)
-    @calendar = Calendar.new(data)
+    @calendar = Calendar.new(date: data)
     @vendas = Venda.where(data: @calendar.range)
     @itens = ItemEstoque.vendidos.where(movimento_id: @vendas.pluck(:id))
   end

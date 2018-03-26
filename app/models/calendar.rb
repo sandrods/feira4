@@ -1,15 +1,19 @@
 class Calendar
-  attr_accessor :date
+  attr_accessor :date, :year
 
-  def initialize(data = nil)
+  def initialize(date: nil, year: nil)
 
-    if data.is_a? String
-      d = Date.parse(data) rescue nil
+    if date.present?
+      @date = date.is_a?(String) ? Date.parse(date) : date
+
+    elsif year.present?
+      @date = Date.new year.to_i, 1, 1
+
     else
-      d = data
+      @date = Date.today
     end
 
-    @date = d || Date.today
+    @year = @date.year
 
   end
 
@@ -41,8 +45,16 @@ class Calendar
     @range ||= @date.beginning_of_month..@date.end_of_month
   end
 
-  def next_cal
-    @next_cal ||= Calendar.new(@date.next_month)
+  def last_year
+    @year - 1
+  end
+
+  def next_year
+    @year + 1
+  end
+
+  def range_year
+    @range ||= @date.beginning_of_year..@date.end_of_year
   end
 
 end

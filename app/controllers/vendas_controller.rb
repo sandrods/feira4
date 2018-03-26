@@ -47,7 +47,7 @@ class VendasController < ApplicationController
 
   def mensal
     @vendas = Venda::Mensal.new params[:mes]
-    @graf = Venda::Grafico.new nil
+    @graf = Venda::Grafico.new
   end
 
   private

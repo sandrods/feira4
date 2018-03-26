@@ -3,13 +3,13 @@ class Anual
   attr_accessor :calendar
 
   def initialize(ano = nil)
-    @calendar = Calendar.new(ano)
-    @registros = Registro.where(data: @calendar.range)
+    @calendar = Calendar.new(year: ano)
+    @registros = Registro.where(data: @calendar.range_year)
   end
 
   def saldos
 
-    anteriores = Registro.where('data < ?', @calendar.range.begin)
+    anteriores = Registro.where('data < ?', @calendar.range_year.begin).efetivos
     saldo_inicial = anteriores.creditos.sum(:valor) - anteriores.debitos.sum(:valor)
 
     registros = @registros.group_by { |r| r.data.month }
@@ -27,30 +27,42 @@ class Anual
 
   end
 
+  def despesas
+    @registros.debitos.efetivos.group(:categoria).sum(:valor)
+  end
+
+  def total_despesas
+    @registros.debitos.efetivos.sum(:valor)
+  end
+
+  def receitas
+    @registros.creditos.efetivos.group(:categoria).sum(:valor)
+  end
+
+  def total_receitas
+    @registros.creditos.efetivos.sum(:valor)
+  end
+
+  def saldo_inicial
+    @saldo_inicial ||= begin
+      ant = Registro.where('data < ?', @calendar.range_year.begin).efetivos
+      ant.creditos.sum(:valor) - ant.debitos.sum(:valor)
+    end
+  end
+
+  def saldo_final
+    @saldo_final ||= begin
+      ant = Registro.where('data <= ?', @calendar.range_year.last).efetivos
+      ant.creditos.sum(:valor) - ant.debitos.sum(:valor)
+    end
+  end
+
+  private
+
   def local_month(month)
     #I18n.t("date.month_names")[month] # "December"
     #I18n.t("date.abbr_month_names")[month] # "Dec"
-    Date.parse("01/#{month}/#{@calendar.year}").to_s(:db)
-  end
-
-  class Calendar
-    attr_accessor :year
-
-    def initialize(year = nil)
-      @year = (year || Date.today.year).to_i
-    end
-
-    def last_year
-      @year - 1
-    end
-
-    def next_year
-      @year + 1
-    end
-
-    def range
-      @range ||= Date.parse("#{@year}-1-1")..Date.parse("#{@year}-12-31")
-    end
+    Date.new(@calendar.year, month, 1).to_s(:db)
   end
 
 end
