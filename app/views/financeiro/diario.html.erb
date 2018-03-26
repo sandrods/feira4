@@ -159,7 +159,7 @@
         <tbody>
           <% @diario.despesas.each do |cat, valor| %>
           <tr>
-            <td><%= cat.nome %></td>
+            <td><%= cat.try(:nome) || 'SEM CATEGORIA' %></td>
             <td class='text-right' ><%= number_to_currency(valor) %></td>
           </tr>
           <% end %>
@@ -179,7 +179,7 @@
         <tbody>
           <% @diario.receitas.each do |cat, valor| %>
           <tr>
-            <td><%= cat.nome %></td>
+            <td><%= cat.try(:nome) || 'SEM CATEGORIA' %></td>
             <td class='text-right' ><%= number_to_currency(valor) %></td>
           </tr>
           <% end %>
