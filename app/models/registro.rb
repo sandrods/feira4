@@ -33,11 +33,11 @@ class Registro < ActiveRecord::Base
   end
 
   def self.a_pagar
-    debitos.pendentes
+    debitos.pendentes.por_data
   end
 
   def self.a_receber
-    creditos.pendentes
+    creditos.pendentes.por_data
   end
 
   def valor_cd
