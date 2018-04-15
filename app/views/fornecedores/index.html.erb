@@ -1,4 +1,6 @@
-<%= page_header "Fornecedores" %>
+<%= page_header "Fornecedores" do %>
+  <%= link_to(icon(:plus, 'Novo Fornecedor'), new_fornecedor_path, class: 'btn btn-sm btn-success') %>
+<% end %>
 
 <div class="row">
 
@@ -17,11 +19,9 @@
         <% end %>
       </tbody>
     </table>
-    
+
     <p class="index_count"><span><%= @fornecedores.count %></span> fornecedores encontradas.</p>
 
-    <%= link_to(icon(:plus, 'Novo Fornecedor'), new_fornecedor_path, class: 'btn btn-primary') %>
-  
   </div>
 
   <div class="col-md-4">
@@ -32,6 +32,7 @@
       <div id="filtro_pedidos" class="panel-body">
         <%= simple_form_for @search, url: fornecedores_path, method: 'GET' do |f| %>
           <%= f.input :nome_cont, label: "Nome" %>
+          <%= f.input :arquivado_eq, label: "Exibir Arquivados", as: :boolean %>
 
           <%= f.submit 'Filtrar', class: 'btn btn-info' %>
           <%= button_tag 'Limpar', class: 'btn btn-default clear' %>
@@ -40,4 +41,3 @@
     </div>
   </div>
 </div>
-

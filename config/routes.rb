@@ -45,9 +45,13 @@ Rails.application.routes.draw do
   post 'etiquetas/unselect'     => 'etiquetas#unselect_all', as: 'unselect_all_etiquetas'
   post 'etiquetas/select'       => 'etiquetas#select_page', as: 'select_page_etiquetas'
 
-  resources :fornecedores
+  resources :fornecedores do
+    post :arquivar, on: :member
+  end
 
-  resources :clientes
+  resources :clientes do
+    post :arquivar, on: :member
+  end
 
   resources :tamanhos
 

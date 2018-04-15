@@ -48,11 +48,29 @@
   <div class="bottom-actions">
     <%= f.button :submit, 'Salvar Fornecedor', class: 'btn btn-primary' %>
 
+    <% unless @fornecedor.new_record?  %>
+
+    <% if @fornecedor.arquivado? %>
+      <%= link_to icon(:folder_close, 'Desarquivar este Fornecedor'),
+          arquivar_fornecedor_path(@fornecedor, desarquivar: true),
+          method: :post,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-success pull-right' %>
+    <% else %>
+      <%= link_to icon(:folder_open, ' Arquivar este Fornecedor'),
+          arquivar_fornecedor_path(@fornecedor),
+          method: :post,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-info pull-right' %>
+    <% end %>
+
     <%= link_to icon(:trash, 'Apagar este Fornecedor'),
           @fornecedor,
           method: :delete,
           data: { confirm: 'Tem certeza?' },
-          class: 'btn btn-sm text-danger pull-right' unless @fornecedor.new_record? %>
+          class: 'btn btn-sm text-danger pull-right'  %>
+
+    <% end %>
   </div>
 
 <% end %>

@@ -5,7 +5,7 @@
       <%= f.input :ref, label: 'Ref', input_html: { class: 'input-lg'} %>
     </div>
     <div class="col-sm-4">
-      <%= f.association :fornecedor, label: 'Fornecedor', label_method: :nome, input_html: { class: 'select2' } %>
+      <%= f.association :fornecedor, label: 'Fornecedor', collection: Fornecedor.ativos, label_method: :nome, input_html: { class: 'select2' } %>
     </div>
   </div>
   <div class="row">

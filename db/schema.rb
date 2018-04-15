@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915232555) do
+ActiveRecord::Schema.define(version: 20180415214456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,22 +31,21 @@ ActiveRecord::Schema.define(version: 20160915232555) do
   end
 
   create_table "clientes", force: :cascade do |t|
-    t.string   "nome",         limit: 60
-    t.string   "email",        limit: 40
-    t.string   "fone_res",     limit: 20
-    t.string   "fone_com",     limit: 20
-    t.string   "fone_cel",     limit: 20
-    t.string   "endereco",     limit: 60
-    t.string   "bairro",       limit: 30
-    t.string   "cep",          limit: 10
-    t.string   "cidade",       limit: 60
-    t.string   "uf",           limit: 2
-    t.string   "obs",          limit: 100
+    t.string   "nome",       limit: 60
+    t.string   "email",      limit: 40
+    t.string   "fone_res",   limit: 20
+    t.string   "fone_com",   limit: 20
+    t.string   "fone_cel",   limit: 20
+    t.string   "endereco",   limit: 60
+    t.string   "bairro",     limit: 30
+    t.string   "cep",        limit: 10
+    t.string   "cidade",     limit: 60
+    t.string   "uf",         limit: 2
+    t.string   "obs",        limit: 100
     t.integer  "aniver_dia"
     t.integer  "aniver_mes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "vendas_count"
   end
 
   create_table "colecoes", force: :cascade do |t|
@@ -97,7 +96,7 @@ ActiveRecord::Schema.define(version: 20160915232555) do
   add_index "formas", ["conta_id"], name: "index_formas_on_conta_id", using: :btree
 
   create_table "fornecedores", force: :cascade do |t|
-    t.string   "nome",       limit: 30,                 null: false
+    t.string   "nome",       limit: 30,                  null: false
     t.string   "email",      limit: 60
     t.string   "website",    limit: 60
     t.string   "fone",       limit: 30
@@ -110,7 +109,7 @@ ActiveRecord::Schema.define(version: 20160915232555) do
     t.string   "obs",        limit: 200
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "ativo",                  default: true
+    t.boolean  "arquivado",              default: false
   end
 
   create_table "itens", force: :cascade do |t|
