@@ -13,7 +13,7 @@ class Ajuste < ActiveRecord::Base
   end
 
   def data
-    I18n.localize created_at.to_date
+    created_at.to_date
   end
 
 end

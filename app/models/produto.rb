@@ -8,6 +8,8 @@ class Produto < ActiveRecord::Base
   has_many :itens, dependent: :destroy
   has_many :etiquetas, dependent: :destroy
 
+  has_many :itens_estoque, through: :itens
+
   before_save :calcula_lucro
 
   validates :colecao_id, :linha_id, :fornecedor_id, :tipo_id, :ref, :valor, presence: true
@@ -21,6 +23,10 @@ class Produto < ActiveRecord::Base
 
   def Produto.lucro(valor1, custo1)
     valor1-custo1 rescue nil
+  end
+
+  def movimentacoes
+    itens_estoque.sort_by { |m| m.movimento.data }
   end
 
   private
