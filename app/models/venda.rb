@@ -39,4 +39,8 @@ class Venda < ActiveRecord::Base
     desconto.present? && desconto > 0
   end
 
+  def descr
+    "Venda ##{id}"
+  end
+
 end

@@ -16,8 +16,10 @@
 
         <dl class="dl-horizontal form">
 
-          <dt>Nome</dt>
-          <dd><%= @cliente.nome %></dd>
+          <dt>Email</dt>
+          <dd><%= @cliente.email %></dd>
+          <dt>Celular</dt>
+          <dd><%= @cliente.fone_cel %></dd>
 
         </dl>
 
@@ -27,3 +29,20 @@
 
   </div>
 </div>
+
+<table class="table">
+  <tbody>
+    <% @cliente.vendas.includes(itens: { item: [:produto, :cor, :tamanho] }).order(data: :desc).each do |venda| %>
+      <tr class='header'>
+        <td colspan="10"> <%= venda.data %> &nbsp;&nbsp;&nbsp; <%= link_to venda.descr, venda %>   </td>
+      </tr>
+      <% venda.itens.each do |item| %>
+      <tr>
+        <td><%= item.produto.ref %></td>
+        <td><small><%= item.cor.try :nome %></small></td>
+        <td><small><%= item.tamanho.try :nome %></small></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
