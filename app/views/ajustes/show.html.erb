@@ -1,5 +1,5 @@
 <%= page_header "Ajuste de Estoque ##{@ajuste.id} &nbsp;&nbsp;&nbsp; #{label_es(@ajuste.tipo)}" do %>
-  <%= link_to icon(:chevron_left, "Voltar"), ajustes_path, class: 'btn' %>
+  <%= link_to_back get_back_for(:ajuste_show) %>
   <%= link_to icon(:edit, 'Editar Ajuste'), edit_ajuste_path(@ajuste), class: 'btn btn-sm btn-primary' %>
 <% end %>
 

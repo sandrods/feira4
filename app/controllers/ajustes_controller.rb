@@ -5,6 +5,7 @@ class AjustesController < ApplicationController
   def index
     @search = Ajuste.search(params[:q])
     @ajustes = @search.result.order(:tipo)
+    set_back_from(:ajuste_show)
   end
 
   def show

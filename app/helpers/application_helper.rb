@@ -56,6 +56,10 @@ module ApplicationHelper
     raw(ic)
   end
 
+  def link_to_back(path = nil)
+    link_to icon(:arrow_left, "Voltar"), (path || :back), class: 'btn btn-clean'
+  end
+
   def data_pt_BR(data)
     l(data) unless data.nil?
   end

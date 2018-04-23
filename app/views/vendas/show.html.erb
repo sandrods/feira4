@@ -1,5 +1,5 @@
 <%= page_header "Venda ##{@venda.id}" do %>
-  <%= link_to icon(:chevron_left, "Voltar"),vendas_path, class: 'btn' %>
+  <%= link_to_back get_back_for(:venda_show) %>
   <%= link_to icon(:edit, 'Editar Venda'), edit_venda_path(@venda), class: 'btn btn-sm btn-primary' %>
 <% end %>
 

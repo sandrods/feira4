@@ -1,5 +1,5 @@
 <%= page_header "Exibir Cliente" do %>
-  <%= link_to icon(:chevron_left, "Voltar"), clientes_path, class: 'btn' %>
+  <%= link_to_back get_back_for(:cliente_show) %>
   <%= link_to icon(:edit, 'Editar Cliente'), edit_cliente_path(@cliente), class: 'btn btn-primary' %>
 <% end %>
 

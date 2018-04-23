@@ -21,6 +21,7 @@ class ProdutosController < ApplicationController
   end
 
   def show
+    set_back_from(:compra_show, :venda_show, :ajuste_show)
   end
 
   def new

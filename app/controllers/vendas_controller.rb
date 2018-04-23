@@ -5,6 +5,7 @@ class VendasController < ApplicationController
   def index
     @search = Venda.search(params[:q])
     @vendas = @search.result.order('id desc')
+    set_back_from(:venda_show)
   end
 
   def show

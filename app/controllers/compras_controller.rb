@@ -5,6 +5,7 @@ class ComprasController < ApplicationController
   def index
     @search = Compra.search(params[:q])
     @compras = @search.result.order('id desc')
+    set_back_from(:compra_show)
   end
 
   def show

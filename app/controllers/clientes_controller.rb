@@ -10,9 +10,11 @@ class ClientesController < ApplicationController
       @search = Cliente.search(params[:q])
       @clientes = @search.result.order(:nome)
     end
+    set_back_from(:cliente_show)
   end
 
   def show
+    set_back_from(:venda_show)
   end
 
   def new

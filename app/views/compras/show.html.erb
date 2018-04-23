@@ -1,5 +1,5 @@
 <%= page_header "Compra ##{@compra.id}" do %>
-  <%= link_to icon(:chevron_left, "Voltar"), compras_path, class: 'btn' %>
+  <%= link_to_back get_back_for(:compra_show) %>
   <%= link_to icon(:edit, 'Editar Compra'), edit_compra_path(@compra), class: 'btn btn-sm btn-primary' %>
 <% end %>
 
