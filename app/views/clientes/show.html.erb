@@ -39,8 +39,10 @@
       <% venda.itens.each do |item| %>
       <tr>
         <td><%= item.produto.ref %></td>
-        <td><small><%= item.cor.try :nome %></small></td>
-        <td><small><%= item.tamanho.try :nome %></small></td>
+        <td><%= item.produto.tipo.descricao %></td>
+        <td><%= item.produto.fornecedor.nome %></td>
+        <td><%= item.tamanho.try :nome %></td>
+        <td><%= item.cor.try :nome %></td>
       </tr>
       <% end %>
     <% end %>
