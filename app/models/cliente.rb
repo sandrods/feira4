@@ -1,7 +1,9 @@
 class Cliente < ActiveRecord::Base
+  include Arquivar
 
   has_many :vendas, dependent: :restrict_with_error
 
+  scope :por_letra, -> (letra) { where(["nome like ?", "#{letra}%"]) }
   default_scope -> { order(:nome) }
 
   validates :nome, length: { maximum: 60 }, presence: true
@@ -38,9 +40,6 @@ class Cliente < ActiveRecord::Base
     write_attribute(:aniver_mes, a[1])
   end
 
-  def self.por_letra(letra)
-    where(["nome like ?", "#{letra}%"])
-  end
 
   def self.letras
     Cliente.all.map {|c| c.nome.try(:first).try(:upcase) }.uniq.sort

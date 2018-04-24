@@ -43,6 +43,7 @@
       <div id="filtro_pedidos" class="panel-body">
         <%= simple_form_for @search, url: clientes_path, method: 'GET' do |f| %>
           <%= f.input :nome_cont, label: "Nome" %>
+          <%= f.input :arquivado_eq, label: "Exibir Arquivados", as: :boolean %>
 
           <%= f.submit 'Filtrar', class: 'btn btn-info' %>
           <%= button_tag 'Limpar', class: 'btn btn-default clear' %>

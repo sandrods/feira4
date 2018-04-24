@@ -1,11 +1,13 @@
 # coding: UTF-8
 class ClientesController < ApplicationController
-  before_action :set_cliente, only: [:show, :edit, :update, :destroy]
+  before_action :set_cliente, only: [:show, :edit, :update, :destroy, :arquivar]
 
   def index
+    params[:q] = { arquivado_eq: false } unless params[:q]
+
     if params[:letra]
-      @clientes = Cliente.por_letra(params[:letra]).order(:nome)
-      @search = Cliente.search
+      @search = Cliente.search(params[:q])
+      @clientes = @search.result.por_letra(params[:letra]).order(:nome)
     else
       @search = Cliente.search(params[:q])
       @clientes = @search.result.order(:nome)
@@ -51,12 +53,21 @@ class ClientesController < ApplicationController
     end
   end
 
-  private
-    def set_cliente
-      @cliente = Cliente.find(params[:id])
-    end
+  def arquivar
+    @cliente.arquivar! params[:desarquivar].blank?
+    notice = params[:desarquivar].blank? ? "Arquivada" : "Desarquivada"
+    redirect_to clientes_path, notice: "#{@cliente.nome} <b>#{notice}</b> com sucesso."
+  end
 
-    def cliente_params
-      params.require(:cliente).permit(:nome, :email, :fone_res, :fone_com, :fone_cel, :endereco, :bairro, :cep, :cidade, :uf, :obs, :aniversario)
-    end
+  private
+
+  def set_cliente
+    @cliente = Cliente.find(params[:id])
+  end
+
+  def cliente_params
+    params.require(:cliente)
+          .permit(:nome, :email, :fone_res, :fone_com, :fone_cel, :endereco, :bairro, :cep, :cidade, :uf, :obs, :aniversario)
+  end
+
 end
